@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="podcastCell" id="LvB-vg-MEM">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="podcastCell" id="LvB-vg-MEM" customClass="PodcastTableViewCell" customModule="DVRGV_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LvB-vg-MEM" id="PF9-oI-ZQx">
@@ -48,6 +48,11 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="authorLabel" destination="rd7-eS-9N5" id="fFl-5z-Plx"/>
+                                    <outlet property="dateLabel" destination="sOc-u6-dbr" id="7ZG-oA-Vi1"/>
+                                    <outlet property="titleLabel" destination="AWQ-rm-gfa" id="0BD-Oj-osR"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
