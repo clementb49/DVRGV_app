@@ -6,7 +6,6 @@
 //  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
 //
 
-import Foundation
 // http methods of the API
 enum HTTPMethods:String {
 	case GET
