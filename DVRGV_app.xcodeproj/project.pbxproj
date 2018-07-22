@@ -10,6 +10,9 @@
 		EB0752702103304600857E4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB07526F2103304600857E4F /* AppDelegate.swift */; };
 		EB0752792103304700857E4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB0752782103304700857E4F /* Assets.xcassets */; };
 		EB07527C2103304700857E4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB07527A2103304700857E4F /* LaunchScreen.storyboard */; };
+		EB2702E22103BB1200350777 /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2702E12103BB1200350777 /* PodcastTableViewCell.swift */; };
+		EB2702E42103BFA200350777 /* PodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2702E32103BFA200350777 /* PodcastTableViewController.swift */; };
+		EB2702E72104895800350777 /* APIVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2702E62104895800350777 /* APIVerb.swift */; };
 		EB2E39542103AD79001E518D /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2E39532103AD78001E518D /* tabBar.storyboard */; };
 		EB2E39572103AF39001E518D /* podcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2E39562103AF39001E518D /* podcastStoryboard.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,6 +23,9 @@
 		EB0752782103304700857E4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB07527B2103304700857E4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB07527D2103304700857E4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB2702E12103BB1200350777 /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
+		EB2702E32103BFA200350777 /* PodcastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewController.swift; sourceTree = "<group>"; };
+		EB2702E62104895800350777 /* APIVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIVerb.swift; sourceTree = "<group>"; };
 		EB2E39532103AD78001E518D /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB2E39562103AF39001E518D /* podcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = podcastStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +63,7 @@
 				EB07526F2103304600857E4F /* AppDelegate.swift */,
 				EB2E39532103AD78001E518D /* tabBar.storyboard */,
 				EB0752782103304700857E4F /* Assets.xcassets */,
+				EB2702E52104890900350777 /* API */,
 				EB2E39552103AEC7001E518D /* podcast */,
 				EB07527A2103304700857E4F /* LaunchScreen.storyboard */,
 				EB07527D2103304700857E4F /* Info.plist */,
@@ -64,10 +71,20 @@
 			path = DVRGV_app;
 			sourceTree = "<group>";
 		};
+		EB2702E52104890900350777 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				EB2702E62104895800350777 /* APIVerb.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		EB2E39552103AEC7001E518D /* podcast */ = {
 			isa = PBXGroup;
 			children = (
 				EB2E39562103AF39001E518D /* podcastStoryboard.storyboard */,
+				EB2702E32103BFA200350777 /* PodcastTableViewController.swift */,
+				EB2702E12103BB1200350777 /* PodcastTableViewCell.swift */,
 			);
 			path = podcast;
 			sourceTree = "<group>";
@@ -144,7 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB2702E22103BB1200350777 /* PodcastTableViewCell.swift in Sources */,
+				EB2702E72104895800350777 /* APIVerb.swift in Sources */,
 				EB0752702103304600857E4F /* AppDelegate.swift in Sources */,
+				EB2702E42103BFA200350777 /* PodcastTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
