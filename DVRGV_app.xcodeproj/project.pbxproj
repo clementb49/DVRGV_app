@@ -16,6 +16,8 @@
 		EB2E39542103AD79001E518D /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2E39532103AD78001E518D /* tabBar.storyboard */; };
 		EB2E39572103AF39001E518D /* podcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2E39562103AF39001E518D /* podcastStoryboard.storyboard */; };
 		EBA72E5C21048F3D0070D2F0 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72E5B21048F3D0070D2F0 /* Route.swift */; };
+		EBA72E6021049B1F0070D2F0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72E5F21049B1F0070D2F0 /* APIManager.swift */; };
+		EBA72E652104D40B0070D2F0 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72E642104D40B0070D2F0 /* stringExtention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		EB2E39532103AD78001E518D /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB2E39562103AF39001E518D /* podcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = podcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EBA72E5B21048F3D0070D2F0 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		EBA72E5F21049B1F0070D2F0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		EBA72E642104D40B0070D2F0 /* stringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			children = (
 				EB07526F2103304600857E4F /* AppDelegate.swift */,
 				EB2E39532103AD78001E518D /* tabBar.storyboard */,
+				EBA72E632104D3C20070D2F0 /* typeExtension */,
 				EB0752782103304700857E4F /* Assets.xcassets */,
 				EB2702E52104890900350777 /* API */,
 				EB2E39552103AEC7001E518D /* podcast */,
@@ -78,6 +83,7 @@
 			children = (
 				EB2702E62104895800350777 /* HTTPMethods.swift */,
 				EBA72E5B21048F3D0070D2F0 /* Route.swift */,
+				EBA72E5F21049B1F0070D2F0 /* APIManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -90,6 +96,14 @@
 				EB2702E12103BB1200350777 /* PodcastTableViewCell.swift */,
 			);
 			path = podcast;
+			sourceTree = "<group>";
+		};
+		EBA72E632104D3C20070D2F0 /* typeExtension */ = {
+			isa = PBXGroup;
+			children = (
+				EBA72E642104D40B0070D2F0 /* stringExtention.swift */,
+			);
+			path = typeExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,8 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBA72E6021049B1F0070D2F0 /* APIManager.swift in Sources */,
 				EB2702E22103BB1200350777 /* PodcastTableViewCell.swift in Sources */,
 				EB2702E72104895800350777 /* HTTPMethods.swift in Sources */,
+				EBA72E652104D40B0070D2F0 /* stringExtention.swift in Sources */,
 				EB0752702103304600857E4F /* AppDelegate.swift in Sources */,
 				EBA72E5C21048F3D0070D2F0 /* Route.swift in Sources */,
 				EB2702E42103BFA200350777 /* PodcastTableViewController.swift in Sources */,
