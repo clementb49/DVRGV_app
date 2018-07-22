@@ -12,7 +12,7 @@
         <!--podcast Table View Controller-->
         <scene sceneID="F0e-Xq-jxX">
             <objects>
-                <tableViewController storyboardIdentifier="podcastStoryboardID" id="Fz7-kh-AT9" userLabel="podcast Table View Controller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="podcastStoryboardID" id="Fz7-kh-AT9" userLabel="podcast Table View Controller" customClass="PodcastTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zGJ-xV-nMd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
