@@ -7,8 +7,8 @@
 //
 
 import Foundation
-// http verb of the API
-enum APIVerb:String {
+// http methods of the API
+enum HTTPMethods:String {
 	case GET
 	case POST
 	case PUT
