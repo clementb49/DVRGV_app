@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */; };
-		EB0C4B4F2104E3DF00128DD6 /* DVRGV_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B4D2104E3DF00128DD6 /* DVRGV_app.xcdatamodeld */; };
 		EB0C4B512104E3DF00128DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B502104E3DF00128DD6 /* Assets.xcassets */; };
 		EB0C4B542104E3DF00128DD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */; };
 		EB0C4B5F2104E44E00128DD6 /* PodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B5C2104E44E00128DD6 /* PodcastTableViewController.swift */; };
@@ -19,12 +18,12 @@
 		EB0C4B682104E47E00128DD6 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B652104E47E00128DD6 /* Route.swift */; };
 		EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */; };
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
+		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EB0C4B432104E3DF00128DD6 /* DVRGV_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DVRGV_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EB0C4B4E2104E3DF00128DD6 /* DVRGV_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV_app.xcdatamodel; sourceTree = "<group>"; };
 		EB0C4B502104E3DF00128DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB0C4B532104E3DF00128DD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB0C4B552104E3DF00128DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		EB0C4B652104E47E00128DD6 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
+		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */,
+				EB99A025210A5BE90018072C /* CoreDataStack.swift */,
 				EB0C4B502104E3DF00128DD6 /* Assets.xcassets */,
 				EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */,
 				EB0C4B552104E3DF00128DD6 /* Info.plist */,
@@ -76,7 +77,6 @@
 				EB0C4B692104E4C800128DD6 /* typeExtension */,
 				EB0C4B622104E47E00128DD6 /* API */,
 				EB0C4B5B2104E44E00128DD6 /* podcast */,
-				EB0C4B4D2104E3DF00128DD6 /* DVRGV_app.xcdatamodeld */,
 			);
 			path = DVRGV_app;
 			sourceTree = "<group>";
@@ -182,7 +182,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB0C4B4F2104E3DF00128DD6 /* DVRGV_app.xcdatamodeld in Sources */,
 				EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */,
 				EB0C4B672104E47E00128DD6 /* HTTPMethods.swift in Sources */,
 				EB0C4B662104E47E00128DD6 /* APIManager.swift in Sources */,
@@ -190,6 +189,7 @@
 				EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */,
 				EB0C4B682104E47E00128DD6 /* Route.swift in Sources */,
 				EB0C4B5F2104E44E00128DD6 /* PodcastTableViewController.swift in Sources */,
+				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,19 +379,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		EB0C4B4D2104E3DF00128DD6 /* DVRGV_app.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EB0C4B4E2104E3DF00128DD6 /* DVRGV_app.xcdatamodel */,
-			);
-			currentVersion = EB0C4B4E2104E3DF00128DD6 /* DVRGV_app.xcdatamodel */;
-			path = DVRGV_app.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = EB0C4B3B2104E3DF00128DD6 /* Project object */;
 }
