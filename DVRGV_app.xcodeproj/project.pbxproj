@@ -19,6 +19,7 @@
 		EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */; };
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
+		EBE13427210B03EE009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13425210B03EE009AADF6 /* DVRGV.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EBE13426210B03EE009AADF6 /* DVRGV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		EB0C4B3A2104E3DF00128DD6 = {
 			isa = PBXGroup;
 			children = (
+				EBE13425210B03EE009AADF6 /* DVRGV.xcdatamodeld */,
 				EB0C4B452104E3DF00128DD6 /* DVRGV_app */,
 				EB0C4B442104E3DF00128DD6 /* Products */,
 			);
@@ -190,6 +193,7 @@
 				EB0C4B682104E47E00128DD6 /* Route.swift in Sources */,
 				EB0C4B5F2104E44E00128DD6 /* PodcastTableViewController.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
+				EBE13427210B03EE009AADF6 /* DVRGV.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +383,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EBE13425210B03EE009AADF6 /* DVRGV.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EBE13426210B03EE009AADF6 /* DVRGV.xcdatamodel */,
+			);
+			currentVersion = EBE13426210B03EE009AADF6 /* DVRGV.xcdatamodel */;
+			path = DVRGV.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EB0C4B3B2104E3DF00128DD6 /* Project object */;
 }
