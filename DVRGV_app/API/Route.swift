@@ -9,4 +9,6 @@
 enum Route:String {
 	case categories = "wp-json/wp/v2/categories"
 	case posts = "wp-json/wp/v2/posts"
+	case users = "wp-json/wp/v2/users"
+	case comments = "wp-json/wp/v2/comments"
 }
