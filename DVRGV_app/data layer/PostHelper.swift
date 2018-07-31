@@ -10,8 +10,26 @@ import Foundation
 import CoreData
 class PostHelper {
 	private var coreDataStack:CoreDataStack!
+	private let apiManager = APIManager()
 	init(coreDataStack:CoreDataStack) {
 		self.coreDataStack = coreDataStack
+	}
+	func retrievePosts() {
+		let argument = ["per_page":"100"]
+		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
+		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
+			if let error = error {
+				print("errror \(error)")
+			} else {
+				let responseCode = (response as! HTTPURLResponse).statusCode
+				if responseCode == 200 {
+					self.savePost(from: databody!)
+				} else {
+					print("errror")
+				}
+			}
+		}
+		task.resume()
 	}
 	func savePost(from data:Data) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
