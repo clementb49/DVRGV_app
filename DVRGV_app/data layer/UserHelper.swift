@@ -10,8 +10,26 @@ import Foundation
 import CoreData
 class UserHelper {
 	private var coreDataStack:CoreDataStack!
+	private let apiManager = APIManager()
 	init(coreDataStack: CoreDataStack) {
 	self.coreDataStack = coreDataStack
+	}
+	func retrieveUsers() {
+		let argument = ["orderby":"id","per_page":"100"]
+		let request = apiManager.request(methods: .GET, route: .users, data: argument)
+		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
+			if let error = error {
+				print("error \(error)")
+			} else {
+				let responseCode = (response as! HTTPURLResponse).statusCode
+				if responseCode == 200 {
+					self.saveUser(from: databody!)
+				} else {
+					print("error")
+				}
+			}
+		}
+		task.resume()
 	}
 	func saveUser(from data: Data) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
@@ -27,8 +45,7 @@ class UserHelper {
 		user.name = jsonObject["name"] as? String
 
 	}
-	static func findUserById(id: NSNumber, context:NSManagedObjectContext) -> User? {
-		let predicate:NSPredicate = NSPredicate(format: "%K == %@", #keyPath(User.id), id.int32Value)
+	static func findUser(predicate:NSPredicate, context:NSManagedObjectContext) -> User? {
 		let fetchRequest = NSFetchRequest<User>(entityName: "User")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate

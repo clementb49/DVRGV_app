@@ -28,6 +28,7 @@
 		EBB1E91A210BD09C00B9CB12 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */; };
 		EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */; };
 		EBB1E91C210BD09C00B9CB12 /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */; };
+		EBDE7605210FA07400A3C769 /* RetrieveFromSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDE7604210FA07400A3C769 /* RetrieveFromSite.swift */; };
 		EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */; };
 		EBF89F19210F158200F9E0C8 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F18210F158100F9E0C8 /* UserHelper.swift */; };
 		EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F1A210F198300F9E0C8 /* PostHelper.swift */; };
@@ -58,6 +59,7 @@
 		EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EBDE7604210FA07400A3C769 /* RetrieveFromSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveFromSite.swift; sourceTree = "<group>"; };
 		EBE13429210B0562009AADF6 /* DVRGV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV.xcdatamodel; sourceTree = "<group>"; };
 		EBF89F18210F158100F9E0C8 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		EBF89F1A210F198300F9E0C8 /* PostHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHelper.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				EBB1E90C210BD00100B9CB12 /* Models */,
 				EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */,
 				EB99A025210A5BE90018072C /* CoreDataStack.swift */,
+				EBDE7604210FA07400A3C769 /* RetrieveFromSite.swift */,
 				EB0C4B502104E3DF00128DD6 /* Assets.xcassets */,
 				EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */,
 				EB0C4B552104E3DF00128DD6 /* Info.plist */,
@@ -257,6 +260,7 @@
 				EBB1E918210BD09C00B9CB12 /* User+CoreDataProperties.swift in Sources */,
 				EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
+				EBDE7605210FA07400A3C769 /* RetrieveFromSite.swift in Sources */,
 				EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,7 +407,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "clementb49.DVRGV-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -421,7 +425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "clementb49.DVRGV-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

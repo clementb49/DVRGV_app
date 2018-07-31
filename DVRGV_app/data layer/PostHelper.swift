@@ -33,13 +33,15 @@ class PostHelper {
 		post.content = contentDict["rendered"] as? String
 		let author = jsonObject["author"] as? NSNumber
 		if let author = author {
-			post.author = UserHelper.findUserById(id: author, context: coreDataStack.managedContext)
+			let predicate = NSPredicate(format: "%K == \(author.intValue)", #keyPath(User.id))
+			post.author = UserHelper.findUser(predicate: predicate, context: coreDataStack.managedContext)
 		}
 		post.commentIsOpen = jsonObject["comment_status"] as! String == "open"
 		let categoriesArray = jsonObject["categories"] as? [NSNumber]
 		if let categoriesArray = categoriesArray {
 			for categoryId in categoriesArray {
-				if let category = CategoryHelper.findCategoryById(id: categoryId, context: coreDataStack.managedContext) {
+				let predicate = NSPredicate(format: "%K == \(categoryId.intValue)", #keyPath(Category.id))
+				if let category = CategoryHelper.findCategory(predicate:predicate, context: coreDataStack.managedContext) {
 					post.addToCategories(category)
 				}
 			}

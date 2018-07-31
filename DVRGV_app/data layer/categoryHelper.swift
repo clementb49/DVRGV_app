@@ -10,13 +10,42 @@ import Foundation
 import CoreData
 class CategoryHelper {
 	private var coreDataStack:CoreDataStack!
+	private var parentDict = [String:Int]()
+	private let apiManager = APIManager()
 	init(coreDataStack: CoreDataStack) {
 		self.coreDataStack = coreDataStack
 	}
+	func retrieveCategories() {
+		let argument:[String:String] = ["orderby":"id","per_page":"100","order":"desc"]
+		let request = apiManager.request(methods: .GET, route: .categories, data: argument)
+		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
+			if let error = error {
+				print("error, \(error)")
+			} else {
+				let responseCode = (response as! HTTPURLResponse).statusCode
+				if responseCode == 200 {
+					self.saveCategories(from: databody!)
+				} else {
+					print("error")
+				}
+			}
+		}
+		task.resume()
+	}
+
 	func saveCategories(from data:Data) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
 		for jsonDictionary in jsonArray {
 			newCategory(jsonObject: jsonDictionary)
+		}
+		coreDataStack.saveContext()
+		for (key, value) in parentDict {
+			let predicateName = NSPredicate(format: "%K == %@", #keyPath(Category.name), key)
+			let category = CategoryHelper.findCategory(predicate: predicateName, context: coreDataStack.managedContext)
+			if let category = category {
+				let predicateId = NSPredicate(format: "%K == \(value)", #keyPath(Category.id))
+				category.parent = CategoryHelper.findCategory(predicate: predicateId, context: coreDataStack.managedContext)
+			}
 		}
 		coreDataStack.saveContext()
 	}
@@ -30,14 +59,10 @@ class CategoryHelper {
 		category.name = jsonObject["name"] as? String
 		let parent = jsonObject["parent"] as? NSNumber
 		if (parent!.intValue != 0) {
-			guard let parent=parent, let parentCategory = CategoryHelper.findCategoryById(id: parent, context: coreDataStack.managedContext) else {
-				return
-			}
-			category.parent = parentCategory
+			parentDict[category.name!] = parent!.intValue
 		}
 	}
-	static func findCategoryById(id:NSNumber, context:NSManagedObjectContext) -> Category? {
-		let predicate:NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.id), id.int32Value)
+	static func findCategory(predicate:NSPredicate, context:NSManagedObjectContext) -> Category? {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
