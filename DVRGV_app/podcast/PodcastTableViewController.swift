@@ -7,9 +7,16 @@
 //
 
 import UIKit
-
+import CoreData
 class PodcastTableViewController: UITableViewController {
-
+	var coreDataStack:CoreDataStack!
+	lazy var fetchedResultController:NSFetchedResultsController<Post> = {
+		let fetchRequest:NSFetchRequest<Post> = Post.fetchRequest()
+		let sort = NSSortDescriptor(key: #keyPath(Post.title), ascending: true)
+		fetchRequest.sortDescriptors = [sort]
+		return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+	}()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -17,6 +24,11 @@ class PodcastTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+		do {
+			try fetchedResultController.performFetch()
+		} catch let error as NSError {
+			print("error, \(error)")
+		}
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,23 +40,27 @@ class PodcastTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+		guard let sections = fetchedResultController.sections else {
+			return 0
+		}
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+		guard let sectionInfo = fetchedResultController.sections?[section] else {
+			return 0
+		}
+		return sectionInfo.numberOfObjects
     }
 
-    /*
+	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "podcastCell", for: indexPath) as! PodcastTableViewCell
+		let post = fetchedResultController.object(at: indexPath)
+		cell.update(post: post)
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

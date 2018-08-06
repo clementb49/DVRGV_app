@@ -24,5 +24,11 @@ class PodcastTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+	func update(post: Post) {
+		guard let title = post.title, let author = post.author?.name else {
+			return
+		}
+		titleLabel.text = title
+		authorLabel.text = "réaliser par \(author)"
+	}
 }

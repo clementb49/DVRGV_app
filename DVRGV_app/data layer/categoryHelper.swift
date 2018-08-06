@@ -9,13 +9,10 @@
 import Foundation
 import CoreData
 class CategoryHelper {
-	private var coreDataStack:CoreDataStack!
 	private var parentDict = [String:Int]()
 	private let apiManager = APIManager()
-	init(coreDataStack: CoreDataStack) {
-		self.coreDataStack = coreDataStack
-	}
-	func retrieveCategories() {
+	func retrieveCategories(group: DispatchGroup?, context:NSManagedObjectContext) {
+		group?.enter()
 		let argument:[String:String] = ["orderby":"id","per_page":"100","order":"desc"]
 		let request = apiManager.request(methods: .GET, route: .categories, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
@@ -24,33 +21,34 @@ class CategoryHelper {
 			} else {
 				let responseCode = (response as! HTTPURLResponse).statusCode
 				if responseCode == 200 {
-					self.saveCategories(from: databody!)
+					self.convertCategories(from: databody!, context: context)
 				} else {
 					print("error")
 				}
 			}
+			group?.leave()
 		}
 		task.resume()
 	}
 
-	func saveCategories(from data:Data) {
+	func convertCategories(from data:Data, context:NSManagedObjectContext) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
 		for jsonDictionary in jsonArray {
-			newCategory(jsonObject: jsonDictionary)
+			newCategory(jsonObject: jsonDictionary, context: context)
 		}
-		coreDataStack.saveContext()
+		save(context: context)
 		for (key, value) in parentDict {
 			let predicateName = NSPredicate(format: "%K == %@", #keyPath(Category.name), key)
-			let category = CategoryHelper.findCategory(predicate: predicateName, context: coreDataStack.managedContext)
+			let category = CategoryHelper.findCategory(predicate: predicateName, context: context)
 			if let category = category {
 				let predicateId = NSPredicate(format: "%K == \(value)", #keyPath(Category.id))
-				category.parent = CategoryHelper.findCategory(predicate: predicateId, context: coreDataStack.managedContext)
+				category.parent = CategoryHelper.findCategory(predicate: predicateId, context: context)
 			}
 		}
-		coreDataStack.saveContext()
+		save(context: context)
 	}
-	private func newCategory(jsonObject: [String:Any]) {
-		let category = Category(context: coreDataStack.managedContext)
+	private func newCategory(jsonObject: [String:Any], context: NSManagedObjectContext) {
+		let category = Category(context: context)
 		let id = jsonObject["id"] as? NSNumber
 		category.id = id!.int32Value
 		let count = jsonObject["count"] as? NSNumber
@@ -74,5 +72,11 @@ class CategoryHelper {
 			return nil
 		}
 	}
-
+	private func save(context: NSManagedObjectContext) {
+		do {
+			try context.save()
+		} catch let error as NSError {
+			print("error, \(error), \(error.userInfo)")
+		}
+	}
 }

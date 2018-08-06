@@ -32,7 +32,6 @@
 		EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */; };
 		EBF89F19210F158200F9E0C8 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F18210F158100F9E0C8 /* UserHelper.swift */; };
 		EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F1A210F198300F9E0C8 /* PostHelper.swift */; };
-		EBF89F1D210F566100F9E0C8 /* commentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F1C210F566100F9E0C8 /* commentHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +62,6 @@
 		EBE13429210B0562009AADF6 /* DVRGV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV.xcdatamodel; sourceTree = "<group>"; };
 		EBF89F18210F158100F9E0C8 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		EBF89F1A210F198300F9E0C8 /* PostHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHelper.swift; sourceTree = "<group>"; };
-		EBF89F1C210F566100F9E0C8 /* commentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +145,6 @@
 				EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */,
 				EBF89F18210F158100F9E0C8 /* UserHelper.swift */,
 				EBF89F1A210F198300F9E0C8 /* PostHelper.swift */,
-				EBF89F1C210F566100F9E0C8 /* commentHelper.swift */,
 			);
 			path = "data layer";
 			sourceTree = "<group>";
@@ -256,7 +253,6 @@
 				EBB1E916210BD09C00B9CB12 /* Category+CoreDataProperties.swift in Sources */,
 				EB0C4B682104E47E00128DD6 /* Route.swift in Sources */,
 				EB0C4B5F2104E44E00128DD6 /* PodcastTableViewController.swift in Sources */,
-				EBF89F1D210F566100F9E0C8 /* commentHelper.swift in Sources */,
 				EBB1E918210BD09C00B9CB12 /* User+CoreDataProperties.swift in Sources */,
 				EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,

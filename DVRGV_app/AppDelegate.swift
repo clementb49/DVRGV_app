@@ -20,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let retrieve = RetrieveFromSite()
 		retrieve.coreDataStack = coreDataStack
 		retrieve.retrieveAll()
+		guard let tabController = window?.rootViewController as? UITabBarController,
+			let navController = tabController.viewControllers?.first as? UINavigationController,
+			let vc = navController.topViewController as? PodcastTableViewController else {
+			return true
+		}
+//		vc.coreDataStack = coreDataStack
 		return true
 	}
 	

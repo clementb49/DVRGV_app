@@ -11,9 +11,11 @@ import CoreData
 class RetrieveFromSite {
 	var coreDataStack:CoreDataStack!
 	func retrieveAll() {
-		let categoryHelper = CategoryHelper(coreDataStack: coreDataStack)
-		categoryHelper.retrieveCategories()
-		let userHelper = UserHelper(coreDataStack: coreDataStack)
-		userHelper.retrieveUsers()
+		let categoryHelper = CategoryHelper()
+		categoryHelper.retrieveCategories(group: nil, context: coreDataStack.privateContext)
+		let userHelper = UserHelper()
+		userHelper.retrieveUsers(group: nil, context: coreDataStack.privateContext)
+		let postHelper = PostHelper()
+		postHelper.retrievePosts(group: nil, context: coreDataStack.privateContext)
 	}
 }

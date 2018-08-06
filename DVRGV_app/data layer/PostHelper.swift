@@ -9,37 +9,35 @@
 import Foundation
 import CoreData
 class PostHelper {
-	private var coreDataStack:CoreDataStack!
 	private let apiManager = APIManager()
-	init(coreDataStack:CoreDataStack) {
-		self.coreDataStack = coreDataStack
-	}
-	func retrievePosts() {
-		let argument = ["per_page":"100"]
+	func retrievePosts(group: DispatchGroup?, context: NSManagedObjectContext) {
+		group?.enter()
+		let argument = ["per_page":"10"]
 		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
-		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
+		let task = URLSession.shared.dataTask(with: request) {dataBody, response, error -> Void in
 			if let error = error {
 				print("errror \(error)")
 			} else {
 				let responseCode = (response as! HTTPURLResponse).statusCode
 				if responseCode == 200 {
-					self.savePost(from: databody!)
+					self.convertPost(from: dataBody!, context: context)
 				} else {
 					print("errror")
 				}
 			}
+			group?.leave()
 		}
 		task.resume()
 	}
-	func savePost(from data:Data) {
+	func convertPost(from data:Data, context: NSManagedObjectContext) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
 		for jsonDictionary in jsonArray {
-			newPost(jsonObject: jsonDictionary)
+			newPost(jsonObject: jsonDictionary, context: context)
 		}
-		coreDataStack.saveContext()
+		saveContext(context: context)
 	}
-	private func newPost(jsonObject: [String:Any]) {
-		let post = Post(context: coreDataStack.managedContext)
+	private func newPost(jsonObject: [String:Any], context: NSManagedObjectContext) {
+		let post = Post(context: context)
 		let id = jsonObject["id"] as? NSNumber
 		post.id = id!.int32Value
 		post.date_gmt = convertDate(from: jsonObject["date_gmt"] as! String)
@@ -52,14 +50,14 @@ class PostHelper {
 		let author = jsonObject["author"] as? NSNumber
 		if let author = author {
 			let predicate = NSPredicate(format: "%K == \(author.intValue)", #keyPath(User.id))
-			post.author = UserHelper.findUser(predicate: predicate, context: coreDataStack.managedContext)
+			post.author = UserHelper.findUser(predicate: predicate, context: context)
 		}
 		post.commentIsOpen = jsonObject["comment_status"] as! String == "open"
 		let categoriesArray = jsonObject["categories"] as? [NSNumber]
 		if let categoriesArray = categoriesArray {
 			for categoryId in categoriesArray {
 				let predicate = NSPredicate(format: "%K == \(categoryId.intValue)", #keyPath(Category.id))
-				if let category = CategoryHelper.findCategory(predicate:predicate, context: coreDataStack.managedContext) {
+				if let category = CategoryHelper.findCategory(predicate:predicate, context: context) {
 					post.addToCategories(category)
 				}
 			}
@@ -77,8 +75,7 @@ class PostHelper {
 			return nil
 		}
 	}
-	static func findPostById(id: NSNumber, context: NSManagedObjectContext) -> Post? {
-		let predicate:NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Post.id), id.int32Value)
+	static func findPost(predicate: NSPredicate, context: NSManagedObjectContext) -> Post? {
 		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
@@ -88,6 +85,20 @@ class PostHelper {
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil
+		}
+	}
+	static func fetchPost(context:NSManagedObjectContext) -> [Post]? {
+		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")
+		fetchRequest.resultType = .managedObjectResultType
+		do {
+			return try? context.fetch(fetchRequest)
+		}
+	}
+	func saveContext(context: NSManagedObjectContext) {
+		do {
+			try context.save()
+		} catch let error as NSError {
+			print("error, \(error), \(error.userInfo)")
 		}
 	}
 }

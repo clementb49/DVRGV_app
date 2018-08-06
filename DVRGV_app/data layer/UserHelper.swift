@@ -9,12 +9,9 @@
 import Foundation
 import CoreData
 class UserHelper {
-	private var coreDataStack:CoreDataStack!
 	private let apiManager = APIManager()
-	init(coreDataStack: CoreDataStack) {
-	self.coreDataStack = coreDataStack
-	}
-	func retrieveUsers() {
+	func retrieveUsers(group: DispatchGroup?, context: NSManagedObjectContext) {
+		group?.enter()
 		let argument = ["orderby":"id","per_page":"100"]
 		let request = apiManager.request(methods: .GET, route: .users, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
@@ -23,27 +20,27 @@ class UserHelper {
 			} else {
 				let responseCode = (response as! HTTPURLResponse).statusCode
 				if responseCode == 200 {
-					self.saveUser(from: databody!)
+					self.convertUser(from: databody!, context: context)
 				} else {
 					print("error")
 				}
 			}
+			group?.leave()
 		}
 		task.resume()
 	}
-	func saveUser(from data: Data) {
+	func convertUser(from data: Data, context: NSManagedObjectContext) {
 		let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
 		for jsonDictionary in jsonArray {
-			newUser(jsonObject: jsonDictionary)
+			newUser(jsonObject: jsonDictionary, context: context)
 		}
-		coreDataStack.saveContext()
+		saveContext(context: context)
 	}
-	private func newUser(jsonObject: [String:Any]) {
-		let user = User(context: coreDataStack.managedContext)
+	private func newUser(jsonObject: [String:Any], context: NSManagedObjectContext) {
+		let user = User(context: context)
 		let id = jsonObject["id"] as? NSNumber
 		user.id = id!.int32Value
 		user.name = jsonObject["name"] as? String
-
 	}
 	static func findUser(predicate:NSPredicate, context:NSManagedObjectContext) -> User? {
 		let fetchRequest = NSFetchRequest<User>(entityName: "User")
@@ -55,6 +52,13 @@ class UserHelper {
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil
+		}
+	}
+	private func saveContext(context: NSManagedObjectContext) {
+		do {
+			try context.save()
+		} catch let error as NSError {
+			print("error, \(error), \(error.userInfo)")
 		}
 	}
 }

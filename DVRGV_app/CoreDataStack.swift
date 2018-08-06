@@ -15,8 +15,19 @@ class CoreDataStack {
 		self.modelName = modelName
 	}
 	
-	lazy var managedContext:NSManagedObjectContext = {
+	private lazy var managedContext:NSManagedObjectContext = {
 		return self.storeContainer.viewContext
+	}()
+
+	lazy var privateContext:NSManagedObjectContext = {
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.parent = self.managedContext
+		return context
+	}()
+	lazy var mainContext:NSManagedObjectContext = {
+		let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+		context.parent = self.managedContext
+		return context
 	}()
 	
 	private lazy var storeContainer: NSPersistentContainer = {
