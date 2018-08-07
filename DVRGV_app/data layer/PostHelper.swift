@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 class PostHelper {
 	private let apiManager = APIManager()
-	func retrievePosts(group: DispatchGroup?, context: NSManagedObjectContext) {
+	func retrievePosts(group: DispatchGroup?, context: NSManagedObjectContext, page: Int) {
 		group?.enter()
-		let argument = ["per_page":"10"]
+		let argument = ["per_page":"10","page":"\(page)"]
 		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {dataBody, response, error -> Void in
 			if let error = error {
@@ -63,17 +63,12 @@ class PostHelper {
 			}
 		}
 	}
-	private func convertDate(from dateString: String) -> NSDate? {
+	private func convertDate(from dateString: String) -> Date? {
 		let dateFormatter:DateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 		dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 		
-		let date = dateFormatter.date(from: dateString)
-		if let date = date {
-			return NSDate(timeIntervalSince1970: date.timeIntervalSince1970)
-		} else {
-			return nil
-		}
+		return dateFormatter.date(from: dateString)
 	}
 	static func findPost(predicate: NSPredicate, context: NSManagedObjectContext) -> Post? {
 		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")

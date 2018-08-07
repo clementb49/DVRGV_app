@@ -21,9 +21,9 @@ extension Category {
     @NSManaged public var desc: String?
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
-    @NSManaged public var childs: NSSet?
+    @NSManaged public var childs: Set<Category>?
     @NSManaged public var parent: Category?
-    @NSManaged public var posts: NSSet?
+	@NSManaged public var posts: Set<Post>?
 
 }
 

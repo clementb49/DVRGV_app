@@ -17,16 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		let retrieve = RetrieveFromSite()
-		retrieve.coreDataStack = coreDataStack
-		retrieve.retrieveAll()
 		guard let tabController = window?.rootViewController as? UITabBarController,
 			let navController = tabController.viewControllers?.first as? UINavigationController,
 			let vc = navController.topViewController as? PodcastTableViewController else {
 			return true
 		}
-//		vc.coreDataStack = coreDataStack
-		return true
+		vc.coreDataStack = coreDataStack
+		let fetchRequestCategory = NSFetchRequest<Category>(entityName: "Category")
+		let countCategory = try! coreDataStack.mainContext.count(for: fetchRequestCategory)
+		if countCategory != 0 {
+			return true
+		} else {
+			retrieveAll(view: vc)
+			return true
+		}
 	}
 	
 	func applicationWillResignActive(_ application: UIApplication) {
@@ -53,6 +57,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		coreDataStack.saveContext()
 	}
 	
-	
+	func retrieveAll(view: UITableViewController) {
+		let work = DispatchWorkItem {
+			let categoryHelper = CategoryHelper()
+			let userHelper = UserHelper()
+			let postHelper = PostHelper()
+			let catGroup = DispatchGroup()
+			let userGroup = DispatchGroup()
+			categoryHelper.retrieveCategories(group: catGroup, context: self.coreDataStack.privateContext)
+			userHelper.retrieveUsers(group: userGroup, context: self.coreDataStack.privateContext)
+			catGroup.wait()
+			userGroup.wait()
+			let postGroup = DispatchGroup()
+			for page in 1 ... 10 {
+				postHelper.retrievePosts(group: postGroup, context: self.coreDataStack.privateContext, page: page)
+			}
+			postGroup.wait()
+			self.coreDataStack.saveContext()
+			DispatchQueue.main.async {
+				view.viewDidLoad()
+				view.tableView.reloadData()
+			}
+		}
+		DispatchQueue.global().async (execute: work)
+	}
 }
 

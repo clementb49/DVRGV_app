@@ -19,10 +19,10 @@ extension Post {
 
     @NSManaged public var commentIsOpen: Bool
     @NSManaged public var content: String?
-    @NSManaged public var date_gmt: NSDate?
+    @NSManaged public var date_gmt: Date?
     @NSManaged public var id: Int32
     @NSManaged public var link: URL?
-    @NSManaged public var modified_gmt: NSDate?
+    @NSManaged public var modified_gmt: Date?
     @NSManaged public var title: String?
     @NSManaged public var author: User?
     @NSManaged public var categories: NSSet?
