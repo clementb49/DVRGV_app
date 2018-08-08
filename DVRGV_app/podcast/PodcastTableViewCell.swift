@@ -25,10 +25,11 @@ class PodcastTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 	func update(post: Post) {
-		guard let title = post.title, let author = post.author?.name else {
+		guard let title = post.title, let author = post.author?.name, let date = post.date_gmt else {
 			return
 		}
 		titleLabel.text = title
 		authorLabel.text = "réaliser par \(author)"
+		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
 	}
 }

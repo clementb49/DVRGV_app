@@ -60,16 +60,24 @@
                             <outlet property="delegate" destination="Fz7-kh-AT9" id="eFi-V1-R1Q"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Podcast" id="V2R-66-nrR"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Podcast" id="V2R-66-nrR">
+                        <barButtonItem key="rightBarButtonItem" title="filtrer" id="TW2-pq-0e4">
+                            <connections>
+                                <action selector="filterBarButtonItemTapped:" destination="Fz7-kh-AT9" id="cem-CJ-Ep4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlD-LN-wap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="131.78410794602701"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--podcast Navigation Controller-->
         <scene sceneID="PUM-Go-8Fj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IIe-3e-Uhj" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IIe-3e-Uhj" userLabel="podcast Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="12p-Kc-oJS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -87,7 +95,7 @@
         <!--category podcast Table View Controller-->
         <scene sceneID="GIC-Xq-lm8">
             <objects>
-                <tableViewController id="vuA-9d-hiT" userLabel="category podcast Table View Controller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="categoryPodcastTableViewController" hidesBottomBarWhenPushed="YES" id="vuA-9d-hiT" userLabel="category podcast Table View Controller" customClass="CategoryPodcastTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5t6-Tk-mdY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,9 +124,11 @@
                             <outlet property="delegate" destination="vuA-9d-hiT" id="Eju-2g-58T"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="sélectioné une cathégorie de podcast" id="Euj-XX-E8R"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnj-DH-mpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2016.8" y="790.25487256371821"/>
         </scene>
     </scenes>
 </document>
