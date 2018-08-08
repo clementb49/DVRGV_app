@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,6 +53,7 @@
                                     <outlet property="authorLabel" destination="rd7-eS-9N5" id="fFl-5z-Plx"/>
                                     <outlet property="dateLabel" destination="sOc-u6-dbr" id="7ZG-oA-Vi1"/>
                                     <outlet property="titleLabel" destination="AWQ-rm-gfa" id="0BD-Oj-osR"/>
+                                    <segue destination="vkx-PS-7Cs" kind="show" id="caX-Cv-KKT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -129,6 +131,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnj-DH-mpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2016.8" y="790.25487256371821"/>
+        </scene>
+        <!--Detail Podcast View Controller-->
+        <scene sceneID="RSQ-pz-3cf">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="vkx-PS-7Cs" userLabel="Detail Podcast View Controller" customClass="DetailPodcastViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KmZ-SU-Kwh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wu9-QM-yZH">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="zPg-UL-h9L"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QEq-S9-3nQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>

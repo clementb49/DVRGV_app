@@ -18,6 +18,7 @@
 		EB0C4B682104E47E00128DD6 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B652104E47E00128DD6 /* Route.swift */; };
 		EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */; };
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
+		EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */; };
 		EB7A2FB3210F0BD100E14816 /* categoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */; };
 		EB9035AA2118E24E0091F603 /* CategoryPodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
@@ -48,6 +49,7 @@
 		EB0C4B652104E47E00128DD6 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
+		EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPodcastViewController.swift; sourceTree = "<group>"; };
 		EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryHelper.swift; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPodcastTableViewController.swift; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				EB0C4B5C2104E44E00128DD6 /* PodcastTableViewController.swift */,
 				EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */,
 				EB0C4B5D2104E44E00128DD6 /* podcastStoryboard.storyboard */,
+				EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */,
 				EB0C4B5E2104E44E00128DD6 /* PodcastTableViewCell.swift */,
 			);
 			path = podcast;
@@ -257,6 +260,7 @@
 				EBB1E918210BD09C00B9CB12 /* User+CoreDataProperties.swift in Sources */,
 				EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
+				EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */,
 				EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
