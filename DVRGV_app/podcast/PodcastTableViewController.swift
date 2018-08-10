@@ -101,7 +101,6 @@ class PodcastTableViewController: UITableViewController, CategoryPodcastTableVie
 			guard let podcastCell = sender as? PodcastTableViewCell,
 			let indexPath = tableView.indexPath(for: podcastCell),
 			let post = posts?[indexPath.row] else {
-				print("3")
 				return
 			}
 			destinationViewController.post = post
