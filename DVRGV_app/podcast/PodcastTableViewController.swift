@@ -96,5 +96,15 @@ class PodcastTableViewController: UITableViewController, CategoryPodcastTableVie
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "PodcastTableViewCellToDetailPodcastTableViewController" {
+			let destinationViewController = segue.destination as! DetailPodcastViewController
+			guard let podcastCell = sender as? PodcastTableViewCell,
+			let indexPath = tableView.indexPath(for: podcastCell),
+			let post = posts?[indexPath.row] else {
+				print("3")
+				return
+			}
+			destinationViewController.post = post
+		}
 	}
 }

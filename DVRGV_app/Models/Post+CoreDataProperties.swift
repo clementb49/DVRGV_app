@@ -25,8 +25,8 @@ extension Post {
     @NSManaged public var modified_gmt: Date?
     @NSManaged public var title: String?
     @NSManaged public var author: User?
-    @NSManaged public var categories: NSSet?
-    @NSManaged public var comments: NSSet?
+    @NSManaged public var categories: Set<Category>?
+    @NSManaged public var comments: Set<Comment>?
 
 }
 

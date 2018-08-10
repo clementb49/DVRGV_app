@@ -7,15 +7,36 @@
 //
 
 import UIKit
-
+import WebKit
 class DetailPodcastViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
+	var post:Post?
+	
+	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var categoryLabel:UILabel!
+	@IBOutlet weak var TitleLabel:UILabel!
+	@IBOutlet weak var authorLabel:UILabel!
+	@IBOutlet weak var dateLabel:UILabel!
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		guard let post = post,
+		let categories = post.categories,
+		let date = post.date_gmt,
+		let conten = post.content else {
+			return
+		}
+		
+		let categoriesArray = Array(categories)
+		categoryLabel.text = categoriesArray.last?.name
+		TitleLabel.text = post.title
+		authorLabel.text = post.author?.name
+		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+		var htmlString = "<!doctype html><html><head></head><body>"
+		htmlString = htmlString + conten
+		htmlString = htmlString + "</body></html>"
+		print(htmlString)
+		webView.loadHTMLString(htmlString, baseURL: post.link)
+	}
 
     /*
     // MARK: - Navigation
