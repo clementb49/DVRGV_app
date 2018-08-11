@@ -20,6 +20,7 @@
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
 		EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */; };
 		EB7A2FB3210F0BD100E14816 /* categoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */; };
+		EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */; };
 		EB9035AA2118E24E0091F603 /* CategoryPodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
 		EBB1E915210BD09C00B9CB12 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E90D210BD09B00B9CB12 /* Category+CoreDataClass.swift */; };
@@ -51,6 +52,7 @@
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPodcastViewController.swift; sourceTree = "<group>"; };
 		EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryHelper.swift; sourceTree = "<group>"; };
+		EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPodcastTableViewController.swift; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		EBB1E90D210BD09B00B9CB12 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 			children = (
 				EB0C4B452104E3DF00128DD6 /* DVRGV_app */,
 				EB0C4B442104E3DF00128DD6 /* Products */,
+				EB8A9CA0211E3E4100CE32C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +156,14 @@
 			path = "data layer";
 			sourceTree = "<group>";
 		};
+		EB8A9CA0211E3E4100CE32C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EBB1E90C210BD00100B9CB12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +189,7 @@
 				EB0C4B3F2104E3DF00128DD6 /* Sources */,
 				EB0C4B402104E3DF00128DD6 /* Frameworks */,
 				EB0C4B412104E3DF00128DD6 /* Resources */,
+				EB55FDE0211E999500B73E45 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -234,6 +247,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB55FDE0211E999500B73E45 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB0C4B3F2104E3DF00128DD6 /* Sources */ = {
@@ -399,6 +433,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SH8XQWP7ZU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DVRGV_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -417,6 +455,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SH8XQWP7ZU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DVRGV_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

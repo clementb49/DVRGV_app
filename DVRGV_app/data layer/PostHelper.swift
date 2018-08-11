@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftSoup
 class PostHelper {
 	private let apiManager = APIManager()
 	func retrievePosts(group: DispatchGroup?, context: NSManagedObjectContext, page: Int) {
