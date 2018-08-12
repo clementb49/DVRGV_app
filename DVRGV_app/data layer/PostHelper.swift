@@ -47,8 +47,20 @@ class PostHelper {
 		let titleDict = jsonObject["title"] as! [String:Any]
 		post.title = titleDict["rendered"] as? String
 		let contentDict = jsonObject["content"] as! [String:Any]
-		post.content = contentDict["rendered"] as? String
-		let author = jsonObject["author"] as? NSNumber
+		let contentString = contentDict["rendered"] as! String
+		let HTMLString = newHTMLString(contentString)
+		do {
+			let doc:Document = try parse(HTMLString)
+			post.podcastURL = findPodcastURL(doc: doc)
+			if post.podcastURL != nil {
+				post.content = deletePlayer(doc: doc)
+			}
+		} catch Exception.Error(type: let type, Message: let message) {
+			print(message)
+		} catch {
+			print("failed to parse the HTML String")
+		}
+			let author = jsonObject["author"] as? NSNumber
 		if let author = author {
 			let predicate = NSPredicate(format: "%K == \(author.intValue)", #keyPath(User.id))
 			post.author = UserHelper.findUser(predicate: predicate, context: context)
@@ -63,6 +75,12 @@ class PostHelper {
 				}
 			}
 		}
+	}
+	private func newHTMLString(_ contentString: String) -> String {
+		var string = "<! doctype html><html><head></head><body>"
+		string = string + contentString
+		string = string + "</body></html>"
+		return string
 	}
 	private func convertDate(from dateString: String) -> Date? {
 		let dateFormatter:DateFormatter = DateFormatter()
@@ -95,6 +113,33 @@ class PostHelper {
 			try context.save()
 		} catch let error as NSError {
 			print("error, \(error), \(error.userInfo)")
+		}
+	}
+	func findPodcastURL(doc:Document) -> URL? {
+		do {
+			let link:Element? = try doc.select("a[href$=.mp3]").first()
+			let urlString = try link?.attr("href")
+			if let urlString = urlString {
+				return URL(string: urlString)
+			} else {
+				return nil
+			}
+		} catch {
+			print("failed to find podcast url")
+			return nil
+		}
+	}
+	private func deletePlayer(doc: Document) -> String? {
+		do {
+			let playerElements:Elements = try doc.getElementsByClass("powerpress_player")
+			try playerElements.remove()
+			let podcastLinkElements:Elements = try doc.getElementsByClass("powerpress_links powerpress_links_mp3")
+			try podcastLinkElements.remove()
+			let htmlString = try doc.outerHtml()
+			return htmlString
+		} catch {
+			print("failed to delete the player")
+			return "unable to delete the player"
 		}
 	}
 }

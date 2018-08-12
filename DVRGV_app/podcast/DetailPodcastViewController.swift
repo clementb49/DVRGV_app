@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SwiftSoup
 class DetailPodcastViewController: UIViewController {
 	var post:Post?
 	
@@ -22,20 +23,16 @@ class DetailPodcastViewController: UIViewController {
 		guard let post = post,
 		let categories = post.categories,
 		let date = post.date_gmt,
-		let conten = post.content else {
+		let content = post.content else {
 			return
 		}
-		
+
 		let categoriesArray = Array(categories)
 		categoryLabel.text = categoriesArray.last?.name
 		TitleLabel.text = post.title
 		authorLabel.text = post.author?.name
 		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
-		var htmlString = "<!doctype html><html><head></head><body>"
-		htmlString = htmlString + conten
-		htmlString = htmlString + "</body></html>"
-		print(htmlString)
-		webView.loadHTMLString(htmlString, baseURL: post.link)
+		webView.loadHTMLString(content, baseURL: post.link)
 	}
 
     /*

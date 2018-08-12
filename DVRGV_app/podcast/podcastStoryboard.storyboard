@@ -193,5 +193,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEq-S9-3nQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="etg-27-Fzy">
+            <objects>
+                <avPlayerViewController hidesBottomBarWhenPushed="YES" videoGravity="AVLayerVideoGravityResizeAspect" id="8Z3-Qc-Qci" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6LW-Dt-Am8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
 </document>
