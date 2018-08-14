@@ -19,6 +19,9 @@
 		EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */; };
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
 		EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */; };
+		EB48827321237379005527A7 /* Podcast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48827221237379005527A7 /* Podcast+CoreDataProperties.swift */; };
+		EB4882752123740F005527A7 /* Podcast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4882742123740F005527A7 /* Podcast+CoreDataClass.swift */; };
+		EB73B1B82121883200B69A35 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73B1B72121883200B69A35 /* BackgroundAudio.swift */; };
 		EB7A2FB3210F0BD100E14816 /* categoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */; };
 		EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */; };
 		EB9035AA2118E24E0091F603 /* CategoryPodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */; };
@@ -40,7 +43,6 @@
 		EB0C4B432104E3DF00128DD6 /* DVRGV_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DVRGV_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB0C4B502104E3DF00128DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EB0C4B532104E3DF00128DD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB0C4B552104E3DF00128DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB0C4B5C2104E44E00128DD6 /* PodcastTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastTableViewController.swift; sourceTree = "<group>"; };
 		EB0C4B5D2104E44E00128DD6 /* podcastStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = podcastStoryboard.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,10 @@
 		EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPodcastViewController.swift; sourceTree = "<group>"; };
+		EB48827221237379005527A7 /* Podcast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Podcast+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EB4882742123740F005527A7 /* Podcast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Podcast+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EB73B1B62120F8C600B69A35 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = fr; path = fr.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EB73B1B72121883200B69A35 /* BackgroundAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		EB7A2FB2210F0BD100E14816 /* categoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryHelper.swift; sourceTree = "<group>"; };
 		EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPodcastTableViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */,
+				EB73B1B72121883200B69A35 /* BackgroundAudio.swift */,
 				EB7A2FB1210F0B3100E14816 /* data layer */,
 				EBB1E90C210BD00100B9CB12 /* Models */,
 				EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */,
@@ -167,6 +174,8 @@
 		EBB1E90C210BD00100B9CB12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EB48827221237379005527A7 /* Podcast+CoreDataProperties.swift */,
+				EB4882742123740F005527A7 /* Podcast+CoreDataClass.swift */,
 				EBB1E90D210BD09B00B9CB12 /* Category+CoreDataClass.swift */,
 				EBB1E90E210BD09B00B9CB12 /* Category+CoreDataProperties.swift */,
 				EBB1E90F210BD09B00B9CB12 /* User+CoreDataClass.swift */,
@@ -213,6 +222,14 @@
 					EB0C4B422104E3DF00128DD6 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -221,8 +238,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				fr,
 			);
 			mainGroup = EB0C4B3A2104E3DF00128DD6;
 			productRefGroup = EB0C4B442104E3DF00128DD6 /* Products */;
@@ -274,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB48827321237379005527A7 /* Podcast+CoreDataProperties.swift in Sources */,
 				EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */,
 				EB0C4B672104E47E00128DD6 /* HTTPMethods.swift in Sources */,
 				EBB1E917210BD09C00B9CB12 /* User+CoreDataClass.swift in Sources */,
@@ -284,6 +301,8 @@
 				EBB1E915210BD09C00B9CB12 /* Category+CoreDataClass.swift in Sources */,
 				EBB1E919210BD09C00B9CB12 /* Comment+CoreDataClass.swift in Sources */,
 				EBF89F19210F158200F9E0C8 /* UserHelper.swift in Sources */,
+				EB4882752123740F005527A7 /* Podcast+CoreDataClass.swift in Sources */,
+				EB73B1B82121883200B69A35 /* BackgroundAudio.swift in Sources */,
 				EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */,
 				EB0C4B612104E44E00128DD6 /* PodcastTableViewCell.swift in Sources */,
 				EB7A2FB3210F0BD100E14816 /* categoryHelper.swift in Sources */,
@@ -305,7 +324,7 @@
 		EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EB0C4B532104E3DF00128DD6 /* Base */,
+				EB73B1B62120F8C600B69A35 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -104,6 +104,7 @@ class PodcastTableViewController: UITableViewController, CategoryPodcastTableVie
 				return
 			}
 			destinationViewController.post = post
+			destinationViewController.podcast = post.podcast
 		}
 	}
 }

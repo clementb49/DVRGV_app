@@ -18,6 +18,11 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comment" inverseName="childs" inverseEntity="Comment" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
+    <entity name="Podcast" representedClassName="Podcast" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="podcast" inverseEntity="Post" syncable="YES"/>
+    </entity>
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="commentIsOpen" optional="YES" attributeType="Boolean" regularExpressionString="#open|closed#" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,11 +30,11 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="modified_gmt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="podcastURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="posts" inverseEntity="User" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="posts" inverseEntity="Category" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="podcast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="post" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -39,6 +44,7 @@
     <elements>
         <element name="Category" positionX="0" positionY="135" width="128" height="150"/>
         <element name="Comment" positionX="-18" positionY="108" width="128" height="150"/>
+        <element name="Podcast" positionX="-18" positionY="126" width="128" height="90"/>
         <element name="Post" positionX="-27" positionY="36" width="128" height="210"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>

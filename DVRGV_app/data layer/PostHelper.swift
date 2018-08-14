@@ -51,8 +51,11 @@ class PostHelper {
 		let HTMLString = newHTMLString(contentString)
 		do {
 			let doc:Document = try parse(HTMLString)
-			post.podcastURL = findPodcastURL(doc: doc)
-			if post.podcastURL != nil {
+			let podcastURL = findPodcastURL(doc: doc)
+			if podcastURL != nil {
+				let podcast = Podcast(context: context)
+				podcast.url = podcastURL
+				post.podcast = podcast
 				post.content = deletePlayer(doc: doc)
 			}
 		} catch Exception.Error(type: let type, Message: let message) {

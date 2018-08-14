@@ -2,7 +2,7 @@
 //  Post+CoreDataProperties.swift
 //  DVRGV_app
 //
-//  Created by Clément BOUSSIRON on 11/08/2018.
+//  Created by Clément BOUSSIRON on 14/08/2018.
 //  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
 //
 //
@@ -19,15 +19,15 @@ extension Post {
 
     @NSManaged public var commentIsOpen: Bool
     @NSManaged public var content: String?
-    @NSManaged public var date_gmt:Date?
+    @NSManaged public var date_gmt: Date?
     @NSManaged public var id: Int32
     @NSManaged public var link: URL?
     @NSManaged public var modified_gmt: Date?
     @NSManaged public var title: String?
-    @NSManaged public var podcastURL: URL?
     @NSManaged public var author: User?
     @NSManaged public var categories: Set<Category>?
     @NSManaged public var comments: Set<Comment>?
+    @NSManaged public var podcast: Podcast?
 
 }
 

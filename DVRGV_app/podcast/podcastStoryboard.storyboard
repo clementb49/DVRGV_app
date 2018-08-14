@@ -178,6 +178,14 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-6r-zVe" userLabel="Read Podcast Button">
+                                <rect key="frame" x="137" y="318" width="101" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Lire le podcast"/>
+                                <connections>
+                                    <segue destination="8Z3-Qc-Qci" kind="show" identifier="DetailPodcastViewControllerToAVPlayerViewController" id="asl-9O-P9p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="zPg-UL-h9L"/>
@@ -187,6 +195,7 @@
                         <outlet property="authorLabel" destination="1zF-oI-dBX" id="4g8-p0-r5P"/>
                         <outlet property="categoryLabel" destination="K7o-xE-jpj" id="y9T-OU-IK1"/>
                         <outlet property="dateLabel" destination="dCw-Ed-RG4" id="vdS-O5-Cz7"/>
+                        <outlet property="readButton" destination="gNa-6r-zVe" id="mjb-xp-bON"/>
                         <outlet property="webView" destination="wu9-QM-yZH" id="yW9-Zn-W14"/>
                     </connections>
                 </viewController>
