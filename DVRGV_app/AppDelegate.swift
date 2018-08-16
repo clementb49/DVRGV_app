@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		let audioSession = AVAudioSession.sharedInstance()
+		do {
+			try audioSession.setCategory(.playback, mode: .spokenAudio, options: [])
+		} catch let error as NSError {
+			print("failed to set theaudi session category and mode: \(error.localizedDescription)")
+		}
 		guard let tabController = window?.rootViewController as? UITabBarController,
 			let navController = tabController.viewControllers?.first as? UINavigationController,
 			let vc = navController.topViewController as? PodcastTableViewController else {
@@ -28,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if countCategory != 0 {
 			return true
 		} else {
+			vc.activityIndicator.startAnimating()
 			retrieveAll(view: vc)
 			return true
 		}
@@ -57,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		coreDataStack.saveContext()
 	}
 	
-	func retrieveAll(view: UITableViewController) {
+	func retrieveAll(view: PodcastTableViewController) {
 		let work = DispatchWorkItem {
 			let categoryHelper = CategoryHelper()
 			let userHelper = UserHelper()
@@ -75,7 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			postGroup.wait()
 			self.coreDataStack.saveContext()
 			DispatchQueue.main.async {
-				view.viewDidLoad()
+				view.activityIndicator.stopAnimating()
+				view.updatePodcastCategory()
+				view.updateUI()
 				view.tableView.reloadData()
 			}
 		}

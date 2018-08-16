@@ -30,14 +30,12 @@ class DetailPodcastViewController: UIViewController {
 			readButton.isHidden = true
 			return
 		}
-
+		webView.loadHTMLString(content, baseURL: post.link)
 		let categoriesArray = Array(categories)
 		categoryLabel.text = categoriesArray.last?.name
 		TitleLabel.text = post.title
 		authorLabel.text = post.author?.name
 		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
-		webView.loadHTMLString(content, baseURL: post.link)
-
 	}
 
 	
@@ -50,7 +48,16 @@ class DetailPodcastViewController: UIViewController {
 			guard let podcast = podcast else {
 				return
 			}
-			let player = AVPlayer(url: podcast.url!)
+			let player = AVPlayer(url: podcast.audioURL!)
+			let audioSession = AVAudioSession.sharedInstance()
+			do {
+				try audioSession.setActive(true)
+			} catch let error as NSError {
+				print("failed to activate the audio session: \(error.localizedDescription)")
+			}
+			player.automaticallyWaitsToMinimizeStalling = true
+			player.allowsExternalPlayback = true
+			player.playImmediately(atRate: 1.0)
 			destinationViewController.player = player
 		}
 	}

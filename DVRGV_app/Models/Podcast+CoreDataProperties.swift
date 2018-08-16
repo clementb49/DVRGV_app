@@ -18,7 +18,8 @@ extension Podcast {
     }
 
     @NSManaged public var image: NSData?
-    @NSManaged public var url: URL?
+    @NSManaged public var audioURL: URL?
+	@NSManaged public var imageURL:URL?
     @NSManaged public var post: Post?
 
 }

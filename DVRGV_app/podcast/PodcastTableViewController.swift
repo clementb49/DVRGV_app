@@ -13,22 +13,15 @@ class PodcastTableViewController: UITableViewController, CategoryPodcastTableVie
 	var podcastCategory:Category?
 	var categorySelected:Category?
 	var posts:[Post]?
+	var activityIndicator = UIActivityIndicatorView(frame: CGRect(x:0, y:0, width:40, height:40))
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
-		fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
-		fetchRequest.resultType = .managedObjectResultType
-		do {
-			let categories = try coreDataStack.mainContext.fetch(fetchRequest)
-			podcastCategory = categories.first
-		} catch let error as NSError {
-			print("error, \(error), \(error.userInfo)")
+		if activityIndicator.isAnimating == true {
+			setActivityIndicator()
+		} else {
+			updatePodcastCategory()
+			updateUI()
 		}
-		guard let podcastCategory = podcastCategory else {
-			return
-		}
-		categorySelected = podcastCategory
-		updateUI()
 	}
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +85,24 @@ class PodcastTableViewController: UITableViewController, CategoryPodcastTableVie
 		tableView.reloadData()
 	}
 	
+	func setActivityIndicator() {
+		activityIndicator.style = .gray
+		activityIndicator.center = self.view.center
+		self.view.addSubview(activityIndicator)
+	}
+	
+	func updatePodcastCategory() {
+		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
+		fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
+		fetchRequest.resultType = .managedObjectResultType
+		do {
+			let categories = try coreDataStack.mainContext.fetch(fetchRequest)
+			self.podcastCategory = categories.first
+			self.categorySelected = podcastCategory
+		} catch let error as NSError {
+			print("error, \(error), \(error.userInfo)")
+		}
+	}
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

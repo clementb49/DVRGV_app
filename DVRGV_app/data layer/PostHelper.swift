@@ -54,7 +54,8 @@ class PostHelper {
 			let podcastURL = findPodcastURL(doc: doc)
 			if podcastURL != nil {
 				let podcast = Podcast(context: context)
-				podcast.url = podcastURL
+				podcast.audioURL = podcastURL
+				podcast.imageURL = findFirstImageURL(doc: doc)
 				post.podcast = podcast
 				post.content = deletePlayer(doc: doc)
 			}
@@ -143,6 +144,20 @@ class PostHelper {
 		} catch {
 			print("failed to delete the player")
 			return "unable to delete the player"
+		}
+	}
+	private func findFirstImageURL(doc:Document) -> URL? {
+		do {
+			let image:Element? = try doc.select("img").first()
+			let imageURLString = try image?.attr("src")
+			if let imageURLString = imageURLString {
+				return URL(string: imageURLString)
+			} else {
+				return nil
+			}
+		} catch {
+			print("failed to find the first image url")
+			return nil
 		}
 	}
 }
