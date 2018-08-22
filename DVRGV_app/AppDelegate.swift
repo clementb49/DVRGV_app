@@ -3,13 +3,14 @@
 //  AppDelegate.swift
 //  DVRGV_app
 //
-//  Created by Clément BOUSSIRON on 26/07/2018.
-//  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
+//  Created by DVRGV Team on 26/07/2018.
+//  Copyright © 2018 DVRGV All rights reserved.
 //
 
 import UIKit
 import CoreData
 import AVFoundation
+import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
@@ -26,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 		guard let tabController = window?.rootViewController as? UITabBarController,
 			let navController = tabController.viewControllers?.first as? UINavigationController,
-			let vc = navController.topViewController as? PodcastTableViewController else {
+			let vc = navController.topViewController as? ListPodcastTableViewController else {
 			return true
 		}
 		vc.coreDataStack = coreDataStack
@@ -65,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		coreDataStack.saveContext()
 	}
 	
-	func retrieveAll(view: PodcastTableViewController) {
+	func retrieveAll(view: ListPodcastTableViewController) {
 		let work = DispatchWorkItem {
 			let categoryHelper = CategoryHelper()
 			let userHelper = UserHelper()
@@ -90,6 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 		}
 		DispatchQueue.global().async (execute: work)
+	}
+	
+	func registerForPushNotifications() {
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {(granted, error) in print("permission granted: \(granted)")
+			
+		}
 	}
 }
 
