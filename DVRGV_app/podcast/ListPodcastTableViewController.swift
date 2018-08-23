@@ -14,6 +14,7 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 	var categorySelected:Category?
 	var posts:[Post]?
 	var activityIndicator = UIActivityIndicatorView(frame: CGRect(x:0, y:0, width:40, height:40))
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if activityIndicator.isAnimating == true {
@@ -21,6 +22,7 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 		} else {
 			updatePodcastCategory()
 			updateUI()
+			updateNavigationItemTitle()
 		}
 	}
 
@@ -84,6 +86,7 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 	func didSelect(category: Category) {
 		self.categorySelected = category
 		updateUI()
+		updateNavigationItemTitle()
 		tableView.reloadData()
 	}
 	
@@ -103,6 +106,12 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 			self.categorySelected = podcastCategory
 		} catch let error as NSError {
 			print("error, \(error), \(error.userInfo)")
+		}
+	}
+	
+	func updateNavigationItemTitle() {
+		if let navController = self.navigationController {
+			navController.navigationBar.topItem?.title = categorySelected?.name
 		}
 	}
     // MARK: - Navigation
