@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Zb-Yj-5Lq">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Podcast View Controller-->
+        <scene sceneID="kRH-pu-M9N">
+            <objects>
+                <viewController storyboardIdentifier="detailPodcastViewController" hidesBottomBarWhenPushed="YES" id="9Zb-Yj-5Lq" userLabel="Detail Podcast View Controller" customClass="DetailPodcastViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AVC-EL-0ix">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="kQr-4m-5Mz">
+                                <rect key="frame" x="166" y="323" width="270" height="349"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="N3x-OF-x9A">
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cur-tu-gIG" userLabel="Category Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="198" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBU-Vo-TOk" userLabel="title Label">
+                                                <rect key="frame" x="228" y="0.0" width="42" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="EKj-11-gse">
+                                        <rect key="frame" x="0.0" y="70.5" width="270" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="er0-QE-Xtl" userLabel="Author Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ko-wu-qk2" userLabel="date Label">
+                                                <rect key="frame" x="72" y="0.0" width="198" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <wkWebView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WlT-pA-uUi">
+                                        <rect key="frame" x="0.0" y="141" width="270" height="128"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="znf-hI-bhr">
+                                        <rect key="frame" x="0.0" y="319" width="270" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ws-zL-7LX">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                                <state key="normal" title="lire le podcast"/>
+                                                <connections>
+                                                    <segue destination="SeG-ch-km6" kind="showDetail" identifier="DetailPodcastViewControllerToPlayerNavigationController" id="sHH-yn-ghq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9d-vu-L0J" userLabel="Download Button">
+                                                <rect key="frame" x="116" y="0.0" width="154" height="30"/>
+                                                <state key="normal" title="télécharger le podcast"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="q4R-vt-OFJ"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Partager" id="TkO-k1-WhL" userLabel="share Bar Button Item "/>
+                        <barButtonItem title="Podcast précédent " id="f3D-17-zBh" userLabel="Preview Bar Button Item"/>
+                        <barButtonItem title="podcast suivant" id="HGe-u1-qrY" userLabel="next bar button Item"/>
+                        <barButtonItem title="ajouter au favoris" id="Rvc-4j-YNz" userLabel="bookmarks Bar Button Item "/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4lg-qH-kks">
+                        <barButtonItem key="rightBarButtonItem" title="Commentaire" id="dbD-fT-9TP" userLabel="comment Bar Button Item"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="TitleLabel" destination="cBU-Vo-TOk" id="DsL-hS-Axb"/>
+                        <outlet property="authorLabel" destination="er0-QE-Xtl" id="Rir-B8-dZ5"/>
+                        <outlet property="categoryLabel" destination="cur-tu-gIG" id="2Hg-QM-vse"/>
+                        <outlet property="dateLabel" destination="3Ko-wu-qk2" id="k65-A5-WSK"/>
+                        <outlet property="readButton" destination="6Ws-zL-7LX" id="Ij9-95-nOR"/>
+                        <outlet property="webView" destination="WlT-pA-uUi" id="HlH-lk-D5C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3sO-bn-mvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="90.404797601199405"/>
+        </scene>
+        <!--PodcastPlayerStoryboard-->
+        <scene sceneID="Gy4-SS-RkG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PodcastPlayerStoryboard" id="SeG-ch-km6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lTJ-Du-Ave" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
