@@ -12,7 +12,7 @@
         <!--List Article Table View Controller-->
         <scene sceneID="cCk-v6-3SM">
             <objects>
-                <tableViewController id="RSu-1O-gj4" userLabel="List Article Table View Controller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListArticleStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RSu-1O-gj4" userLabel="List Article Table View Controller" customClass="ListPostTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="72e-kB-hxG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

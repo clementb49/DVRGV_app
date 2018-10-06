@@ -12,7 +12,7 @@
         <!--List Podcast Table View Controller-->
         <scene sceneID="V37-v0-Mhf">
             <objects>
-                <tableViewController storyboardIdentifier="podcastStoryboardID" title="Podcast" id="bc3-Bj-qPT" userLabel="List Podcast Table View Controller" customClass="ListPodcastTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListPodcastStoryboard" title="Podcast" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bc3-Bj-qPT" userLabel="List Podcast Table View Controller" customClass="ListPodcastTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="q64-UY-wCT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,13 +63,6 @@
             <objects>
                 <viewControllerPlaceholder storyboardName="DetailPodcastStoryboard" referencedIdentifier="detailPodcastViewController" id="qwD-Z3-CT7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVC-Q3-DGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--categoryPodcastTableViewController-->
-        <scene sceneID="2av-hA-EZ6">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="categoryPodcastTableViewController" storyboardName="CategoryPodcastStoryboard" referencedIdentifier="categoryPodcastTableViewController" id="9JD-2e-lwD" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HCl-dL-hZV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
         <!--Navigation Controller-->

@@ -10,7 +10,7 @@
 		EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */; };
 		EB0C4B512104E3DF00128DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B502104E3DF00128DD6 /* Assets.xcassets */; };
 		EB0C4B542104E3DF00128DD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */; };
-		EB0C4B5F2104E44E00128DD6 /* ListPodcastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B5C2104E44E00128DD6 /* ListPodcastTableViewController.swift */; };
+		EB0C4B5F2104E44E00128DD6 /* ListPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B5C2104E44E00128DD6 /* ListPostsTableViewController.swift */; };
 		EB0C4B602104E44E00128DD6 /* CategoryPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B5D2104E44E00128DD6 /* CategoryPodcastStoryboard.storyboard */; };
 		EB0C4B612104E44E00128DD6 /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B5E2104E44E00128DD6 /* PodcastTableViewCell.swift */; };
 		EB0C4B662104E47E00128DD6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B632104E47E00128DD6 /* APIManager.swift */; };
@@ -48,7 +48,7 @@
 		EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB0C4B502104E3DF00128DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB0C4B552104E3DF00128DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB0C4B5C2104E44E00128DD6 /* ListPodcastTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPodcastTableViewController.swift; sourceTree = "<group>"; };
+		EB0C4B5C2104E44E00128DD6 /* ListPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPostsTableViewController.swift; sourceTree = "<group>"; };
 		EB0C4B5D2104E44E00128DD6 /* CategoryPodcastStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CategoryPodcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EB0C4B5E2104E44E00128DD6 /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
 		EB0C4B632104E47E00128DD6 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -124,6 +124,7 @@
 				EB0C4B502104E3DF00128DD6 /* Assets.xcassets */,
 				EB0C4B522104E3DF00128DD6 /* LaunchScreen.storyboard */,
 				EB0C4B552104E3DF00128DD6 /* Info.plist */,
+				EB4393CF2167A5B300760D21 /* Controller */,
 				EB4393CB21679E0300760D21 /* Article */,
 				EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */,
 				EB0C4B692104E4C800128DD6 /* typeExtension */,
@@ -136,7 +137,6 @@
 		EB0C4B5B2104E44E00128DD6 /* podcast */ = {
 			isa = PBXGroup;
 			children = (
-				EB0C4B5C2104E44E00128DD6 /* ListPodcastTableViewController.swift */,
 				EB9035A92118E24E0091F603 /* CategoryPodcastTableViewController.swift */,
 				EB0C4B5D2104E44E00128DD6 /* CategoryPodcastStoryboard.storyboard */,
 				EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */,
@@ -172,6 +172,14 @@
 				EB4393CC21679E4D00760D21 /* ListArticleStoryboard.storyboard */,
 			);
 			path = Article;
+			sourceTree = "<group>";
+		};
+		EB4393CF2167A5B300760D21 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EB0C4B5C2104E44E00128DD6 /* ListPostsTableViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		EB7A2FB1210F0B3100E14816 /* data layer */ = {
@@ -337,7 +345,7 @@
 				EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */,
 				EBB1E916210BD09C00B9CB12 /* Category+CoreDataProperties.swift in Sources */,
 				EB0C4B682104E47E00128DD6 /* Route.swift in Sources */,
-				EB0C4B5F2104E44E00128DD6 /* ListPodcastTableViewController.swift in Sources */,
+				EB0C4B5F2104E44E00128DD6 /* ListPostsTableViewController.swift in Sources */,
 				EBB1E918210BD09C00B9CB12 /* User+CoreDataProperties.swift in Sources */,
 				EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,

@@ -8,19 +8,20 @@
 
 import UIKit
 import CoreData
-class ListPodcastTableViewController: UITableViewController, CategoryPodcastTableViewControllerDelegate {
+class ListPostTableViewController: UITableViewController, CategoryPodcastTableViewControllerDelegate {
 	var coreDataStack:CoreDataStack!
-	var podcastCategory:Category?
+	var postCategory:Category?
 	var categorySelected:Category?
 	var posts:[Post]?
 	var activityIndicator = UIActivityIndicatorView(frame: CGRect(x:0, y:0, width:40, height:40))
-	
+	var isArticleView:Bool?
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		updateIsArticleView()
 		if activityIndicator.isAnimating == true {
 			setActivityIndicator()
 		} else {
-			updatePodcastCategory()
+			updatePostCategory()
 			updateUI()
 			updateNavigationItemTitle()
 		}
@@ -46,27 +47,32 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "podcastCell", for: indexPath) as! PodcastTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "podcastCell", for: indexPath)
 		guard let post = posts?[indexPath.row] else {
 			return cell
 		}
-		cell.update(post: post)
+		cell.textLabel?.text = post.title
 		return cell
 	}
 
 	
 	
 	@IBAction func filterBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		let storyboard:UIStoryboard = UIStoryboard(name: "ListPodcastStoryboard", bundle: nil)
-		let vc = storyboard.instantiateViewController(withIdentifier: "categoryPodcastTableViewController") as! CategoryPodcastTableViewController
+		var storyBoard:UIStoryboard?
+		if isArticleView {
+			
+		} else {
+		storyboard = UIStoryboard(name: "CategoryPodcastStoryboard", bundle: nil)
+		}
+		let vc = storyboard.instantiateInitialViewController() as! CategoryPodcastTableViewController
 		vc.modalPresentationStyle = .popover
-		vc.podcastCategory = podcastCategory
+		vc.podcastCategory = postCategory
 		vc.categorySelected = categorySelected
 		guard let childs = podcastCategory?.childs else {
 			return
 		}
 		var categories =  Array(childs)
-		categories.insert(podcastCategory!, at: 0)
+		categories.insert(postCategory!, at: 0)
 		vc.availableCategories = categories
 		vc.categoryDelegate = self
 		present(vc, animated: true, completion: nil)
@@ -78,7 +84,7 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 				return
 		}
 		self.posts = Array(possts)
-		
+
 		let postsSorted = posts?.sorted(by: {$0.date_gmt! > $1.date_gmt!})
 		self.posts = postsSorted
 	}
@@ -96,9 +102,13 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 		self.view.addSubview(activityIndicator)
 	}
 	
-	func updatePodcastCategory() {
+	func updatePostCategory() {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
-		fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
+		if isArticleView {
+			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
+		} else {
+			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Article")
+		}
 		fetchRequest.resultType = .managedObjectResultType
 		do {
 			let categories = try coreDataStack.mainContext.fetch(fetchRequest)
@@ -112,6 +122,14 @@ class ListPodcastTableViewController: UITableViewController, CategoryPodcastTabl
 	func updateNavigationItemTitle() {
 		if let navController = self.navigationController {
 			navController.navigationBar.topItem?.title = categorySelected?.name
+		}
+	}
+	
+	func updateIsArticleView() {
+		if self.restorationIdentifier == "ListArticleStoryboard" {
+			isArticleView = true
+		} else {
+			isArticleView = false
 		}
 	}
     // MARK: - Navigation
