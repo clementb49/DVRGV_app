@@ -8,15 +8,15 @@
 
 import UIKit
 import CoreData
-protocol CategoryPodcastTableViewControllerDelegate {
+protocol CategoryPostTableViewControllerDelegate {
 	func didSelect(category:Category)
 }
 
-class CategoryPodcastTableViewController: UITableViewController {
-	var podcastCategory:Category?
+class CategoryPostTableViewController: UITableViewController {
+	var postCategory:Category?
 	var categorySelected:Category?
 	var availableCategories:[Category]?
-	var categoryDelegate:CategoryPodcastTableViewControllerDelegate?
+	var categoryDelegate:CategoryPostTableViewControllerDelegate?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
@@ -39,7 +39,7 @@ class CategoryPodcastTableViewController: UITableViewController {
 
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "categoryPodcastCell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryPostCell", for: indexPath)
 		guard let category = availableCategories?[indexPath.row] else {
 			return cell
 		}

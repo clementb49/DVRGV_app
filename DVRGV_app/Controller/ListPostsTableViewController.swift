@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-class ListPostTableViewController: UITableViewController, CategoryPodcastTableViewControllerDelegate {
+class ListPostTableViewController: UITableViewController, CategoryPostTableViewControllerDelegate {
 	var coreDataStack:CoreDataStack!
 	var postCategory:Category?
 	var categorySelected:Category?
@@ -24,6 +24,7 @@ class ListPostTableViewController: UITableViewController, CategoryPodcastTableVi
 			updatePostCategory()
 			updateUI()
 			updateNavigationItemTitle()
+			
 		}
 	}
 
@@ -47,7 +48,7 @@ class ListPostTableViewController: UITableViewController, CategoryPodcastTableVi
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "podcastCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
 		guard let post = posts?[indexPath.row] else {
 			return cell
 		}
@@ -58,17 +59,17 @@ class ListPostTableViewController: UITableViewController, CategoryPodcastTableVi
 	
 	
 	@IBAction func filterBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		var storyBoard:UIStoryboard?
-		if isArticleView {
-			
+		var categoryStoryboard:UIStoryboard?
+		if isArticleView ?? false {
+			categoryStoryboard = UIStoryboard(name: "categoryArticleStoryboard", bundle: nil)
 		} else {
-		storyboard = UIStoryboard(name: "CategoryPodcastStoryboard", bundle: nil)
+		categoryStoryboard = UIStoryboard(name: "CategoryPodcastStoryboard", bundle: nil)
 		}
-		let vc = storyboard.instantiateInitialViewController() as! CategoryPodcastTableViewController
+		let vc = categoryStoryboard!.instantiateInitialViewController() as! CategoryPostTableViewController
 		vc.modalPresentationStyle = .popover
-		vc.podcastCategory = postCategory
+		vc.postCategory = postCategory
 		vc.categorySelected = categorySelected
-		guard let childs = podcastCategory?.childs else {
+		guard let childs = postCategory?.childs else {
 			return
 		}
 		var categories =  Array(childs)
@@ -104,16 +105,16 @@ class ListPostTableViewController: UITableViewController, CategoryPodcastTableVi
 	
 	func updatePostCategory() {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
-		if isArticleView {
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
-		} else {
+		if isArticleView ?? false {
 			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Article")
+		} else {
+			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
 		}
 		fetchRequest.resultType = .managedObjectResultType
 		do {
 			let categories = try coreDataStack.mainContext.fetch(fetchRequest)
-			self.podcastCategory = categories.first
-			self.categorySelected = podcastCategory
+			self.postCategory = categories.first
+			self.categorySelected = postCategory
 		} catch let error as NSError {
 			print("error, \(error), \(error.userInfo)")
 		}
@@ -138,7 +139,7 @@ class ListPostTableViewController: UITableViewController, CategoryPodcastTableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "PodcastTableViewCellToDetailPodcastTableViewController" {
 			let destinationViewController = segue.destination as! DetailPodcastViewController
-			guard let podcastCell = sender as? PodcastTableViewCell,
+			guard let podcastCell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: podcastCell),
 			let post = posts?[indexPath.row] else {
 				return

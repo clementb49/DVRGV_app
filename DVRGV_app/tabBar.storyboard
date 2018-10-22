@@ -19,10 +19,10 @@
             </objects>
             <point key="canvasLocation" x="1071.2" y="473.16341829085462"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="AUq-KW-VRy">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4Fz-1K-NDA" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4Fz-1K-NDA" customClass="TabBarViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wvx-Z9-Feh">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

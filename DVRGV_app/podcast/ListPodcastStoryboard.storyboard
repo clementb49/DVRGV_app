@@ -12,13 +12,13 @@
         <!--List Podcast Table View Controller-->
         <scene sceneID="V37-v0-Mhf">
             <objects>
-                <tableViewController storyboardIdentifier="ListPodcastStoryboard" title="Podcast" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bc3-Bj-qPT" userLabel="List Podcast Table View Controller" customClass="ListPodcastTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListPodcastStoryboard" title="Podcast" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bc3-Bj-qPT" userLabel="List Podcast Table View Controller" customClass="ListPostTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="q64-UY-wCT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="podcastCell" textLabel="ski-Ui-vCn" rowHeight="75" style="IBUITableViewCellStyleDefault" id="RJY-V1-udz">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" textLabel="ski-Ui-vCn" rowHeight="75" style="IBUITableViewCellStyleDefault" id="RJY-V1-udz">
                                 <rect key="frame" x="0.0" y="28" width="320" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RJY-V1-udz" id="F5n-cc-9Ka">

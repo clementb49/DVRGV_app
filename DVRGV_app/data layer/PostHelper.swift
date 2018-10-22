@@ -39,13 +39,13 @@ class PostHelper {
 	}
 	private func newPost(jsonObject: [String:Any], context: NSManagedObjectContext) {
 		let post = Post(context: context)
-		let id = jsonObject["id"] as? NSNumber
-		post.id = id!.int32Value
+		let id = jsonObject["id"] as! NSNumber
+		post.id = id.int32Value
 		post.date_gmt = convertDate(from: jsonObject["date_gmt"] as! String)
 		post.modified_gmt = convertDate(from: jsonObject["modified_gmt"] as! String)
 		post.link = URL(string: jsonObject["link"] as! String)
 		let titleDict = jsonObject["title"] as! [String:Any]
-		post.title = titleDict["rendered"] as? String
+		post.title = String(htmlEncodedString: titleDict["rendered"] as! String)
 		let contentDict = jsonObject["content"] as! [String:Any]
 		let contentString = contentDict["rendered"] as! String
 		let HTMLString = newHTMLString(contentString)
@@ -66,14 +66,14 @@ class PostHelper {
 		}
 			let author = jsonObject["author"] as? NSNumber
 		if let author = author {
-			let predicate = NSPredicate(format: "%K == \(author.intValue)", #keyPath(User.id))
+			let predicate = NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id))
 			post.author = UserHelper.findUser(predicate: predicate, context: context)
 		}
 		post.commentIsOpen = jsonObject["comment_status"] as! String == "open"
 		let categoriesArray = jsonObject["categories"] as? [NSNumber]
 		if let categoriesArray = categoriesArray {
 			for categoryId in categoriesArray {
-				let predicate = NSPredicate(format: "%K == \(categoryId.intValue)", #keyPath(Category.id))
+				let predicate = NSPredicate(format: "%K == \(categoryId)", #keyPath(Category.id))
 				if let category = CategoryHelper.findCategory(predicate:predicate, context: context) {
 					post.addToCategories(category)
 				}
