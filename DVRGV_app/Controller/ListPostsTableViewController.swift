@@ -15,16 +15,17 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 	var posts:[Post]?
 	var activityIndicator = UIActivityIndicatorView(frame: CGRect(x:0, y:0, width:40, height:40))
 	var isArticleView:Bool?
+	var viewIsLoading:Bool?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		updateIsArticleView()
-		if activityIndicator.isAnimating == true {
+		if viewIsLoading == true {
 			setActivityIndicator()
+			activityIndicator.startAnimating()
 		} else {
 			updatePostCategory()
 			updateUI()
 			updateNavigationItemTitle()
-			
 		}
 	}
 
@@ -80,12 +81,14 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 	}
 	
 	func updateUI() {
+		if viewIsLoading == false {
+			self.activityIndicator.stopAnimating()
+		}
 		guard let categorySelected = categorySelected,
 			let possts = categorySelected.posts else {
 				return
 		}
 		self.posts = Array(possts)
-
 		let postsSorted = posts?.sorted(by: {$0.date_gmt! > $1.date_gmt!})
 		self.posts = postsSorted
 	}

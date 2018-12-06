@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 class CategoryHelper {
 	private var parentDict = [String:Int]()
-	private let apiManager = APIManager()
 	func retrieveCategories(group: DispatchGroup?, context:NSManagedObjectContext) {
+		let apiManager = APIManager()
 		group?.enter()
 		let argument:[String:String] = ["orderby":"id","per_page":"100","order":"desc"]
 		let request = apiManager.request(methods: .GET, route: .categories, data: argument)

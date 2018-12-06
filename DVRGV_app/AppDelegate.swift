@@ -25,19 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		} catch let error as NSError {
 			print("failed to set theaudi session category and mode: \(error.localizedDescription)")
 		}
-		guard let tabController = window?.rootViewController as? UITabBarController,
-			let navController = tabController.viewControllers?.first as? UINavigationController,
-			let vc = navController.topViewController as? ListPodcastTableViewController else {
+		guard let tabController = window?.rootViewController as? TabBarViewController else {
 			return true
 		}
-		vc.coreDataStack = coreDataStack
 		let fetchRequestCategory = NSFetchRequest<Category>(entityName: "Category")
 		let countCategory = try! coreDataStack.mainContext.count(for: fetchRequestCategory)
 		if countCategory != 0 {
+			tabController.coreDataStack = coreDataStack
+			tabController.viewIsLoading = false
+			tabController.launch()
 			return true
 		} else {
-			vc.activityIndicator.startAnimating()
-			retrieveAll(view: vc)
+			tabController.viewIsLoading = true
+			tabController.coreDataStack = coreDataStack
+			tabController.launch()
+			retrieveAll(view: tabController)
 			return true
 		}
 	}
@@ -66,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		coreDataStack.saveContext()
 	}
 	
-	func retrieveAll(view: ListPodcastTableViewController) {
+	func retrieveAll(view: TabBarViewController) {
 		let work = DispatchWorkItem {
 			let categoryHelper = CategoryHelper()
 			let userHelper = UserHelper()
@@ -84,10 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			postGroup.wait()
 			self.coreDataStack.saveContext()
 			DispatchQueue.main.async {
-				view.activityIndicator.stopAnimating()
-				view.updatePodcastCategory()
-				view.updateUI()
-				view.tableView.reloadData()
+				view.didFinishFirstLaunch()
 			}
 		}
 		DispatchQueue.global().async (execute: work)
