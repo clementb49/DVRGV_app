@@ -23,8 +23,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 	}
 	
 	func didFinishFirstLaunch() {
-		let navController = selectedViewController as! UINavigationController
-		let vc = navController.topViewController as! ListPostTableViewController
+		guard let vcs = viewControllers,
+			let navController = vcs[0] as? UINavigationController,
+			let vc = navController.topViewController as? ListPostTableViewController else {
+			return
+		}
 		vc.coreDataStack = self.coreDataStack
 		self.viewIsLoading = false
 		vc.viewIsLoading = self.viewIsLoading
@@ -35,8 +38,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
 
 	func launch() {
-		let navController = selectedViewController as! UINavigationController
-		let vc = navController.topViewController as! ListPostTableViewController
+		guard let vcs = viewControllers,
+			let navController = vcs[0] as? UINavigationController,
+			let vc = navController.topViewController as? ListPostTableViewController else {
+			return
+		}
 		if viewIsLoading ?? false {
 			tabBar.isUserInteractionEnabled = false
 			vc.viewIsLoading = self.viewIsLoading
