@@ -28,6 +28,7 @@
 		EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */; };
 		EB9035AA2118E24E0091F603 /* CategoryPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
+		EBA9C03221BEBA8400BFDE09 /* DetailArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */; };
 		EBAA19D5212AEFB4005395D4 /* ListPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */; };
 		EBAA19D7212AF19F005395D4 /* DetailPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */; };
 		EBAB48932125CC1B00C7FBBA /* PodcastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB48922125CC1B00C7FBBA /* PodcastHelper.swift */; };
@@ -70,6 +71,7 @@
 		EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostTableViewController.swift; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleViewController.swift; sourceTree = "<group>"; };
 		EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListPodcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailPodcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EBAB48922125CC1B00C7FBBA /* PodcastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastHelper.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				EB4393CC21679E4D00760D21 /* ListArticleStoryboard.storyboard */,
 				EBC93AB6216912EB006B9A55 /* categoryArticleStoryboard.storyboard */,
 				EB66A8B421BE5E7300F8D46A /* DetailArticleStoryboard.storyboard */,
+				EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBA9C03221BEBA8400BFDE09 /* DetailArticleViewController.swift in Sources */,
 				EB48827321237379005527A7 /* Podcast+CoreDataProperties.swift in Sources */,
 				EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */,
 				EB0C4B672104E47E00128DD6 /* HTTPMethods.swift in Sources */,
