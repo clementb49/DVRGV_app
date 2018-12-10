@@ -58,7 +58,6 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 	}
 
 	
-	
 	@IBAction func filterBarButtonItemTapped(_ sender: UIBarButtonItem) {
 		var categoryStoryboard:UIStoryboard?
 		if isArticleView ?? false {
@@ -109,7 +108,7 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 	func updatePostCategory() {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
 		if isArticleView ?? false {
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Article")
+			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Articles")
 		} else {
 			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
 		}

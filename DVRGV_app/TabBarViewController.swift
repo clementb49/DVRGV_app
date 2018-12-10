@@ -17,8 +17,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 	}
 
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-		let navController = viewController as! UINavigationController
-		let vc = navController.topViewController as! ListPostTableViewController
+		guard let navController = selectedViewController as? UINavigationController,
+			let vc = navController.topViewController as? ListPostTableViewController else {
+			return
+		}
 		vc.coreDataStack = self.coreDataStack
 	}
 	
