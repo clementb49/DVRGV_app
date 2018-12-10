@@ -143,11 +143,11 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			let destinationViewController = segue.destination as! DetailPodcastViewController
 			guard let podcastCell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: podcastCell),
-			let post = posts?[indexPath.row] else {
+			let posts = posts else {
 				return
 			}
-			destinationViewController.post = post
-			destinationViewController.podcast = post.podcast
+			destinationViewController.posts = posts
+			destinationViewController.currentPostIndex = indexPath.row
 			destinationViewController.coreDataStack = coreDataStack
 		}
 	}

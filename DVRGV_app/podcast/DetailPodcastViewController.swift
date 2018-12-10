@@ -13,7 +13,8 @@ import AVKit
 
 import MediaPlayer
 class DetailPodcastViewController: UIViewController {
-	var post:Post?
+	var posts:[Post]?
+	var currentPostIndex:Int?
 	var podcast:Podcast?
 	var coreDataStack:CoreDataStack!
 	@IBOutlet weak var webView: WKWebView!
@@ -25,38 +26,39 @@ class DetailPodcastViewController: UIViewController {
 	var podcastImageData:Data?
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		guard let post = post,
-		let categories = post.categories,
-		let date = post.date_gmt,
-		let content = post.content,
-		let podcast = podcast else {
+		updateUI()
+	}
+	
+	func updateUI() {
+		guard let posts:[Post] = self.posts,
+			let currentPostIndex = currentPostIndex,
+			let podcast = posts[currentPostIndex].podcast,
+			let categories = posts[currentPostIndex].categories,
+			let date = posts[currentPostIndex].date_gmt,
+			let content = posts[currentPostIndex].content else {
 			readButton.isEnabled = false
 			readButton.isHidden = true
 			return
 		}
-		webView.loadHTMLString(content, baseURL: post.link)
+		self.podcast = podcast
+		webView.loadHTMLString(content, baseURL: posts[currentPostIndex].link)
 		let categoriesArray = Array(categories)
 		categoryLabel.text = categoriesArray.last?.name
-		TitleLabel.text = post.title
-		authorLabel.text = post.author?.name
+		TitleLabel.text = posts[currentPostIndex].title
+		authorLabel.text = posts[currentPostIndex].author?.name
 		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
-		/*
-		if let imageURL = podcast.imageURL {
-			podcastHelper.downloadImage(url: imageURL, handler: {data -> Void in
-				self.podcastImageData = data
-			})
-		}*/
 	}
-
 	
 	func setupNowPlaying() {
 		var nowPlayingInfo = [String:Any]()
-		if let imageData = podcastImageData,
+		if let posts = posts,
+			let currentPostIndex = currentPostIndex,
+			let imageData = podcastImageData,
 			let image = UIImage(data: imageData) {
 			nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: {size in return image})
+			nowPlayingInfo[MPMediaItemPropertyTitle] = posts[currentPostIndex].title!
+			nowPlayingInfo[MPMediaItemPropertyArtist] = posts[currentPostIndex].author!.name!
 		}
-		nowPlayingInfo[MPMediaItemPropertyTitle] = post!.title!
-		nowPlayingInfo[MPMediaItemPropertyArtist] = post!.author!.name!
 		MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
 	}
 	
