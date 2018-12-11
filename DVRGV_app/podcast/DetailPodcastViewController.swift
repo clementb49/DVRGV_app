@@ -19,7 +19,7 @@ class DetailPodcastViewController: UIViewController {
 	var coreDataStack:CoreDataStack!
 	@IBOutlet weak var webView: WKWebView!
 	@IBOutlet weak var categoryLabel:UILabel!
-	@IBOutlet weak var TitleLabel:UILabel!
+	@IBOutlet weak var titleLabel:UILabel!
 	@IBOutlet weak var authorLabel:UILabel!
 	@IBOutlet weak var dateLabel:UILabel!
 	@IBOutlet weak var readButton:UIButton!
@@ -44,7 +44,7 @@ class DetailPodcastViewController: UIViewController {
 		webView.loadHTMLString(content, baseURL: posts[currentPostIndex].link)
 		let categoriesArray = Array(categories)
 		categoryLabel.text = categoriesArray.last?.name
-		TitleLabel.text = posts[currentPostIndex].title
+		titleLabel.text = posts[currentPostIndex].title
 		authorLabel.text = posts[currentPostIndex].author?.name
 		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
 	}

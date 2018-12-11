@@ -58,6 +58,8 @@ class PostHelper {
 				podcast.imageURL = findFirstImageURL(doc: doc)
 				post.podcast = podcast
 				post.content = deletePlayer(doc: doc)
+			} else {
+				post.content = HTMLString
 			}
 		} catch Exception.Error(type: let type, Message: let message) {
 			print(message)
@@ -81,7 +83,7 @@ class PostHelper {
 		}
 	}
 	private func newHTMLString(_ contentString: String) -> String {
-		var string = "<! doctype html><html><head></head><body>"
+		var string = "<!doctype html><html><head></head><body>"
 		string = string + contentString
 		string = string + "</body></html>"
 		return string

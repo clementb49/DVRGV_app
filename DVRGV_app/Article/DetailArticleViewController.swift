@@ -7,23 +7,37 @@
 //
 
 import UIKit
-
+import WebKit
 class DetailArticleViewController: UIViewController {
 	var posts:[Post]?
 	var currentPostIndex:Int?
-	var podcast:Podcast?
-	
 	@IBOutlet weak var categoryLabel: UILabel!
 	@IBOutlet weak var titleLabel:UILabel!
 	@IBOutlet weak var authorLabel: UILabel!
 	@IBOutlet weak var dateLabel:UILabel!
+
+	@IBOutlet weak var webView: WKWebView!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		updateUI()
     }
-    
+	
+	func updateUI() {
+		guard let posts:[Post] = self.posts,
+			let currentPostIndex = currentPostIndex,
+			let categories = posts[currentPostIndex].categories,
+			let date = posts[currentPostIndex].date_gmt,
+			let content = posts[currentPostIndex].content else {
+				return
+		}
+		webView.loadHTMLString(content, baseURL: posts[currentPostIndex].link)
+		let categoriesArray = Array(categories)
+		categoryLabel.text = categoriesArray.last?.name
+		titleLabel.text = posts[currentPostIndex].title
+		authorLabel.text = posts[currentPostIndex].author?.name
+		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+	}
 
     /*
     // MARK: - Navigation
