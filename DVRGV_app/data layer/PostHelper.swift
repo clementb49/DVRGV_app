@@ -76,7 +76,7 @@ class PostHelper {
 		if let categoriesArray = categoriesArray {
 			for categoryId in categoriesArray {
 				let predicate = NSPredicate(format: "%K == \(categoryId)", #keyPath(Category.id))
-				if let category = CategoryHelper.findCategory(predicate:predicate, context: context) {
+				if let category = Category.findCategory(predicate:predicate, context: context) {
 					post.addToCategories(category)
 				}
 			}

@@ -39,10 +39,10 @@ class CategoryHelper {
 		save(context: context)
 		for (key, value) in parentDict {
 			let predicateName = NSPredicate(format: "%K == %@", #keyPath(Category.name), key)
-			let category = CategoryHelper.findCategory(predicate: predicateName, context: context)
+			let category = Category.findCategory(predicate: predicateName, context: context)
 			if let category = category {
 				let predicateId = NSPredicate(format: "%K == \(value)", #keyPath(Category.id))
-				category.parent = CategoryHelper.findCategory(predicate: predicateId, context: context)
+				category.parent = Category.findCategory(predicate: predicateId, context: context)
 			}
 		}
 		save(context: context)
@@ -62,25 +62,6 @@ class CategoryHelper {
 		category.count = count.int32Value
 		if (parent.intValue != 0) {
 			parentDict[category.name] = parent.intValue
-		}
-	}
-	static func findCategory(predicate:NSPredicate, context:NSManagedObjectContext) -> Category? {
-		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
-		fetchRequest.resultType = .managedObjectResultType
-		fetchRequest.predicate = predicate
-		do {
-			let categories = try context.fetch(fetchRequest)
-			return categories.first
-		} catch let error as NSError {
-			print("couldn't fetch \(error) \(error.userInfo)")
-			return nil
-		}
-	}
-	private func save(context: NSManagedObjectContext) {
-		do {
-			try context.save()
-		} catch let error as NSError {
-			print("error, \(error), \(error.userInfo)")
 		}
 	}
 }
