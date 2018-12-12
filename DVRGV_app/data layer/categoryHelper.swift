@@ -49,15 +49,19 @@ class CategoryHelper {
 	}
 	private func newCategory(jsonObject: [String:Any], context: NSManagedObjectContext) {
 		let category = Category(context: context)
-		let id = jsonObject["id"] as? NSNumber
-		category.id = id!.int32Value
-		let count = jsonObject["count"] as? NSNumber
-			category.count = count!.int32Value
-		category.desc = jsonObject["description"] as? String
-		category.name = jsonObject["name"] as? String
-		let parent = jsonObject["parent"] as? NSNumber
-		if (parent!.intValue != 0) {
-			parentDict[category.name!] = parent!.intValue
+		guard let id = jsonObject["id"] as? NSNumber,
+		let count = jsonObject["count"] as? NSNumber,
+		let description = jsonObject["description"] as? String,
+		let name = jsonObject["name"] as? String,
+			let parent = jsonObject["parent"] as? NSNumber else {
+				return
+		}
+		category.name = name
+		category.id = id.int32Value
+		category.desc = description
+		category.count = count.int32Value
+		if (parent.intValue != 0) {
+			parentDict[category.name] = parent.intValue
 		}
 	}
 	static func findCategory(predicate:NSPredicate, context:NSManagedObjectContext) -> Category? {

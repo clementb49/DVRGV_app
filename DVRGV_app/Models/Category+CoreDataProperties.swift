@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  DVRGV_app
 //
-//  Created by Clément BOUSSIRON on 30/07/2018.
+//  Created by clément boussiron on 12/12/2018.
 //  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
 //
 //
@@ -18,12 +18,12 @@ extension Category {
     }
 
     @NSManaged public var count: Int32
-    @NSManaged public var desc: String?
+    @NSManaged public var desc: String
     @NSManaged public var id: Int32
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var childs: Set<Category>?
     @NSManaged public var parent: Category?
-	@NSManaged public var posts: Set<Post>?
+    @NSManaged public var posts: Set<Post>?
 
 }
 
