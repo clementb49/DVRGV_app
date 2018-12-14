@@ -70,12 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func retrieveAll(view: TabBarViewController) {
 		let work = DispatchWorkItem {
-			let categoryHelper = CategoryHelper()
 			let userHelper = UserHelper()
 			let postHelper = PostHelper()
 			let catGroup = DispatchGroup()
 			let userGroup = DispatchGroup()
-			categoryHelper.retrieveCategories(group: catGroup, context: self.coreDataStack.privateContext)
+			Category.retrieveCategories(group: catGroup, context: self.coreDataStack.privateContext)
 			userHelper.retrieveUsers(group: userGroup, context: self.coreDataStack.privateContext)
 			catGroup.wait()
 			userGroup.wait()
