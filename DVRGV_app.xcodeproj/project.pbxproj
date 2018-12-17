@@ -40,10 +40,10 @@
 		EBB1E91A210BD09C00B9CB12 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */; };
 		EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */; };
 		EBB1E91C210BD09C00B9CB12 /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */; };
+		EBBE990E21C7A0DC007A1706 /* User+function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBE990D21C7A0DC007A1706 /* User+function.swift */; };
 		EBC93AB7216912EB006B9A55 /* categoryArticleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC93AB6216912EB006B9A55 /* categoryArticleStoryboard.storyboard */; };
 		EBCBF45321693A980040F5E2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBF45221693A980040F5E2 /* TabBarViewController.swift */; };
 		EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */; };
-		EBF89F19210F158200F9E0C8 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F18210F158100F9E0C8 /* UserHelper.swift */; };
 		EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F1A210F198300F9E0C8 /* PostHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,11 +83,11 @@
 		EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EBBE990D21C7A0DC007A1706 /* User+function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+function.swift"; sourceTree = "<group>"; };
 		EBC93AB6216912EB006B9A55 /* categoryArticleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = categoryArticleStoryboard.storyboard; sourceTree = "<group>"; };
 		EBC93D3A21280B5300C230C3 /* DVRGV_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DVRGV_app.entitlements; sourceTree = "<group>"; };
 		EBCBF45221693A980040F5E2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EBE13429210B0562009AADF6 /* DVRGV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV.xcdatamodel; sourceTree = "<group>"; };
-		EBF89F18210F158100F9E0C8 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		EBF89F1A210F198300F9E0C8 /* PostHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,7 +197,6 @@
 		EB7A2FB1210F0B3100E14816 /* data layer */ = {
 			isa = PBXGroup;
 			children = (
-				EBF89F18210F158100F9E0C8 /* UserHelper.swift */,
 				EBF89F1A210F198300F9E0C8 /* PostHelper.swift */,
 				EBAB48922125CC1B00C7FBBA /* PodcastHelper.swift */,
 			);
@@ -222,6 +221,7 @@
 				EBB1E90E210BD09B00B9CB12 /* Category+CoreDataProperties.swift */,
 				EBB1E90F210BD09B00B9CB12 /* User+CoreDataClass.swift */,
 				EBB1E910210BD09B00B9CB12 /* User+CoreDataProperties.swift */,
+				EBBE990D21C7A0DC007A1706 /* User+function.swift */,
 				EBB1E911210BD09B00B9CB12 /* Comment+CoreDataClass.swift */,
 				EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */,
 				EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */,
@@ -353,7 +353,6 @@
 				EBB1E915210BD09C00B9CB12 /* Category+CoreDataClass.swift in Sources */,
 				EBB1E919210BD09C00B9CB12 /* Comment+CoreDataClass.swift in Sources */,
 				EBCBF45321693A980040F5E2 /* TabBarViewController.swift in Sources */,
-				EBF89F19210F158200F9E0C8 /* UserHelper.swift in Sources */,
 				EB88727121C101F00002F215 /* Category+Function.swift in Sources */,
 				EB4882752123740F005527A7 /* Podcast+CoreDataClass.swift in Sources */,
 				EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */,
@@ -367,6 +366,7 @@
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
 				EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */,
 				EBAB48932125CC1B00C7FBBA /* PodcastHelper.swift in Sources */,
+				EBBE990E21C7A0DC007A1706 /* User+function.swift in Sources */,
 				EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

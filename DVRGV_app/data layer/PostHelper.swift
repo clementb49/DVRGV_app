@@ -69,7 +69,7 @@ class PostHelper {
 			let author = jsonObject["author"] as? NSNumber
 		if let author = author {
 			let predicate = NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id))
-			post.author = UserHelper.findUser(predicate: predicate, context: context)
+			post.author = User.findUser(predicate: predicate, context: context)
 		}
 		post.commentIsOpen = jsonObject["comment_status"] as! String == "open"
 		let categoriesArray = jsonObject["categories"] as? [NSNumber]
