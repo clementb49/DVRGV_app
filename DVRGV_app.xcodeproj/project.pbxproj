@@ -19,6 +19,7 @@
 		EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */; };
 		EB0C4B6D2104E51B00128DD6 /* tabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */; };
 		EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */; };
+		EB276CB721C7D55700620A76 /* Post+function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CB621C7D55700620A76 /* Post+function.swift */; };
 		EB3E0CEF212D65AF009FE8E2 /* PodcastPlayerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB3E0CEE212D65AF009FE8E2 /* PodcastPlayerStoryboard.storyboard */; };
 		EB4393CD21679E4D00760D21 /* ListArticleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB4393CC21679E4D00760D21 /* ListArticleStoryboard.storyboard */; };
 		EB48827321237379005527A7 /* Podcast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48827221237379005527A7 /* Podcast+CoreDataProperties.swift */; };
@@ -44,7 +45,6 @@
 		EBC93AB7216912EB006B9A55 /* categoryArticleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC93AB6216912EB006B9A55 /* categoryArticleStoryboard.storyboard */; };
 		EBCBF45321693A980040F5E2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBF45221693A980040F5E2 /* TabBarViewController.swift */; };
 		EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */; };
-		EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF89F1A210F198300F9E0C8 /* PostHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +61,7 @@
 		EB0C4B6A2104E4C800128DD6 /* stringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringExtention.swift; sourceTree = "<group>"; };
 		EB0C4B6C2104E51B00128DD6 /* tabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tabBar.storyboard; sourceTree = "<group>"; };
 		EB1758BA211B93E60099B9B5 /* DetailPodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPodcastViewController.swift; sourceTree = "<group>"; };
+		EB276CB621C7D55700620A76 /* Post+function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+function.swift"; sourceTree = "<group>"; };
 		EB3E0CEE212D65AF009FE8E2 /* PodcastPlayerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PodcastPlayerStoryboard.storyboard; sourceTree = "<group>"; };
 		EB4393CC21679E4D00760D21 /* ListArticleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListArticleStoryboard.storyboard; sourceTree = "<group>"; };
 		EB48827221237379005527A7 /* Podcast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Podcast+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		EBC93D3A21280B5300C230C3 /* DVRGV_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DVRGV_app.entitlements; sourceTree = "<group>"; };
 		EBCBF45221693A980040F5E2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EBE13429210B0562009AADF6 /* DVRGV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DVRGV.xcdatamodel; sourceTree = "<group>"; };
-		EBF89F1A210F198300F9E0C8 /* PostHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +197,6 @@
 		EB7A2FB1210F0B3100E14816 /* data layer */ = {
 			isa = PBXGroup;
 			children = (
-				EBF89F1A210F198300F9E0C8 /* PostHelper.swift */,
 				EBAB48922125CC1B00C7FBBA /* PodcastHelper.swift */,
 			);
 			path = "data layer";
@@ -226,6 +225,7 @@
 				EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */,
 				EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */,
 				EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */,
+				EB276CB621C7D55700620A76 /* Post+function.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,6 +346,7 @@
 				EB0C4B472104E3DF00128DD6 /* AppDelegate.swift in Sources */,
 				EB0C4B672104E47E00128DD6 /* HTTPMethods.swift in Sources */,
 				EBB1E917210BD09C00B9CB12 /* User+CoreDataClass.swift in Sources */,
+				EB276CB721C7D55700620A76 /* Post+function.swift in Sources */,
 				EB0C4B662104E47E00128DD6 /* APIManager.swift in Sources */,
 				EBB1E91A210BD09C00B9CB12 /* Comment+CoreDataProperties.swift in Sources */,
 				EBB1E91C210BD09C00B9CB12 /* Post+CoreDataProperties.swift in Sources */,
@@ -355,7 +356,6 @@
 				EBCBF45321693A980040F5E2 /* TabBarViewController.swift in Sources */,
 				EB88727121C101F00002F215 /* Category+Function.swift in Sources */,
 				EB4882752123740F005527A7 /* Podcast+CoreDataClass.swift in Sources */,
-				EBF89F1B210F198300F9E0C8 /* PostHelper.swift in Sources */,
 				EB0C4B612104E44E00128DD6 /* PodcastTableViewCell.swift in Sources */,
 				EB0C4B6B2104E4C800128DD6 /* stringExtention.swift in Sources */,
 				EBB1E916210BD09C00B9CB12 /* Category+CoreDataProperties.swift in Sources */,
