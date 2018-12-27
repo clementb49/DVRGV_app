@@ -10,12 +10,21 @@ import Foundation
 import CoreData
 import SwiftSoup
 
-
 extension Post {
-	static func retrievePagePosts(group: DispatchGroup?, context: NSManagedObjectContext, page: Int) -> Int {
-		//group?.enter()
+	private static var totalPages:Int = 1
+	static func retrievePosts(group: DispatchGroup?, coreDataStack:CoreDataStack) {
+		Post.totalPages = 1
+		var currentPage:Int = 1
+		while (currentPage<=Post.totalPages) {
+			Post.retrievePagePosts(group: group, coreDataStack: coreDataStack, page: currentPage)
+			group?.wait()
+			currentPage = currentPage + 1
+		}
+	}
+	private static func retrievePagePosts(group: DispatchGroup?, coreDataStack: CoreDataStack, page: Int) {
+		group?.enter()
 		let apiManager = APIManager()
-		let argument = ["per_page":"10","page":"\(page)"]
+		let argument = ["per_page":"50","page":"\(page)"]
 		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {dataBody, response, error -> Void in
 			if let error = error {
@@ -23,13 +32,9 @@ extension Post {
 			} else {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
-					Post.convertPost(from: dataBody!, context: context)
-					let totalPage = response.allHeaderFields["X-WP-TotalPages"] as! Int
-					if page <= totalPage {
-						Post.retrievePagePosts(group: group, context: context, page: page+1)
-					} else {
-						group?.leave()
-					}
+					let strTotalPage = response.allHeaderFields["X-WP-TotalPages"] as! String
+					Post.totalPages = Int(strTotalPage)!
+					Post.convertPost(from: dataBody!, context: coreDataStack.privateContext)
 				} else {
 					print("errror")
 				}
@@ -83,7 +88,8 @@ extension Post {
 			} else {
 				post.content = HTMLString
 			}
-			} catch Exception.Error(type: let type, Message: let message) {
+		} catch Exception.Error(type: let type, Message: let message) {
+			print(type)
 			print(message)
 		} catch {
 			print("failed to parse the HTML String")

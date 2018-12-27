@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func retrieveAll(view: TabBarViewController) {
 		let work = DispatchWorkItem {
-			let postHelper = PostHelper()
 			let catGroup = DispatchGroup()
 			let userGroup = DispatchGroup()
 			Category.retrieveCategories(group: catGroup, context: self.coreDataStack.privateContext)
@@ -78,9 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			catGroup.wait()
 			userGroup.wait()
 			let postGroup = DispatchGroup()
-			for page in 1 ... 10 {
-				postHelper.retrievePosts(group: postGroup, context: self.coreDataStack.privateContext, page: page)
-			}
+			Post.retrievePosts(group: postGroup, coreDataStack: self.coreDataStack)
 			postGroup.wait()
 			self.coreDataStack.saveContext()
 			DispatchQueue.main.async {
@@ -92,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func registerForPushNotifications() {
 		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {(granted, error) in print("permission granted: \(granted)")
-			
 		}
 	}
 }
