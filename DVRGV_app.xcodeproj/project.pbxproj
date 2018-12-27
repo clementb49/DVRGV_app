@@ -26,7 +26,6 @@
 		EB4882752123740F005527A7 /* Podcast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4882742123740F005527A7 /* Podcast+CoreDataClass.swift */; };
 		EB66A8B521BE5E7300F8D46A /* DetailArticleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB66A8B421BE5E7300F8D46A /* DetailArticleStoryboard.storyboard */; };
 		EB88727121C101F00002F215 /* Category+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB88727021C101F00002F215 /* Category+Function.swift */; };
-		EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */; };
 		EB9035AA2118E24E0091F603 /* CategoryPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
 		EBA9C03221BEBA8400BFDE09 /* DetailArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */; };
@@ -96,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB8A9CA2211E3E4100CE32C4 /* SwiftSoup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +230,6 @@
 				EB0C4B3F2104E3DF00128DD6 /* Sources */,
 				EB0C4B402104E3DF00128DD6 /* Frameworks */,
 				EB0C4B412104E3DF00128DD6 /* Resources */,
-				EB55FDE0211E999500B73E45 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,27 +303,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		EB55FDE0211E999500B73E45 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB0C4B3F2104E3DF00128DD6 /* Sources */ = {
