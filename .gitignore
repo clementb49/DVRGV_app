@@ -22,3 +22,6 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 .DS_Store
+Pods/
+*.xcworkspace
+

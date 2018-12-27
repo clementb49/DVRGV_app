@@ -44,9 +44,13 @@
 		EBC93AB7216912EB006B9A55 /* categoryArticleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC93AB6216912EB006B9A55 /* categoryArticleStoryboard.storyboard */; };
 		EBCBF45321693A980040F5E2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBF45221693A980040F5E2 /* TabBarViewController.swift */; };
 		EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */; };
+		FBCF7E8EFFD66547B6ADC2DA /* libPods-DVRGV_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AAFDD8C5FD9EDC081E3E0B /* libPods-DVRGV_app.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07B6F48DBA242E7F9361C60C /* Pods-DVRGV_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVRGV_app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVRGV_app/Pods-DVRGV_app.debug.xcconfig"; sourceTree = "<group>"; };
+		48AAFDD8C5FD9EDC081E3E0B /* libPods-DVRGV_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVRGV_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EABA8E247684738AE9EDF803 /* Pods-DVRGV_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVRGV_app.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVRGV_app/Pods-DVRGV_app.release.xcconfig"; sourceTree = "<group>"; };
 		EB0C4B432104E3DF00128DD6 /* DVRGV_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DVRGV_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB0C4B502104E3DF00128DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,18 +99,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBCF7E8EFFD66547B6ADC2DA /* libPods-DVRGV_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E04D4FFCF6160108C176861 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				07B6F48DBA242E7F9361C60C /* Pods-DVRGV_app.debug.xcconfig */,
+				EABA8E247684738AE9EDF803 /* Pods-DVRGV_app.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB0C4B3A2104E3DF00128DD6 = {
 			isa = PBXGroup;
 			children = (
 				EB0C4B452104E3DF00128DD6 /* DVRGV_app */,
 				EB0C4B442104E3DF00128DD6 /* Products */,
 				EB8A9CA0211E3E4100CE32C4 /* Frameworks */,
+				1E04D4FFCF6160108C176861 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */,
+				48AAFDD8C5FD9EDC081E3E0B /* libPods-DVRGV_app.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,6 +243,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB0C4B582104E3DF00128DD6 /* Build configuration list for PBXNativeTarget "DVRGV_app" */;
 			buildPhases = (
+				2AD5F71BF47834B86C11E548 /* [CP] Check Pods Manifest.lock */,
 				EB0C4B3F2104E3DF00128DD6 /* Sources */,
 				EB0C4B402104E3DF00128DD6 /* Frameworks */,
 				EB0C4B412104E3DF00128DD6 /* Resources */,
@@ -303,6 +320,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AD5F71BF47834B86C11E548 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DVRGV_app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB0C4B3F2104E3DF00128DD6 /* Sources */ = {
@@ -469,6 +511,7 @@
 		};
 		EB0C4B592104E3DF00128DD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07B6F48DBA242E7F9361C60C /* Pods-DVRGV_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DVRGV_app/DVRGV_app.entitlements;
@@ -492,6 +535,7 @@
 		};
 		EB0C4B5A2104E3DF00128DD6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EABA8E247684738AE9EDF803 /* Pods-DVRGV_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DVRGV_app/DVRGV_app.entitlements;
