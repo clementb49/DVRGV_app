@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 extension User {
+	static var totalPages:Int = 1
 	static func findUser(predicate:NSPredicate, context:NSManagedObjectContext) -> User? {
 		let fetchRequest = NSFetchRequest<User>(entityName: "User")
 		fetchRequest.resultType = .managedObjectResultType
@@ -49,25 +50,35 @@ extension User {
 		User.saveContext(context: context)
 	}
 
-	static func retrieveUsers(group: DispatchGroup?, context: NSManagedObjectContext) {
+	private static func retrievePageUsers(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int) {
+		group.enter()
 		let apiManager = APIManager()
-		group?.enter()
-		let argument = ["orderby":"id","per_page":"100"]
+		let argument = ["orderby":"id","per_page":"50","page":"\(page)"]
 		let request = apiManager.request(methods: .GET, route: .users, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
 			if let error = error {
 				print("error \(error)")
 			} else {
-				let responseCode = (response as! HTTPURLResponse).statusCode
-				if responseCode == 200 {
-					User.convertUser(from: databody!, context: context)
+				let response = response as! HTTPURLResponse
+				if response.statusCode == 200 {
+					User.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
+					User.convertUser(from: databody!, context: coreDataStack.privateContext)
 				} else {
 					print("error")
 				}
 			}
-			group?.leave()
+			group.leave()
 		}
 		task.resume()
 	}
-
+	static func retrieveUsers(coreDataStack: CoreDataStack) {
+	var currentPage = 1
+		User.totalPages = 1
+		let userGroup = DispatchGroup()
+		while (currentPage <= totalPages) {
+			User.retrievePageUsers(group: userGroup, coreDataStack: coreDataStack, page: currentPage)
+			userGroup.wait()
+			currentPage+=1
+		}
+	}
 }
