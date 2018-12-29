@@ -1,4 +1,4 @@
-platform :ios, '12.1'
+platform :ios, '11.4'
 target 'DVRGV_app' do
 	pod 'SwiftSoup'
 end

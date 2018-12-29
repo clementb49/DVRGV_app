@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 extension Category {
+	private static var totalPages:Int = 1
 	static func findCategory(predicate:NSPredicate, context:NSManagedObjectContext) -> Category? {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
 		fetchRequest.resultType = .managedObjectResultType
@@ -73,25 +74,35 @@ extension Category {
 		Category.save(context: context)
 	}
 
-	static func retrieveCategories(group: DispatchGroup?, context:NSManagedObjectContext) {
+	private static func retrievePageCategories(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int) {
+		group.enter()
 		let apiManager = APIManager()
-		group?.enter()
-		let argument:[String:String] = ["orderby":"id","per_page":"100","order":"desc"]
+		let argument:[String:String] = ["orderby":"id","per_page":"50","order":"desc","page":"\(page)"]
 		let request = apiManager.request(methods: .GET, route: .categories, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
 			if let error = error {
 				print("error, \(error)")
 			} else {
-				let responseCode = (response as! HTTPURLResponse).statusCode
-				if responseCode == 200 {
-					Category.convertCategories(from: databody!, context: context)
+				let response = response as! HTTPURLResponse
+				if response.statusCode == 200 {
+					Category.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
+					Category.convertCategories(from: databody!, context: coreDataStack.privateContext)
 				} else {
 					print("error")
 				}
 			}
-			group?.leave()
+			group.leave()
 		}
 		task.resume()
 	}
-
+	static func retrieveCategories(coreDataStack:CoreDataStack) {
+		var currentPage = 1
+		Category.totalPages = 1
+		let categoryGroup = DispatchGroup()
+		while(currentPage <= Category.totalPages) {
+			Category.retrievePageCategories(group: categoryGroup, coreDataStack: coreDataStack, page: currentPage)
+			categoryGroup.wait()
+			currentPage+=1
+		}
+	}
 }
