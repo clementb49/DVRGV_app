@@ -12,17 +12,18 @@ import SwiftSoup
 
 extension Post {
 	private static var totalPages:Int = 1
-	static func retrievePosts(group: DispatchGroup?, coreDataStack:CoreDataStack) {
+	static func retrievePosts(coreDataStack:CoreDataStack) {
 		Post.totalPages = 1
 		var currentPage:Int = 1
+		let postGroup = DispatchGroup()
 		while (currentPage<=Post.totalPages) {
-			Post.retrievePagePosts(group: group, coreDataStack: coreDataStack, page: currentPage)
-			group?.wait()
+			Post.retrievePagePosts(group: postGroup, coreDataStack: coreDataStack, page: currentPage)
+			postGroup.wait()
 			currentPage = currentPage + 1
 		}
 	}
-	private static func retrievePagePosts(group: DispatchGroup?, coreDataStack: CoreDataStack, page: Int) {
-		group?.enter()
+	private static func retrievePagePosts(group: DispatchGroup, coreDataStack: CoreDataStack, page: Int) {
+		group.enter()
 		let apiManager = APIManager()
 		let argument = ["per_page":"50","page":"\(page)"]
 		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
@@ -32,14 +33,13 @@ extension Post {
 			} else {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
-					let strTotalPage = response.allHeaderFields["X-WP-TotalPages"] as! String
-					Post.totalPages = Int(strTotalPage)!
+					Post.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
 					Post.convertPost(from: dataBody!, context: coreDataStack.privateContext)
 				} else {
 					print("errror")
 				}
 			}
-			group?.leave()
+			group.leave()
 		}
 		task.resume()
 	}

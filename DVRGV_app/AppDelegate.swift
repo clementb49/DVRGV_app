@@ -72,9 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let work = DispatchWorkItem {
 			Category.retrieveCategories(coreDataStack: self.coreDataStack)
 			User.retrieveUsers(coreDataStack: self.coreDataStack)
-			let postGroup = DispatchGroup()
-			Post.retrievePosts(group: postGroup, coreDataStack: self.coreDataStack)
-			postGroup.wait()
+			Post.retrievePosts(coreDataStack: self.coreDataStack)
 			self.coreDataStack.saveContext()
 			DispatchQueue.main.async {
 				view.didFinishFirstLaunch()
