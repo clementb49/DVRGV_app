@@ -73,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			Category.retrieveCategories(coreDataStack: self.coreDataStack)
 			User.retrieveUsers(coreDataStack: self.coreDataStack)
 			Post.retrievePosts(coreDataStack: self.coreDataStack)
+			Comment.retrieveComment(coreDataStack: self.coreDataStack)
 			self.coreDataStack.saveContext()
 			DispatchQueue.main.async {
 				view.didFinishFirstLaunch()

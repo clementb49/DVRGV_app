@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  DVRGV_app
 //
-//  Created by Clément BOUSSIRON on 30/07/2018.
+//  Created by Clément BOUSSIRON on 30/12/2018.
 //  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
 //
 //
@@ -19,7 +19,8 @@ extension User {
 
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
-    @NSManaged public var posts: NSSet?
+    @NSManaged public var posts: Set<Post>?
+    @NSManaged public var comments: Set<Comment>?
 
 }
 
@@ -37,5 +38,22 @@ extension User {
 
     @objc(removePosts:)
     @NSManaged public func removeFromPosts(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for comments
+extension User {
+
+    @objc(addCommentsObject:)
+    @NSManaged public func addToComments(_ value: Comment)
+
+    @objc(removeCommentsObject:)
+    @NSManaged public func removeFromComments(_ value: Comment)
+
+    @objc(addComments:)
+    @NSManaged public func addToComments(_ values: NSSet)
+
+    @objc(removeComments:)
+    @NSManaged public func removeFromComments(_ values: NSSet)
 
 }

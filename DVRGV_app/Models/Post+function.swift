@@ -74,7 +74,6 @@ extension Post {
 		post.title = String(htmlEncodedString: title)
 
 		post.author = User.findUser(predicate: NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id)), context: context)
-		
 		let HTMLString = Post.newHTMLString(contentString)
 		do {
 			let doc:Document = try parse(HTMLString)
@@ -112,7 +111,6 @@ extension Post {
 		let dateFormatter:DateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 		dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-		
 		return dateFormatter.date(from: dateString)
 	}
 	static func findPost(predicate: NSPredicate, context: NSManagedObjectContext) -> Post? {

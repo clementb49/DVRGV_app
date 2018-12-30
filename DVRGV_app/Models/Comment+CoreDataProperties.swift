@@ -2,7 +2,7 @@
 //  Comment+CoreDataProperties.swift
 //  DVRGV_app
 //
-//  Created by Clément BOUSSIRON on 30/07/2018.
+//  Created by Clément BOUSSIRON on 30/12/2018.
 //  Copyright © 2018 Clément BOUSSIRON. All rights reserved.
 //
 //
@@ -17,13 +17,14 @@ extension Comment {
         return NSFetchRequest<Comment>(entityName: "Comment")
     }
 
-    @NSManaged public var author_name: String?
-    @NSManaged public var content: String?
-    @NSManaged public var date_gmt: NSDate?
+    @NSManaged public var authorName: String
+    @NSManaged public var content: NSObject
+    @NSManaged public var date_gmt: Date
     @NSManaged public var id: Int32
-    @NSManaged public var childs: NSSet?
+    @NSManaged public var childs: Set<Comment>?
     @NSManaged public var parent: Comment?
-    @NSManaged public var post: Post?
+    @NSManaged public var post: Post
+    @NSManaged public var author: User?
 
 }
 
