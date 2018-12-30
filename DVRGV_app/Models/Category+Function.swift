@@ -30,7 +30,7 @@ extension Category {
 		}
 	}
 
-	private static func newCategory(jsonObject: [String:Any], context: NSManagedObjectContext) -> [String:Int]? {
+	private static func newCategory(jsonObject: [String:Any], context: NSManagedObjectContext) -> [Int32:Int32]? {
 		let category = Category(context: context)
 		guard let id = jsonObject["id"] as? NSNumber,
 			let count = jsonObject["count"] as? NSNumber,
@@ -44,7 +44,7 @@ extension Category {
 		category.desc = description
 		category.count = count.int32Value
 		if (parent.intValue != 0) {
-			return [category.name:parent.intValue]
+			return [id.int32Value:parent.int32Value]
 		} else {
 			return nil
 		}
@@ -54,22 +54,23 @@ extension Category {
 			let jsonArray = jsonObject as? [[String:Any]] else {
 				return
 		}
-		var parentDict:[String:Int] = [String:Int]()
+		var parentDict:[Int32:Int32] = [Int32:Int32]()
 		for jsonDictionary in jsonArray {
-			let parent:[String:Int]? = Category.newCategory(jsonObject: jsonDictionary, context: context)
+			let parent:[Int32:Int32]? = Category.newCategory(jsonObject: jsonDictionary, context: context)
 			if let parent = parent {
 				parentDict = parentDict.merging(parent)
 					{(_, new) in new}
 			}
 		}
 		Category.save(context: context)
-		for (key, value) in parentDict {
-			let predicateName = NSPredicate(format: "%K == %@", #keyPath(Category.name), key)
-			let category = Category.findCategory(predicate: predicateName, context: context)
-			if let category = category {
-				let predicateId = NSPredicate(format: "%K == \(value)", #keyPath(Category.id))
-				category.parent = Category.findCategory(predicate: predicateId, context: context)
+		for (child, parent) in parentDict {
+			let childPredicate = NSPredicate(format: "%K == \(child)", #keyPath(Category.id))
+			let parentPredicate = NSPredicate(format: "%K == \(parent)", #keyPath(Category.id))
+			guard let childCategory = Category.findCategory(predicate: childPredicate, context: context),
+				let parentCategory = Category.findCategory(predicate: parentPredicate, context: context) else {
+					continue
 			}
+			childCategory.parent = parentCategory
 		}
 		Category.save(context: context)
 	}
