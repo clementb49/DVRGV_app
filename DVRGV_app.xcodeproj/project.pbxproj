@@ -28,6 +28,7 @@
 		EB88727121C101F00002F215 /* Category+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB88727021C101F00002F215 /* Category+Function.swift */; };
 		EB9035AA2118E24E0091F603 /* CategoryPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
+		EBA7B1AA21D9085700603073 /* comment+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA7B1A921D9085700603073 /* comment+Function.swift */; };
 		EBA9C03221BEBA8400BFDE09 /* DetailArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */; };
 		EBAA19D5212AEFB4005395D4 /* ListPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */; };
 		EBAA19D7212AF19F005395D4 /* DetailPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */; };
@@ -75,6 +76,7 @@
 		EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostTableViewController.swift; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EBA7B1A921D9085700603073 /* comment+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "comment+Function.swift"; sourceTree = "<group>"; };
 		EBA9C03121BEBA8400BFDE09 /* DetailArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleViewController.swift; sourceTree = "<group>"; };
 		EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListPodcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailPodcastStoryboard.storyboard; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				EBB1E910210BD09B00B9CB12 /* User+CoreDataProperties.swift */,
 				EBBE990D21C7A0DC007A1706 /* User+function.swift */,
 				EBB1E911210BD09B00B9CB12 /* Comment+CoreDataClass.swift */,
+				EBA7B1A921D9085700603073 /* comment+Function.swift */,
 				EBB1E912210BD09B00B9CB12 /* Comment+CoreDataProperties.swift */,
 				EBB1E913210BD09B00B9CB12 /* Post+CoreDataClass.swift */,
 				EBB1E914210BD09B00B9CB12 /* Post+CoreDataProperties.swift */,
@@ -376,6 +379,7 @@
 				EBB1E91B210BD09C00B9CB12 /* Post+CoreDataClass.swift in Sources */,
 				EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */,
 				EB1758BB211B93E60099B9B5 /* DetailPodcastViewController.swift in Sources */,
+				EBA7B1AA21D9085700603073 /* comment+Function.swift in Sources */,
 				EBBE990E21C7A0DC007A1706 /* User+function.swift in Sources */,
 				EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */,
 			);
