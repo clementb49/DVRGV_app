@@ -91,8 +91,16 @@ extension Comment {
 			}
 		}
 		comment.authorName = authorName
-		comment.date_gmt = Comment.convertDate(from: date)
-		
+		comment.date_gmt = Comment.convertDate(from: date)!
+		let contentData = content.data(using: .utf8)!
+
+		let options: [NSAttributedString.DocumentReadingOptionKey:Any] = [
+			.documentType: NSAttributedString.DocumentType.html,
+			.characterEncoding:String.Encoding.utf8.rawValue
+		]
+		if let contentAttributedString = try? NSAttributedString(data: contentData, options: options, documentAttributes: nil) {
+			comment.content = contentAttributedString
+		}
 		if parentId.intValue != 0 {
 			return [id.int32Value:parentId.int32Value]
 		} else {
