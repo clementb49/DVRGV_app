@@ -24,6 +24,8 @@ class DetailPodcastViewController: UIViewController {
 	@IBOutlet weak var dateLabel:UILabel!
 	@IBOutlet weak var readButton:UIButton!
 	var podcastImageData:Data?
+
+	@IBOutlet weak var commentButton: UIBarButtonItem!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		updateUI()
