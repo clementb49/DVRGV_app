@@ -92,7 +92,11 @@
                         <barButtonItem title="ajouter au favoris" id="Rvc-4j-YNz" userLabel="bookmarks Bar Button Item "/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4lg-qH-kks">
-                        <barButtonItem key="rightBarButtonItem" title="Commentaire" id="dbD-fT-9TP" userLabel="comment Bar Button Item"/>
+                        <barButtonItem key="rightBarButtonItem" title="Commentaire" id="dbD-fT-9TP" userLabel="comment Bar Button Item">
+                            <connections>
+                                <segue destination="4hF-dH-Lzg" kind="show" id="8or-u9-CEd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -116,10 +120,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTJ-Du-Ave" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--ListArticleStoryboard-->
+        <!--ListCommentStoryboard-->
         <scene sceneID="9Dg-f7-osc">
             <objects>
-                <viewControllerPlaceholder storyboardName="ListArticleStoryboard" id="4hF-dH-Lzg" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ListCommentStoryboard" id="4hF-dH-Lzg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7g-aD-65H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>

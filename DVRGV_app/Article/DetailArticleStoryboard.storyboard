@@ -70,7 +70,11 @@
                         <viewLayoutGuide key="safeArea" id="4hv-Si-1lY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Article" id="sYu-wA-8UJ">
-                        <barButtonItem key="rightBarButtonItem" title="commentaire" id="DHD-In-KAl"/>
+                        <barButtonItem key="rightBarButtonItem" title="commentaire" id="DHD-In-KAl">
+                            <connections>
+                                <segue destination="XFX-xv-AUK" kind="show" id="aMx-Us-Q4c"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="pub-35-2bN" id="uRB-MR-TFb"/>
