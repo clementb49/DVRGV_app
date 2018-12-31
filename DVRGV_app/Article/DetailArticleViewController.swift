@@ -18,6 +18,7 @@ class DetailArticleViewController: UIViewController {
 
 	@IBOutlet weak var webView: WKWebView!
 	
+	@IBOutlet weak var commentButton: UIBarButtonItem!
 	override func viewDidLoad() {
         super.viewDidLoad()
 		updateUI()
