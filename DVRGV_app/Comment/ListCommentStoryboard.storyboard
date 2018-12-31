@@ -31,6 +31,9 @@
                             <outlet property="delegate" destination="xW0-Ru-xkG" id="yLQ-FG-s4o"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="commentaire" id="Z6T-8T-e0R" userLabel="Commentaire">
+                        <barButtonItem key="rightBarButtonItem" title="commenter" id="1k3-0X-SLK"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0N-YS-WXQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
