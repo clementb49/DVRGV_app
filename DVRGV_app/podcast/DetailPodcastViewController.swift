@@ -24,7 +24,6 @@ class DetailPodcastViewController: UIViewController {
 	@IBOutlet weak var dateLabel:UILabel!
 	@IBOutlet weak var readButton:UIButton!
 	var podcastImageData:Data?
-
 	@IBOutlet weak var commentButton: UIBarButtonItem!
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -49,6 +48,16 @@ class DetailPodcastViewController: UIViewController {
 		titleLabel.text = posts[currentPostIndex].title
 		authorLabel.text = posts[currentPostIndex].author?.name
 		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+		if posts[currentPostIndex].commentIsOpen == true, let numberComment = posts[currentPostIndex].comments?.count {
+			commentButton.isEnabled = true
+			if numberComment == 0 || numberComment == 1 {
+				commentButton.title = "\(numberComment) commentaire"
+			} else {
+				commentButton.title = "\(numberComment) commentaires"
+			}
+		} else {
+			commentButton.isEnabled = false
+		}
 	}
 	
 	func setupNowPlaying() {
