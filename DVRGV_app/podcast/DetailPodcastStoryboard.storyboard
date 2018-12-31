@@ -116,5 +116,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTJ-Du-Ave" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--ListArticleStoryboard-->
+        <scene sceneID="9Dg-f7-osc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ListArticleStoryboard" id="4hF-dH-Lzg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j7g-aD-65H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
 </document>
