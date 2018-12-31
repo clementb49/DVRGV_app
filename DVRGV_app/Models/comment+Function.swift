@@ -124,9 +124,10 @@ extension Comment {
 		let fetchRequest = NSFetchRequest<Comment>(entityName: "Comment")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
+		fetchRequest.fetchLimit = 1
 		do {
 			let comments = try context.fetch(fetchRequest)
-			return comments.first
+			return comments.last
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil

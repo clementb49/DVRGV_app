@@ -14,9 +14,10 @@ extension User {
 		let fetchRequest = NSFetchRequest<User>(entityName: "User")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
+		fetchRequest.fetchLimit = 1
 		do {
 			let users = try context.fetch(fetchRequest)
-			return users.first
+			return users.last
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil

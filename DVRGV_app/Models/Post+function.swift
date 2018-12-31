@@ -117,9 +117,10 @@ extension Post {
 		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
+		fetchRequest.fetchLimit = 1
 		do {
 			let posts = try context.fetch(fetchRequest)
-			return posts.first
+			return posts.last
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil

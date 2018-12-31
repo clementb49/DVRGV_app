@@ -14,9 +14,10 @@ extension Category {
 		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
+		fetchRequest.fetchLimit=1
 		do {
 			let categories = try context.fetch(fetchRequest)
-			return categories.first
+			return categories.last
 		} catch let error as NSError {
 			print("couldn't fetch \(error) \(error.userInfo)")
 			return nil
