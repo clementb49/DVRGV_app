@@ -84,5 +84,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0c-d5-rhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--ListCommentStoryboard-->
+        <scene sceneID="VQn-Pt-LYN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ListCommentStoryboard" id="XFX-xv-AUK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GVG-yp-CvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
 </document>
