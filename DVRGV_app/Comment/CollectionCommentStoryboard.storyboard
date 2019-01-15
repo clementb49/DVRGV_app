@@ -54,6 +54,11 @@
                                         </label>
                                     </subviews>
                                 </view>
+                                <connections>
+                                    <outlet property="contentTextView" destination="k1L-LA-GjB" id="O2e-33-X1f"/>
+                                    <outlet property="dateLabel" destination="oKj-Yz-qLY" id="WyK-md-Ogi"/>
+                                    <outlet property="userLabel" destination="nhc-fz-6ry" id="pRF-kh-fCs"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
