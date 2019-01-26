@@ -15,7 +15,8 @@ import MediaPlayer
 class DetailPodcastViewController: UIViewController {
 	var posts:[Post]?
 	var currentPostIndex:Int?
-	var podcast:Podcast?
+	private var currentPostPodcast:Podcast?
+	private var currentPost:Post?
 	var coreDataStack:CoreDataStack!
 	@IBOutlet weak var webView: WKWebView!
 	@IBOutlet weak var categoryLabel:UILabel!
@@ -31,24 +32,26 @@ class DetailPodcastViewController: UIViewController {
 	}
 	
 	func updateUI() {
-		guard let posts:[Post] = self.posts,
-			let currentPostIndex = currentPostIndex,
-			let podcast = posts[currentPostIndex].podcast,
-			let categories = posts[currentPostIndex].categories,
-			let date = posts[currentPostIndex].date_gmt,
-			let content = posts[currentPostIndex].content else {
+		updateCurentPost()
+		guard let currentPost = self.currentPost,
+			let currentPostPodcast = self.currentPostPodcast,
+			let postCategories = currentPost.categories,
+			let postDate = currentPost.date_gmt,
+			let postContent = currentPost.content,
+			let postLink = currentPost.link,
+		let postTitle = currentPost.title,
+		let postAuthor = currentPost.author else {
 			readButton.isEnabled = false
 			readButton.isHidden = true
 			return
 		}
-		self.podcast = podcast
-		webView.loadHTMLString(content, baseURL: posts[currentPostIndex].link)
-		let categoriesArray = Array(categories)
+		webView.loadHTMLString(postContent, baseURL: postLink)
+		let categoriesArray = Array(postCategories)
 		categoryLabel.text = categoriesArray.last?.name
-		titleLabel.text = posts[currentPostIndex].title
-		authorLabel.text = posts[currentPostIndex].author?.name
-		dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
-		if posts[currentPostIndex].commentIsOpen == true, let numberComment = posts[currentPostIndex].comments?.count {
+		titleLabel.text = postTitle
+		authorLabel.text = postAuthor.name
+		dateLabel.text = DateFormatter.localizedString(from: postDate, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+		if currentPost.commentIsOpen == true, let numberComment = currentPost.comments?.count {
 			commentButton.isEnabled = true
 			if numberComment == 0 || numberComment == 1 {
 				commentButton.title = "\(numberComment) commentaire"
@@ -62,13 +65,14 @@ class DetailPodcastViewController: UIViewController {
 	
 	func setupNowPlaying() {
 		var nowPlayingInfo = [String:Any]()
-		if let posts = posts,
-			let currentPostIndex = currentPostIndex,
+		if let currentPost = self.currentPost,
 			let imageData = podcastImageData,
+			let postTitle = currentPost.title,
+			let postAuthor = currentPost.author,
 			let image = UIImage(data: imageData) {
 			nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: {size in return image})
-			nowPlayingInfo[MPMediaItemPropertyTitle] = posts[currentPostIndex].title!
-			nowPlayingInfo[MPMediaItemPropertyArtist] = posts[currentPostIndex].author!.name!
+			nowPlayingInfo[MPMediaItemPropertyTitle] = postTitle
+			nowPlayingInfo[MPMediaItemPropertyArtist] = postAuthor.name!
 		}
 		MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
 	}
@@ -98,16 +102,26 @@ class DetailPodcastViewController: UIViewController {
 		})
 	}
 	
+	private func updateCurentPost() {
+		guard let posts = self.posts,
+		let currentPostIndex = self.currentPostIndex,
+			let postPodcast = posts[currentPostIndex].podcast else {
+				return
+		}
+		self.currentPost = posts[currentPostIndex]
+		self.currentPostPodcast = postPodcast
+	}
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "DetailPodcastViewControllerToPlayerNavigationController" {
 			let destinationViewController = segue.destination as! AVPlayerViewController
-			guard let podcast = podcast else {
+			guard let currentPostPodcast = self.currentPostPodcast,
+			let podcastURL = currentPostPodcast.audioURL else {
 				return
 			}
-			let player = AVPlayer(url: podcast.audioURL!)
+			let player = AVPlayer(url: podcastURL)
 			let audioSession = AVAudioSession.sharedInstance()
 			do {
 				try audioSession.setActive(true)
