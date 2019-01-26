@@ -14,6 +14,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var dateLabel:UILabel!
 	func updateCommentView(comment:Comment) {
 		userLabel.text = comment.authorName
-		contentTextView.attributedText = comment.content as NSAttributedString
+		contentTextView.attributedText = comment.content as? NSAttributedString
+		
 	}
 }

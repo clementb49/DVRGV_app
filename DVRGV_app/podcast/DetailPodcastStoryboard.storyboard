@@ -120,10 +120,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTJ-Du-Ave" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--ListCommentStoryboard-->
+        <!--CollectionCommentStoryboard-->
         <scene sceneID="9Dg-f7-osc">
             <objects>
-                <viewControllerPlaceholder storyboardName="ListCommentStoryboard" id="4hF-dH-Lzg" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="CollectionCommentStoryboard" id="4hF-dH-Lzg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7g-aD-65H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
