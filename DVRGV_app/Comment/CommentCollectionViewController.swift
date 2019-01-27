@@ -24,6 +24,8 @@ class CommentCollectionViewController: UICollectionViewController {
 				self.navigationItem.title = "\(numberComment) commentaires"
 			}
 		}
+		self.collectionView!.isAccessibilityElement = false
+		self.collectionView.shouldGroupAccessibilityChildren = true
 	}
 
     /*
