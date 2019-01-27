@@ -43,8 +43,8 @@ class CommentCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		if self.comments != nil && comments?.count != 0 {
-			return 1
 			self.restore()
+			return 1
 		} else {
 			self.setEmpty()
 			return 0
@@ -109,5 +109,15 @@ class CommentCollectionViewController: UICollectionViewController {
 	}
 	private func restore() {
 		self.collectionView.backgroundView = nil
+	}
+	
+	
+	@IBAction func addCommentBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		let defaults = UserDefaults.standard
+		if defaults.string(forKey: "authorName") == nil && defaults.string(forKey: "authorEmail") == nil {
+			let storyboard = UIStoryboard.init(name: "identityCommentStoryboard", bundle: nil)
+			let navController = storyboard.instantiateInitialViewController() as! UINavigationController
+			self.present(navController, animated: true, completion: nil)
+		}
 	}
 }

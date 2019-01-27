@@ -69,7 +69,11 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="commentaires" id="6kr-P3-1se">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="O9h-cr-G7c" userLabel="add comment bar button item"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="O9h-cr-G7c" userLabel="add comment bar button item">
+                            <connections>
+                                <action selector="addCommentBarButtonItemTapped:" destination="ghM-wn-0vF" id="cMr-e8-So5"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

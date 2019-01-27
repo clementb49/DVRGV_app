@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KLt-Jr-QKW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9CP-ah-wOP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--identité-->
+        <!--identity-->
         <scene sceneID="dgO-tE-9q9">
             <objects>
-                <tableViewController id="KLt-Jr-QKW" sceneMemberID="viewController">
+                <tableViewController id="KLt-Jr-QKW" userLabel="identity" customClass="IdentityCommentTableViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4p1-I9-hZf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,13 +61,32 @@
                             <outlet property="delegate" destination="KLt-Jr-QKW" id="NWX-Sg-4za"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="identité" id="5Nq-F7-R7j">
+                    <navigationItem key="navigationItem" title="identité" id="5Nq-F7-R7j" userLabel="identity">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r1M-gD-gt0"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="tAe-lh-SdD"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WyU-kQ-vTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="960.79999999999995" y="56.221889055472268"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dGL-wB-lGM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9CP-ah-wOP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UEQ-O4-sR1">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KLt-Jr-QKW" kind="relationship" relationship="rootViewController" id="hbd-4g-MLh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3y-b9-Nb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="20" y="715.59220389805103"/>
         </scene>
     </scenes>
 </document>
