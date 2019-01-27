@@ -8,13 +8,16 @@
 
 import UIKit
 
-class IdentityCommentTableViewController: UITableViewController {
+class IdentityCommentTableViewController: UITableViewController, UITextFieldDelegate {
 
 	@IBOutlet weak var cancelBarButtonItem:UIBarButtonItem!
 	@IBOutlet weak var saveBarButtonItem:UIBarButtonItem!
-	
+	@IBOutlet weak var authorNameTextField:UITextField!
+	@IBOutlet weak var authorEmailTextField:UITextField!
+	var delegate:UITextFieldDelegate?
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		delegate=self
 	}
 	
 	
@@ -23,6 +26,11 @@ class IdentityCommentTableViewController: UITableViewController {
 	}
 	
 	
+	@IBAction func saveBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		let defaults = UserDefaults.standard
+		defaults.set(authorNameTextField.text!, forKey: "authorName")
+		defaults.set(authorEmailTextField.text!, forKey: "authorEmail")
+	}
 	/*
     // MARK: - Navigation
 

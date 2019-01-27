@@ -67,9 +67,15 @@
                                 <action selector="cancelBarButtonItemTapped:" destination="KLt-Jr-QKW" id="v2n-hG-zOS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tAe-lh-SdD"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tAe-lh-SdD">
+                            <connections>
+                                <action selector="saveBarButtonItemTapped:" destination="KLt-Jr-QKW" id="rbk-Vg-94E"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="authorEmailTextField" destination="MHo-RT-MNY" id="2ee-7V-OeK"/>
+                        <outlet property="authorNameTextField" destination="6fW-Uk-yeb" id="egl-Jv-QWs"/>
                         <outlet property="cancelBarButtonItem" destination="r1M-gD-gt0" id="hiN-II-5mE"/>
                         <outlet property="saveBarButtonItem" destination="tAe-lh-SdD" id="riv-Dq-kl4"/>
                     </connections>
