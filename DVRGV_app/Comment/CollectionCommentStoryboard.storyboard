@@ -55,9 +55,9 @@
                                     </subviews>
                                 </view>
                                 <connections>
-                                    <outlet property="contentTextView" destination="k1L-LA-GjB" id="O2e-33-X1f"/>
-                                    <outlet property="dateLabel" destination="oKj-Yz-qLY" id="WyK-md-Ogi"/>
-                                    <outlet property="userLabel" destination="nhc-fz-6ry" id="pRF-kh-fCs"/>
+                                    <outlet property="authorLabel" destination="nhc-fz-6ry" id="bLb-xu-jXt"/>
+                                    <outlet property="contentTextView" destination="k1L-LA-GjB" id="UUA-eL-jNx"/>
+                                    <outlet property="dateLabel" destination="oKj-Yz-qLY" id="D8n-8A-VoB"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

@@ -9,11 +9,14 @@
 import UIKit
 
 class CommentCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var userLabel:UILabel!
-	@IBOutlet weak var contentTextView:UITextView!
-	@IBOutlet weak var dateLabel:UILabel!
+
+	@IBOutlet weak var authorLabel: UILabel!
+
+	@IBOutlet weak var contentTextView: UITextView!
+
+	@IBOutlet weak var dateLabel: UILabel!
 	func updateCommentView(comment:Comment) {
-		userLabel.text = comment.authorName
+		authorLabel.text = comment.authorName
 		contentTextView.attributedText = comment.content as? NSAttributedString
 		
 	}
