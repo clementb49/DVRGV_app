@@ -67,7 +67,11 @@
                             <outlet property="delegate" destination="ghM-wn-0vF" id="X3a-JA-RHx"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="commentaires" id="6kr-P3-1se"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="commentaires" id="6kr-P3-1se">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="O9h-cr-G7c"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="navigationItem" destination="6kr-P3-1se" id="LbL-Wt-0Ox"/>
                     </connections>
