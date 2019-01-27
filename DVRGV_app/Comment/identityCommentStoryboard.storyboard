@@ -62,9 +62,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="identité" id="5Nq-F7-R7j" userLabel="identity">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r1M-gD-gt0"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="r1M-gD-gt0">
+                            <connections>
+                                <action selector="cancelBarButtonItemTapped:" destination="KLt-Jr-QKW" id="v2n-hG-zOS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="tAe-lh-SdD"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="r1M-gD-gt0" id="hiN-II-5mE"/>
+                        <outlet property="saveBarButtonItem" destination="tAe-lh-SdD" id="riv-Dq-kl4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WyU-kQ-vTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
