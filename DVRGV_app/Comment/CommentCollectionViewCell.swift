@@ -24,7 +24,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
 		self.isAccessibilityElement = true
 		var commentString = "le"
 		commentString += DateFormatter.localizedString(from: comment.date_gmt, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.none)
-		commentString += ". "
+		commentString += ".\n"
 		commentString += authorLabel.text!
 		commentString += " dit : \n"
 		commentString += contentTextView.text!

@@ -34,7 +34,6 @@ class DetailPodcastViewController: UIViewController {
 	func updateUI() {
 		updateCurentPost()
 		guard let currentPost = self.currentPost,
-			let currentPostPodcast = self.currentPostPodcast,
 			let postCategories = currentPost.categories,
 			let postDate = currentPost.date_gmt,
 			let postContent = currentPost.content,
