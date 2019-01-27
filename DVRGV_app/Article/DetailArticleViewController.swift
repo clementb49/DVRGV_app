@@ -74,7 +74,6 @@ class DetailArticleViewController: UIViewController {
 					return
 			}
 			destinationViewController.comments = Array(comments)
-			
 		}
 	}
 	
