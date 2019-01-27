@@ -42,10 +42,11 @@ class CommentCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-
-		if self.comments != nil {
+		if self.comments != nil && comments?.count != 0 {
 			return 1
+			self.restore()
 		} else {
+			self.setEmpty()
 			return 0
 		}
 	}
@@ -97,4 +98,16 @@ class CommentCollectionViewController: UICollectionViewController {
     }
     */
 
+	private func setEmpty() {
+
+		let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.collectionView.bounds.width, height: self.collectionView.bounds.height))
+		messageLabel.text = "aucun commentaire"
+		messageLabel.textColor = UIColor.black
+		messageLabel.textAlignment = NSTextAlignment.center
+		messageLabel.sizeToFit()
+		self.collectionView.backgroundView = messageLabel
+	}
+	private func restore() {
+		self.collectionView.backgroundView = nil
+	}
 }
