@@ -18,6 +18,7 @@ class CommentCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		if let comments = self.comments {
 			let numberComment = comments.count
+			self.comments = comments.sorted(by: {$0.date_gmt < $1.date_gmt})
 			if numberComment == 0 || numberComment == 1 {
 				self.navigationItem.title = "\(numberComment) commentaire"
 			} else {
