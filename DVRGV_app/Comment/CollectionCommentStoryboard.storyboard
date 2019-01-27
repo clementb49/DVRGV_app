@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Comment Collection View Controller-->
+        <!--commentaires-->
         <scene sceneID="77X-DX-KJ2">
             <objects>
                 <collectionViewController id="ghM-wn-0vF" customClass="CommentCollectionViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,6 +66,10 @@
                             <outlet property="delegate" destination="ghM-wn-0vF" id="X3a-JA-RHx"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" title="commentaires" id="6kr-P3-1se"/>
+                    <connections>
+                        <outlet property="navigationItem" destination="6kr-P3-1se" id="LbL-Wt-0Ox"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8M-M9-U1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

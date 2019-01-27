@@ -13,16 +13,18 @@ private let reuseIdentifier = "commentCell"
 class CommentCollectionViewController: UICollectionViewController {
 
 	var comments:[Comment]?
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-
-        // Do any additional setup after loading the view.
-    }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		if let comments = self.comments {
+			let numberComment = comments.count
+			if numberComment == 0 || numberComment == 1 {
+				self.navigationItem.title = "\(numberComment) commentaire"
+			} else {
+				self.navigationItem.title = "\(numberComment) commentaires"
+			}
+		}
+	}
 
     /*
     // MARK: - Navigation
