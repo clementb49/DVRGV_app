@@ -94,7 +94,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4lg-qH-kks">
                         <barButtonItem key="rightBarButtonItem" title="Commentaire" id="dbD-fT-9TP" userLabel="comment Bar Button Item">
                             <connections>
-                                <segue destination="4hF-dH-Lzg" kind="show" id="8or-u9-CEd"/>
+                                <segue destination="4hF-dH-Lzg" kind="show" identifier="detailPodcastViewControllerToCommentCollectionViewController" id="8or-u9-CEd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

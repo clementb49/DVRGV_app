@@ -135,5 +135,13 @@ class DetailPodcastViewController: UIViewController {
 			setupRemoteControl(player: player)
 			destinationViewController.player = player
 		}
+		if segue.identifier == "detailPodcastViewControllerToCommentCollectionViewController" {
+			guard let currentPost = self.currentPost,
+				let comments = currentPost.comments,
+				let destinationViewController = segue.destination as? CommentCollectionViewController else {
+					return
+			}
+			destinationViewController.comments = Array(comments)
+		}
 	}
 }
