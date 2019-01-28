@@ -31,8 +31,16 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Commenter" id="6iB-M8-zmX">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hho-Pn-tqo"/>
-                        <barButtonItem key="rightBarButtonItem" title="Publier" id="Jnl-1I-O0N"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hho-Pn-tqo">
+                            <connections>
+                                <action selector="cancelBarButtonItemTapped:" destination="mBg-Uv-uMR" id="7Ek-ZS-IJf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Publier" id="Jnl-1I-O0N">
+                            <connections>
+                                <action selector="publishBarButtonItemTapped:" destination="mBg-Uv-uMR" id="qIH-Ze-BXm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

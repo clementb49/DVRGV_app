@@ -19,7 +19,16 @@ class AddCommentViewController: UIViewController {
 	
 
 	
-    /*
+	@IBAction func cancelBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		self.dismiss(animated: true, completion: nil)
+	}
+
+	
+	@IBAction func publishBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		
+	}
+	
+	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

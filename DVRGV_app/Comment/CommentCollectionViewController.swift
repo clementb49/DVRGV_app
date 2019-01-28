@@ -13,7 +13,7 @@ private let reuseIdentifier = "commentCell"
 class CommentCollectionViewController: UICollectionViewController {
 
 	var comments:[Comment]?
-
+	var currentPost:Post?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if let comments = self.comments {
