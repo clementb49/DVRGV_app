@@ -10,12 +10,15 @@ import UIKit
 
 class AddCommentViewController: UIViewController {
 	@IBOutlet weak var commentTextView:UITextView!
-	
+	@IBOutlet weak var cancelBarButtonItem:UIBarButtonItem!
+	@IBOutlet weak var publishBarButtonItem:UIBarButtonItem!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		}
-    
+	
 
+	
     /*
     // MARK: - Navigation
 

@@ -35,6 +35,11 @@
                         <barButtonItem key="rightBarButtonItem" title="Publier" id="Jnl-1I-O0N"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="hho-Pn-tqo" id="kih-cj-i6X"/>
+                        <outlet property="commentTextView" destination="b3K-c2-Mos" id="bOq-pR-vI6"/>
+                        <outlet property="publishBarButtonItem" destination="Jnl-1I-O0N" id="a6D-Sk-8LW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LA2-a1-Jw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
