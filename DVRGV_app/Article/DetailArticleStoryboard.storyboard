@@ -12,7 +12,7 @@
         <!--Detail Article View Controller-->
         <scene sceneID="W6i-dJ-xqK">
             <objects>
-                <viewController id="rYh-Zi-uTb" userLabel="Detail Article View Controller" customClass="DetailArticleViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rYh-Zi-uTb" userLabel="Detail Article View Controller" customClass="DetailPostViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D0G-BD-4fK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,7 +78,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="pub-35-2bN" id="uRB-MR-TFb"/>
-                        <outlet property="categoryLabel" destination="KUH-cZ-EZK" id="4zv-n7-nEU"/>
+                        <outlet property="categoryLabel" destination="KUH-cZ-EZK" id="ZAS-Np-5Xy"/>
                         <outlet property="commentButton" destination="DHD-In-KAl" id="yob-ax-Qxm"/>
                         <outlet property="dateLabel" destination="6e8-Bl-fcU" id="DHr-fQ-Th0"/>
                         <outlet property="titleLabel" destination="y6B-4a-1d8" id="0lw-GF-u1C"/>

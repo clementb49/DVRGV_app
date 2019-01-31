@@ -12,7 +12,7 @@
         <!--Detail Podcast View Controller-->
         <scene sceneID="kRH-pu-M9N">
             <objects>
-                <viewController storyboardIdentifier="detailPodcastViewController" hidesBottomBarWhenPushed="YES" id="9Zb-Yj-5Lq" userLabel="Detail Podcast View Controller" customClass="DetailPodcastViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailPodcastViewController" hidesBottomBarWhenPushed="YES" id="9Zb-Yj-5Lq" userLabel="Detail Podcast View Controller" customClass="DetailPostViewController" customModule="DVRGV_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AVC-EL-0ix">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
