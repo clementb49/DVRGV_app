@@ -7,20 +7,24 @@
 //
 
 import UIKit
-
+protocol IdentityCommentTableViewControllerDelegate {
+	func didSavedIdentity()
+}
 class IdentityCommentTableViewController: UITableViewController, UITextFieldDelegate {
 
 	@IBOutlet weak var cancelBarButtonItem:UIBarButtonItem!
 	@IBOutlet weak var saveBarButtonItem:UIBarButtonItem!
 	@IBOutlet weak var authorNameTextField:UITextField!
 	@IBOutlet weak var authorEmailTextField:UITextField!
-	var delegate:UITextFieldDelegate?
-	var currentPost:Post?
+	var textFieldDelegate:UITextFieldDelegate?
+	var identityCommentTableViewControllerDelegate:IdentityCommentTableViewControllerDelegate?
+	var isAddComment:Bool?
 	@IBOutlet weak var errorAuthorLabel:UILabel!
 	@IBOutlet weak var errorEmailLabel:UILabel!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		delegate=self
+		textFieldDelegate=self
 	}
 	
 	
@@ -30,17 +34,44 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 	
 	
 	@IBAction func saveBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		let defaults = UserDefaults.standard
-		defaults.set(authorNameTextField.text!, forKey: "authorName")
-		defaults.set(authorEmailTextField.text!, forKey: "authorEmail")
+		let authorNameString = authorNameTextField.text!
+		let authorEmailString = authorEmailTextField.text!
+		if isValideAuthorName(authorNameString) {
+			UIView.animate(withDuration: 0.25, animations: {self.errorAuthorLabel.isHidden = true})
+			if isValideEmail(authorEmailString) {
+				UIView.animate(withDuration: 0.25, animations: {self.errorEmailLabel.isHidden = true})
+				let defaults = UserDefaults.standard
+				defaults.set(authorNameString, forKey: "authorName")
+				defaults.set(authorEmailString, forKey: "authorEmail")
+				if isAddComment! {
+					self.dismiss(animated: false, completion: {
+						self.identityCommentTableViewControllerDelegate?.didSavedIdentity()
+					})
+				} else {
+					self.dismiss(animated: true, completion: nil)
+				}
+			} else {
+				UIView.animate(withDuration: 0.25, animations: {self.errorEmailLabel.isHidden = false})
+			}
+		} else {
+			UIView.animate(withDuration: 0.25, animations: {self.errorEmailLabel.isHidden = false})
+		}
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		switch textField {
 		case authorNameTextField:
-			authorEmailTextField.becomeFirstResponder()
+			let isValideAuthorName = self.isValideAuthorName(authorNameTextField.text!)
+			if isValideAuthorName {
+				authorEmailTextField.becomeFirstResponder()
+			}
+			UIView.animate(withDuration: 0.25, animations: {self.errorAuthorLabel.isHidden = isValideAuthorName})
 		default:
-			authorEmailTextField.resignFirstResponder()
+			let isValideEmail = self.isValideEmail(authorEmailTextField.text!)
+			if isValideEmail {
+				authorEmailTextField.resignFirstResponder()
+			}
+			UIView.animate(withDuration: 0.25, animations: {self.errorEmailLabel.isHidden = isValideEmail})
 		}
 		return true
 	}
@@ -51,7 +82,7 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 		return emailTest.evaluate(with: test)
 	}
 	
-	private func isValideAuthor(_ test:String) -> Bool {
+	private func isValideAuthorName(_ test:String) -> Bool {
 		let authorRegEx = "[A-Za-z0-9()àéèêîïëóûùçñá ]+"
 		let authorTest = NSPredicate(format:"SELF MATCHES %@", authorRegEx)
 		return authorTest.evaluate(with: test)

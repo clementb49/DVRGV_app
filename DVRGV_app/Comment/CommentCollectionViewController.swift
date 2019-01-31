@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "commentCell"
 
-class CommentCollectionViewController: UICollectionViewController {
+class CommentCollectionViewController: UICollectionViewController, IdentityCommentTableViewControllerDelegate {
 	var comments:[Comment]?
 	var currentPost:Post?
 	override func viewDidLoad() {
@@ -116,14 +116,21 @@ class CommentCollectionViewController: UICollectionViewController {
 		if defaults.string(forKey: "authorName") == nil && defaults.string(forKey: "authorEmail") == nil {
 			let storyboard = UIStoryboard.init(name: "identityCommentStoryboard", bundle: nil)
 			let navController = storyboard.instantiateInitialViewController() as! UINavigationController
-			let identityTableViewController = navController.topViewController as! IdentityCommentTableViewController
-			identityTableViewController.currentPost = self.currentPost
+			let identityCommentTableViewController = navController.topViewController as! IdentityCommentTableViewController
+			identityCommentTableViewController.identityCommentTableViewControllerDelegate = self
+			identityCommentTableViewController.isAddComment = true
 			self.present(navController, animated: true, completion: nil)
 		} else {
-			let storyboard = UIStoryboard.init(name:"AddCommentStoryboard", bundle: nil)
-			let navController = storyboard.instantiateInitialViewController() as! UINavigationController
-			
-			self.present(navController, animated: true, completion: nil)
+			self.didSavedIdentity()
 		}
+	}
+	
+	func didSavedIdentity() {
+		let storyboard = UIStoryboard.init(name:"AddCommentStoryboard", bundle: nil)
+		let navController = storyboard.instantiateInitialViewController() as! UINavigationController
+		let addCommentViewController = navController.topViewController as! AddCommentViewController
+		addCommentViewController.currentPost = self.currentPost
+
+		self.present(navController, animated: true, completion: nil)
 	}
 }

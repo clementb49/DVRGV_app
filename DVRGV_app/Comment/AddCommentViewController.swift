@@ -12,7 +12,7 @@ class AddCommentViewController: UIViewController {
 	@IBOutlet weak var commentTextView:UITextView!
 	@IBOutlet weak var cancelBarButtonItem:UIBarButtonItem!
 	@IBOutlet weak var publishBarButtonItem:UIBarButtonItem!
-
+	var currentPost:Post?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		}
