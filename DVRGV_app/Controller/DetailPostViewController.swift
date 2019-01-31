@@ -11,7 +11,7 @@ import WebKit
 import AVFoundation
 import AVKit
 import MediaPlayer
-class DetailPostViewController: UIViewController {
+class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	var posts:[Post]?
 	var currentPostIndex:Int?
 	private var currentPostPodcast:Podcast?
@@ -26,6 +26,7 @@ class DetailPostViewController: UIViewController {
 	@IBOutlet weak var commentButton: UIBarButtonItem!
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		webView.navigationDelegate = self
 		updateUI()
 	}
 	
