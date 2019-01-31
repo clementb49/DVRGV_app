@@ -122,6 +122,7 @@ class CommentCollectionViewController: UICollectionViewController {
 		} else {
 			let storyboard = UIStoryboard.init(name:"AddCommentStoryboard", bundle: nil)
 			let navController = storyboard.instantiateInitialViewController() as! UINavigationController
+			
 			self.present(navController, animated: true, completion: nil)
 		}
 	}

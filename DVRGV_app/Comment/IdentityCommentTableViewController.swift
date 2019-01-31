@@ -32,6 +32,23 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 		defaults.set(authorNameTextField.text!, forKey: "authorName")
 		defaults.set(authorEmailTextField.text!, forKey: "authorEmail")
 	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		switch textField {
+		case authorNameTextField:
+			authorEmailTextField.becomeFirstResponder()
+		default:
+			authorEmailTextField.resignFirstResponder()
+		}
+		return true
+	}
+	
+	private func isValideEmail(_ test:String) -> Bool {
+		let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+		let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+		return emailTest.evaluate(with: test)
+	}
+	
 	/*
     // MARK: - Navigation
 
