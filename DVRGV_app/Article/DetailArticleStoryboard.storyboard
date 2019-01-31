@@ -72,7 +72,7 @@
                     <navigationItem key="navigationItem" title="Article" id="sYu-wA-8UJ">
                         <barButtonItem key="rightBarButtonItem" title="commentaire" id="DHD-In-KAl">
                             <connections>
-                                <segue destination="D97-ZM-kM5" kind="show" identifier="detailArticleViewControllerToCommentCollectionViewController" id="C1M-AX-2WR"/>
+                                <segue destination="D97-ZM-kM5" kind="show" identifier="DetailPostViewControllerToCommentCollectionViewController" id="C1M-AX-2WR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -129,8 +129,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 			setupNowPlaying()
 			setupRemoteControl(player: player)
 			destinationViewController.player = player
-		}
-		if segue.identifier == "detailPodcastViewControllerToCommentCollectionViewController"  || segue.identifier == "detailArticleViewControllerToCommentCollectionViewController" {
+		} else if segue.identifier == "DetailPostViewControllerToCommentCollectionViewController" {
 			guard let currentPost = self.currentPost,
 				let comments = currentPost.comments,
 				let destinationViewController = segue.destination as? CommentCollectionViewController else {

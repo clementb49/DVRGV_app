@@ -34,7 +34,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="qwD-Z3-CT7" kind="show" identifier="PodcastTableViewCellToDetailPodcastViewController" id="HcN-gH-tyz"/>
+                                    <segue destination="qwD-Z3-CT7" kind="show" identifier="PostTableViewCellToDetailPostViewController" id="HcN-gH-tyz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

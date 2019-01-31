@@ -34,7 +34,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="ch8-Nj-7mu" kind="show" identifier="ArticleTableViewCellToDetailArticleViewController" id="W3T-Kd-5A2"/>
+                                    <segue destination="ch8-Nj-7mu" kind="show" identifier="PostTableViewCellToDetailPostViewController" id="W3T-Kd-5A2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

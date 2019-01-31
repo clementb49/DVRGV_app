@@ -139,24 +139,14 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "PodcastTableViewCellToDetailPodcastViewController" {
+		if segue.identifier == "PostTableViewCellToDetailPostViewController" {
 			guard let destinationViewController = segue.destination as? DetailPostViewController,
-			let podcastCell = sender as? UITableViewCell,
-			let indexPath = tableView.indexPath(for: podcastCell),
+			let postCell = sender as? UITableViewCell,
+			let indexPath = tableView.indexPath(for: postCell),
 			let posts = posts else {
 				return
 			}
 			destinationViewController.posts = posts
-			destinationViewController.currentPostIndex = indexPath.row
-		} else if segue.identifier == "ArticleTableViewCellToDetailArticleViewController" {
-			guard let destinationViewController = segue.destination as? DetailPostViewController,
-			let articleCell = sender as? UITableViewCell,
-			let indexPath = tableView.indexPath(for: articleCell),
-			let posts=posts else {
-
-				return
-			}
-			destinationViewController.posts = self.posts
 			destinationViewController.currentPostIndex = indexPath.row
 		}
 	}
