@@ -11,6 +11,7 @@ import WebKit
 import AVFoundation
 import AVKit
 import MediaPlayer
+import SafariServices
 class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	var posts:[Post]?
 	var currentPostIndex:Int?
@@ -106,7 +107,21 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 		self.currentPost = posts[currentPostIndex]
 		self.currentPostPodcast = self.currentPost?.podcast
 	}
-    // MARK: - Navigation
+	
+	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+		if navigationAction.navigationType == WKNavigationType.linkActivated {
+			if let url = navigationAction.request.url {
+				let safariViewController = SFSafariViewController.init(url: url)
+				decisionHandler(WKNavigationActionPolicy.cancel)
+				self.present(safariViewController, animated: true, completion: nil)
+			} else {
+				decisionHandler(WKNavigationActionPolicy.allow)
+			}
+		} else {
+			decisionHandler(WKNavigationActionPolicy.allow)
+		}
+	}
+// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
