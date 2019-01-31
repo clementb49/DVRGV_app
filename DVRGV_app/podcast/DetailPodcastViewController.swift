@@ -140,6 +140,7 @@ class DetailPodcastViewController: UIViewController {
 				let destinationViewController = segue.destination as? CommentCollectionViewController else {
 					return
 			}
+			destinationViewController.currentPost = self.currentPost
 			destinationViewController.comments = Array(comments)
 		}
 	}

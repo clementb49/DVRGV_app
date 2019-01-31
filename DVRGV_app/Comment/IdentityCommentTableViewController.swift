@@ -15,6 +15,7 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 	@IBOutlet weak var authorNameTextField:UITextField!
 	@IBOutlet weak var authorEmailTextField:UITextField!
 	var delegate:UITextFieldDelegate?
+	var currentPost:Post?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		delegate=self

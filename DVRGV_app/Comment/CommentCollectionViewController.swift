@@ -11,7 +11,6 @@ import UIKit
 private let reuseIdentifier = "commentCell"
 
 class CommentCollectionViewController: UICollectionViewController {
-
 	var comments:[Comment]?
 	var currentPost:Post?
 	override func viewDidLoad() {
@@ -117,6 +116,8 @@ class CommentCollectionViewController: UICollectionViewController {
 		if defaults.string(forKey: "authorName") == nil && defaults.string(forKey: "authorEmail") == nil {
 			let storyboard = UIStoryboard.init(name: "identityCommentStoryboard", bundle: nil)
 			let navController = storyboard.instantiateInitialViewController() as! UINavigationController
+			let identityTableViewController = navController.topViewController as! IdentityCommentTableViewController
+			identityTableViewController.currentPost = self.currentPost
 			self.present(navController, animated: true, completion: nil)
 		} else {
 			let storyboard = UIStoryboard.init(name:"AddCommentStoryboard", bundle: nil)

@@ -73,6 +73,7 @@ class DetailArticleViewController: UIViewController {
 				let comments = currentPost.comments else {
 					return
 			}
+			destinationViewController.currentPost = self.currentPost
 			destinationViewController.comments = Array(comments)
 		}
 	}
