@@ -87,6 +87,7 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 		let authorTest = NSPredicate(format:"SELF MATCHES %@", authorRegEx)
 		return authorTest.evaluate(with: test)
 	}
+	
 	/*
     // MARK: - Navigation
 

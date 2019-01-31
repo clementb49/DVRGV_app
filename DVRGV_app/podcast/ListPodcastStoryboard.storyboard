@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,11 +64,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVC-Q3-DGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Navigation Controller-->
+        <!--Podcast-->
         <scene sceneID="Hxo-ff-Ul7">
             <objects>
                 <navigationController storyboardIdentifier="PodcastNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="yA7-Dk-tg9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Podcast" id="60z-4S-RlX"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cLG-Wn-BW0">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
