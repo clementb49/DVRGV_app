@@ -16,6 +16,8 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 	@IBOutlet weak var authorEmailTextField:UITextField!
 	var delegate:UITextFieldDelegate?
 	var currentPost:Post?
+	@IBOutlet weak var errorAuthorLabel:UILabel!
+	@IBOutlet weak var errorEmailLabel:UILabel!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		delegate=self
@@ -49,6 +51,11 @@ class IdentityCommentTableViewController: UITableViewController, UITextFieldDele
 		return emailTest.evaluate(with: test)
 	}
 	
+	private func isValideAuthor(_ test:String) -> Bool {
+		let authorRegEx = "[A-Za-z0-9()àéèêîïëóûùçñá ]+"
+		let authorTest = NSPredicate(format:"SELF MATCHES %@", authorRegEx)
+		return authorTest.evaluate(with: test)
+	}
 	/*
     // MARK: - Navigation
 
