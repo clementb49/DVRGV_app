@@ -12,6 +12,7 @@ import AVFoundation
 import AVKit
 import MediaPlayer
 import SafariServices
+import CoreData
 protocol DetailPostViewControllerDelegate {
 	func previewPost(_ currentIndex:Int) -> Post?
 	func nextPost(_ currentIndex:Int) -> Post?
@@ -29,6 +30,8 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	var podcastImageData:Data?
 	@IBOutlet weak var commentButton: UIBarButtonItem!
 	var detailPostViewControllerDelegate:DetailPostViewControllerDelegate?
+	var postCount:Int?
+	var coreDataStack:CoreDataStack!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		webView.navigationDelegate = self
@@ -45,7 +48,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 		let postAuthor = currentPost.author else {
 			return
 		}
-		webView.loadHTMLString(postContent, baseURL: postLink)
+		webView.loadHTMLString(postContent, baseURL: URL(string: postLink))
 		let categoriesArray = Array(postCategories)
 		categoryLabel.text = categoriesArray.last?.name
 		titleLabel.text = postTitle
@@ -107,9 +110,8 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		if navigationAction.navigationType == WKNavigationType.linkActivated {
 			if let url = navigationAction.request.url {
-				let safariViewController = SFSafariViewController.init(url: url)
+				openURL(url:url)
 				decisionHandler(WKNavigationActionPolicy.cancel)
-				self.present(safariViewController, animated: true, completion: nil)
 			} else {
 				decisionHandler(WKNavigationActionPolicy.allow)
 			}
@@ -117,6 +119,33 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 			decisionHandler(WKNavigationActionPolicy.allow)
 		}
 	}
+	
+	private func openURL(url:URL) {
+		if let host = url.host, host=="www.dvrgv.org" {
+			let predicate = NSPredicate(format: "%K == %@", #keyPath(Post.link), url.absoluteString)
+			let post = Post.findPost(predicate: predicate, context: coreDataStack.mainContext)
+			if let post = post {
+				var storyBoard = UIStoryboard.init()
+				if post.podcast != nil {
+					storyBoard = UIStoryboard.init(name: "DetailPodcastStoryboard", bundle: nil)
+				} else {
+					storyBoard = UIStoryboard.init(name: "DetailArticleStoryboard", bundle: nil)
+				}
+				let viewController = storyBoard.instantiateInitialViewController() as! DetailPostViewController
+				viewController.currentPost = post
+				viewController.coreDataStack = self.coreDataStack
+				viewController.postCount = 1
+				self.show(viewController, sender: nil)
+			} else {
+				let safariViewController = SFSafariViewController.init(url: url)
+				self.present(safariViewController, animated: true, completion: nil)
+			}
+		} else {
+			let safariViewController = SFSafariViewController.init(url: url)
+			self.present(safariViewController, animated: true, completion: nil)
+		}
+	}
+
 // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

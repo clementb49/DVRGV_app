@@ -166,6 +166,8 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			destinationViewController.currentPostIndex = indexPath.row
 			destinationViewController.currentPost = posts[indexPath.row]
 			destinationViewController.detailPostViewControllerDelegate = self
+			destinationViewController.postCount = posts.count
+			destinationViewController.coreDataStack = self.coreDataStack
 		}
 	}
 }

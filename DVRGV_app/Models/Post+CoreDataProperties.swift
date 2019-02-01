@@ -21,7 +21,7 @@ extension Post {
     @NSManaged public var content: String?
     @NSManaged public var date_gmt: Date?
     @NSManaged public var id: Int32
-    @NSManaged public var link: URL?
+    @NSManaged public var link:String?
     @NSManaged public var modified_gmt: Date?
     @NSManaged public var title: String?
     @NSManaged public var author: User?

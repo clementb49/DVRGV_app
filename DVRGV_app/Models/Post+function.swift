@@ -70,7 +70,7 @@ extension Post {
 		post.id = id.int32Value
 		post.date_gmt = Post.convertDate(from: date)
 		post.modified_gmt = Post.convertDate(from: modified)
-		post.link = URL(string: link)
+		post.link = link
 		post.title = String(htmlEncodedString: title)
 
 		post.author = User.findUser(predicate: NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id)), context: context)

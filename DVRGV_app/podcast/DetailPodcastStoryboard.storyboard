@@ -92,6 +92,7 @@
                         <barButtonItem title="ajouter au favoris" id="Rvc-4j-YNz" userLabel="bookmarks Bar Button Item "/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4lg-qH-kks">
+                        <barButtonItem key="backBarButtonItem" title="Précédent" id="JBJ-EZ-EB5"/>
                         <barButtonItem key="rightBarButtonItem" title="Commentaire" id="dbD-fT-9TP" userLabel="comment Bar Button Item">
                             <connections>
                                 <segue destination="4hF-dH-Lzg" kind="show" identifier="DetailPostViewControllerToCommentCollectionViewController" id="8or-u9-CEd"/>
