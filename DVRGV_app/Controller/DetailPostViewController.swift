@@ -12,11 +12,14 @@ import AVFoundation
 import AVKit
 import MediaPlayer
 import SafariServices
+protocol DetailPostViewControllerDelegate {
+	func previewPost(_ currentIndex:Int) -> Post?
+	func nextPost(_ currentIndex:Int) -> Post?
+}
 class DetailPostViewController: UIViewController, WKNavigationDelegate {
-	var posts:[Post]?
 	var currentPostIndex:Int?
 	private var currentPostPodcast:Podcast?
-	private var currentPost:Post?
+	var currentPost:Post?
 	@IBOutlet weak var webView: WKWebView!
 	@IBOutlet weak var categoryLabel:UILabel!
 	@IBOutlet weak var titleLabel:UILabel!
@@ -25,6 +28,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	@IBOutlet weak var readButton:UIButton?
 	var podcastImageData:Data?
 	@IBOutlet weak var commentButton: UIBarButtonItem!
+	var detailPostViewControllerDelegate:DetailPostViewControllerDelegate?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		webView.navigationDelegate = self
@@ -32,7 +36,6 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 	}
 	
 	func updateUI() {
-		updateCurentPost()
 		guard let currentPost = self.currentPost,
 			let postCategories = currentPost.categories,
 			let postDate = currentPost.date_gmt,
@@ -99,14 +102,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 		})
 	}
 	
-	private func updateCurentPost() {
-		guard let posts = self.posts,
-		let currentPostIndex = self.currentPostIndex else {
-				return
-		}
-		self.currentPost = posts[currentPostIndex]
-		self.currentPostPodcast = self.currentPost?.podcast
-	}
+
 	
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 		if navigationAction.navigationType == WKNavigationType.linkActivated {

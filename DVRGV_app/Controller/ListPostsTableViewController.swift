@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-class ListPostTableViewController: UITableViewController, CategoryPostTableViewControllerDelegate {
+class ListPostTableViewController: UITableViewController, CategoryPostTableViewControllerDelegate, DetailPostViewControllerDelegate {
 	var coreDataStack:CoreDataStack!
 	var postCategory:Category?
 	var categorySelected:Category?
@@ -135,6 +135,23 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			isArticleView = false
 		}
 	}
+	
+	func previewPost(_ currentIndex: Int) -> Post? {
+		let newIndex = currentIndex - 1
+		guard let posts = posts, newIndex<0,
+			newIndex>posts.count else {
+			return nil
+		}
+		return posts[newIndex]
+	}
+	
+	func nextPost(_ currentIndex: Int) -> Post? {
+		let newIndex = currentIndex+1
+		guard let posts = posts, newIndex<0, newIndex>posts.count else {
+			return nil
+		}
+		return posts[newIndex]
+	}
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -143,11 +160,12 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			guard let destinationViewController = segue.destination as? DetailPostViewController,
 			let postCell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: postCell),
-			let posts = posts else {
+			let posts = self.posts else {
 				return
 			}
-			destinationViewController.posts = posts
 			destinationViewController.currentPostIndex = indexPath.row
+			destinationViewController.currentPost = posts[indexPath.row]
+			destinationViewController.detailPostViewControllerDelegate = self
 		}
 	}
 }
