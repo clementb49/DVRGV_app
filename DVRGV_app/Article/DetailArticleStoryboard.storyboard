@@ -69,7 +69,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4hv-Si-1lY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Article" id="sYu-wA-8UJ">
+                    <navigationItem key="navigationItem" id="sYu-wA-8UJ">
+                        <barButtonItem key="backBarButtonItem" title="Précédent" id="sWd-36-JTq"/>
                         <barButtonItem key="rightBarButtonItem" title="commentaire" id="DHD-In-KAl">
                             <connections>
                                 <segue destination="D97-ZM-kM5" kind="show" identifier="DetailPostViewControllerToCommentCollectionViewController" id="C1M-AX-2WR"/>
