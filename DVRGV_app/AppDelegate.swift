@@ -28,9 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		guard let tabController = window?.rootViewController as? TabBarViewController else {
 			return true
 		}
-		let fetchRequestCategory = NSFetchRequest<Category>(entityName: "Category")
-		let countCategory = try! coreDataStack.mainContext.count(for: fetchRequestCategory)
-		if countCategory != 0 {
+		
+		if UserDefaults.standard.object(forKey: "lastLaunch") != nil {
 			tabController.coreDataStack = coreDataStack
 			tabController.viewIsLoading = false
 			tabController.launch()
@@ -75,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			Post.retrievePosts(coreDataStack: self.coreDataStack)
 			Comment.retrieveComment(coreDataStack: self.coreDataStack)
 			self.coreDataStack.saveContext()
+			UserDefaults.standard.set(Date(), forKey: "lastLaunch")
 			DispatchQueue.main.async {
 				view.didFinishFirstLaunch()
 			}
