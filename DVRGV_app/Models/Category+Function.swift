@@ -15,6 +15,7 @@ extension Category {
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
 		fetchRequest.fetchLimit=1
+		fetchRequest.includesPendingChanges=true
 		do {
 			let categories = try context.fetch(fetchRequest)
 			return categories.last
@@ -63,7 +64,6 @@ extension Category {
 					{(_, new) in new}
 			}
 		}
-		Category.save(context: context)
 		for (child, parent) in parentDict {
 			let childPredicate = NSPredicate(format: "%K == \(child)", #keyPath(Category.id))
 			let parentPredicate = NSPredicate(format: "%K == \(parent)", #keyPath(Category.id))
@@ -76,10 +76,15 @@ extension Category {
 		Category.save(context: context)
 	}
 
-	private static func retrievePageCategories(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int) {
+	private static func retrievePageCategories(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int, isPartialRefresh:Bool) {
 		group.enter()
 		let apiManager = APIManager()
-		let argument:[String:String] = ["orderby":"id","per_page":"50","order":"desc","page":"\(page)"]
+		var argument:[String:String] = ["orderby":"id","per_page":"50","order":"desc","page":"\(page)"]
+		if isPartialRefresh {
+			let idArray = Category.findAllIds(context: coreDataStack.privateContext)
+			let idString = "\(idArray!)"
+			argument["exclude"] = idString
+		}
 		let request = apiManager.request(methods: .GET, route: .categories, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
 			if let error = error {
@@ -88,7 +93,10 @@ extension Category {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
 					Category.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
-					Category.convertCategories(from: databody!, context: coreDataStack.privateContext)
+					let totalItem = Int(response.allHeaderFields["X-WP-Total"] as! String)!
+					if totalItem != 0 {
+						Category.convertCategories(from: databody!, context: coreDataStack.privateContext)
+					}
 				} else {
 					print("error")
 				}
@@ -97,14 +105,27 @@ extension Category {
 		}
 		task.resume()
 	}
-	static func retrieveCategories(coreDataStack:CoreDataStack) {
+	static func retrieveCategories(coreDataStack:CoreDataStack, isPartialRefresh:Bool) {
 		var currentPage = 1
 		Category.totalPages = 1
 		let categoryGroup = DispatchGroup()
 		while(currentPage <= Category.totalPages) {
-			Category.retrievePageCategories(group: categoryGroup, coreDataStack: coreDataStack, page: currentPage)
+			Category.retrievePageCategories(group: categoryGroup, coreDataStack: coreDataStack, page: currentPage, isPartialRefresh: isPartialRefresh)
 			categoryGroup.wait()
 			currentPage+=1
+		}
+	}
+	static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+		fetchRequest.resultType = .dictionaryResultType
+		fetchRequest.propertiesToFetch = ["id"]
+		fetchRequest.resultType = .dictionaryResultType
+		do {
+			let categories = try context.fetch(fetchRequest) as NSArray
+			return categories.value(forKey: "id") as? [Int]
+		} catch let error as NSError {
+			print("couldn't fetc \(error), \(error.userInfo)")
+			return nil
 		}
 	}
 }

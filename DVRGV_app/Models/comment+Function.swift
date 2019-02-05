@@ -54,7 +54,6 @@ extension Comment {
 				{(_, new) in new}
 			}
 		}
-		Comment.save(context: context)
 		for (child, parent) in parentDict {
 			let childPredicate = NSPredicate(format: "%K == \(child)", #keyPath(Comment.id))
 			let parentPredicate = NSPredicate(format: "%K == \(parent)", #keyPath(Comment.id))
@@ -125,6 +124,7 @@ extension Comment {
 		fetchRequest.resultType = .managedObjectResultType
 		fetchRequest.predicate = predicate
 		fetchRequest.fetchLimit = 1
+		fetchRequest.includesPendingChanges=true
 		do {
 			let comments = try context.fetch(fetchRequest)
 			return comments.last

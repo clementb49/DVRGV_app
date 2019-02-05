@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func retrieveAll(view: TabBarViewController) {
 		let work = DispatchWorkItem {
-			Category.retrieveCategories(coreDataStack: self.coreDataStack)
+			Category.retrieveCategories(coreDataStack: self.coreDataStack, isPartialRefresh: false)
 			User.retrieveUsers(coreDataStack: self.coreDataStack)
 			Post.retrievePosts(coreDataStack: self.coreDataStack)
 			Comment.retrieveComment(coreDataStack: self.coreDataStack)

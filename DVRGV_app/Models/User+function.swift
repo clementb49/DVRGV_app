@@ -82,4 +82,17 @@ extension User {
 			currentPage+=1
 		}
 	}
+	static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+		fetchRequest.resultType = .dictionaryResultType
+		fetchRequest.propertiesToFetch = ["id"]
+		fetchRequest.resultType = .dictionaryResultType
+		do {
+			let categories = try context.fetch(fetchRequest) as NSArray
+			return categories.value(forKey: "id") as? [Int]
+		} catch let error as NSError {
+			print("couldn't fetc \(error), \(error.userInfo)")
+			return nil
+		}
+	}
 }
