@@ -81,8 +81,8 @@ extension Category {
 		let apiManager = APIManager()
 		var argument:[String:String] = ["orderby":"id","per_page":"50","order":"desc","page":"\(page)"]
 		if isPartialRefresh {
-			let idArray = Category.findAllIds(context: coreDataStack.privateContext)
-			let idString = "\(idArray!)"
+			let idArray = Category.findAllIds(context: coreDataStack.privateContext)!
+			let idString:String = idArray.map{"\($0),"}.reduce(""){$0+$1}
 			argument["exclude"] = idString
 		}
 		let request = apiManager.request(methods: .GET, route: .categories, data: argument)
@@ -94,7 +94,7 @@ extension Category {
 				if response.statusCode == 200 {
 					Category.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
 					let totalItem = Int(response.allHeaderFields["X-WP-Total"] as! String)!
-					if totalItem != 0 {
+					if totalPages != 0 && totalItem != 0 {
 						Category.convertCategories(from: databody!, context: coreDataStack.privateContext)
 					}
 				} else {
@@ -115,7 +115,7 @@ extension Category {
 			currentPage+=1
 		}
 	}
-	static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+	private static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
 		fetchRequest.resultType = .dictionaryResultType
 		fetchRequest.propertiesToFetch = ["id"]

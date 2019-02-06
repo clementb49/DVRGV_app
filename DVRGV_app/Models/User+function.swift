@@ -51,10 +51,14 @@ extension User {
 		User.saveContext(context: context)
 	}
 
-	private static func retrievePageUsers(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int) {
-		group.enter()
+	private static func retrievePageUsers(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int, isPartialRefresh:Bool) {
 		let apiManager = APIManager()
-		let argument = ["orderby":"id","per_page":"50","page":"\(page)"]
+		var argument:[String:String] = ["orderby":"id","per_page":"50","page":"\(page)"]
+		if (isPartialRefresh) {
+			let idArray = User.findAllIds(context: coreDataStack.privateContext)!
+			let idString:String = idArray.map{"\($0),"}.reduce(""){$0+$1}
+			argument["exclude"] = idString
+		}
 		let request = apiManager.request(methods: .GET, route: .users, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {databody, response, error -> Void in
 			if let error = error {
@@ -63,7 +67,10 @@ extension User {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
 					User.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
-					User.convertUser(from: databody!, context: coreDataStack.privateContext)
+					let totalItem = Int(response.allHeaderFields["X-WP-Total"] as! String)!
+					if totalPages != 0 && totalItem != 0 {
+						User.convertUser(from: databody!, context: coreDataStack.privateContext)
+					}
 				} else {
 					print("error")
 				}
@@ -72,17 +79,17 @@ extension User {
 		}
 		task.resume()
 	}
-	static func retrieveUsers(coreDataStack: CoreDataStack) {
+	static func retrieveUsers(coreDataStack: CoreDataStack, isPartialRefresh:Bool) {
 	var currentPage = 1
 		User.totalPages = 1
 		let userGroup = DispatchGroup()
 		while (currentPage <= totalPages) {
-			User.retrievePageUsers(group: userGroup, coreDataStack: coreDataStack, page: currentPage)
+			User.retrievePageUsers(group: userGroup, coreDataStack: coreDataStack, page: currentPage, isPartialRefresh: isPartialRefresh)
 			userGroup.wait()
 			currentPage+=1
 		}
 	}
-	static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+	private static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
 		fetchRequest.resultType = .dictionaryResultType
 		fetchRequest.propertiesToFetch = ["id"]
