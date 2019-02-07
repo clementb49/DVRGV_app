@@ -13,7 +13,7 @@ class Refresh {
 	init(coreDataStack:CoreDataStack) {
 		self.coreDataStack = coreDataStack
 	}
-	func refreshAll() {
+	func All() {
 		Category.refreshCategories(coreDataStack: coreDataStack, isPartialRefresh: false)
 		User.refreshUsers(coreDataStack:  coreDataStack, isPartialRefresh: false)
 		UserDefaults.standard.set(Date(), forKey: "lastLaunch")
@@ -23,7 +23,7 @@ class Refresh {
 		UserDefaults.standard.set(Date(), forKey: "lastRefresh")
 	}
 	
-	func partialRefresh() {
+	func partial() {
 		let lastRefresh = UserDefaults.standard.object(forKey: "lastRefresh") as! Date
 		Category.refreshCategories(coreDataStack: coreDataStack, isPartialRefresh: true)
 		User.refreshUsers(coreDataStack: coreDataStack, isPartialRefresh: true)

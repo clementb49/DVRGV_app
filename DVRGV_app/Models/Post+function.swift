@@ -25,7 +25,10 @@ extension Post {
 	private static func retrievePagePosts(group: DispatchGroup, coreDataStack: CoreDataStack, page: Int, lastRefresh:Date?) {
 		group.enter()
 		let apiManager = APIManager()
-		let argument = ["per_page":"50","page":"\(page)"]
+		var argument = ["per_page":"50","page":"\(page)"]
+		if let lastRefresh = lastRefresh {
+			argument["after"] = lastRefresh.iso8601
+		}
 		let request = apiManager.request(methods: .GET, route: .posts, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {dataBody, response, error -> Void in
 			if let error = error {
@@ -34,7 +37,10 @@ extension Post {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
 					Post.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
-					Post.convertPost(from: dataBody!, context: coreDataStack.privateContext)
+					let totalItem = Int(response.allHeaderFields["X-WP-Total"] as! String)!
+					if totalPages != 0 && totalItem != 0 {
+						Post.convertPost(from: dataBody!, context: coreDataStack.privateContext)
+					}
 				} else {
 					print("errror")
 				}
@@ -48,13 +54,13 @@ extension Post {
 			let jsonArray = jsonObject as? [[String:Any]] else {
 				return
 		}
+		let idArray:[Int]? = Post.findAllIds(context: context)
 		for jsonDictionary in jsonArray {
-			Post.newPost(jsonObject: jsonDictionary, context: context)
+			Post.newPost(jsonObject: jsonDictionary, context: context, existingPostIds: idArray!)
 		}
 		Post.saveContext(context: context)
 	}
-	private static func newPost(jsonObject: [String:Any], context: NSManagedObjectContext) {
-		let post = Post(context: context)
+	private static func newPost(jsonObject: [String:Any], context: NSManagedObjectContext, existingPostIds:[Int]) {
 		guard let id = jsonObject["id"] as? NSNumber,
 			let date = jsonObject["date_gmt"] as? String,
 			let modified = jsonObject["modified_gmt"] as? String,
@@ -67,13 +73,20 @@ extension Post {
 			let contentString = contentDict["rendered"] as? String else {
 				return
 		}
-		post.id = id.int32Value
-		post.date_gmt = Post.convertDate(from: date)
-		post.modified_gmt = Post.convertDate(from: modified)
-		post.link = link
-		post.title = String(htmlEncodedString: title)
+		var post:Post?
+		if existingPostIds.contains(id.intValue) {
+			let predicate = NSPredicate(format: "%K == \(id.int32Value)", #keyPath(Post.id))
+			post = findPost(predicate: predicate, context: context)!
+		} else {
+			post = Post(context: context)
+			post?.id = id.int32Value
+		}
+		post?.date_gmt = Post.convertDate(from: date)
+		post?.modified_gmt = Post.convertDate(from: modified)
+		post?.link = link
+		post?.title = String(htmlEncodedString: title)
 
-		post.author = User.findUser(predicate: NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id)), context: context)
+		post?.author = User.findUser(predicate: NSPredicate(format: "%K == \(author.int32Value)", #keyPath(User.id)), context: context)
 		let HTMLString = Post.newHTMLString(contentString)
 		do {
 			let doc:Document = try parse(HTMLString)
@@ -82,10 +95,10 @@ extension Post {
 				let podcast = Podcast(context: context)
 				podcast.audioURL = podcastURL
 				podcast.imageURL = Post.findFirstImageURL(doc: doc)
-				post.podcast = podcast
-				post.content = Post.deletePlayer(doc: doc)
+				post?.podcast = podcast
+				post?.content = Post.deletePlayer(doc: doc)
 			} else {
-				post.content = HTMLString
+				post?.content = HTMLString
 			}
 		} catch Exception.Error(type: let type, Message: let message) {
 			print(type)
@@ -93,11 +106,11 @@ extension Post {
 		} catch {
 			print("failed to parse the HTML String")
 		}
-		post.commentIsOpen = jsonObject["comment_status"] as! String == "open"
+		post?.commentIsOpen = jsonObject["comment_status"] as! String == "open"
 		for categoryId in categoriesArray {
 			let predicate = NSPredicate(format: "%K == \(categoryId)", #keyPath(Category.id))
 			if let category = Category.findCategory(predicate:predicate, context: context) {
-				post.addToCategories(category)
+				post?.addToCategories(category)
 			}
 		}
 	}
@@ -181,4 +194,18 @@ extension Post {
 			return nil
 		}
 	}
+	private static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+		fetchRequest.resultType = .dictionaryResultType
+		fetchRequest.propertiesToFetch = ["id"]
+		fetchRequest.resultType = .dictionaryResultType
+		do {
+			let categories = try context.fetch(fetchRequest) as NSArray
+			return categories.value(forKey: "id") as? [Int]
+		} catch let error as NSError {
+			print("couldn't fetc \(error), \(error.userInfo)")
+			return nil
+		}
+	}
 }
+

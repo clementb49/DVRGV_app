@@ -69,12 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func firstRefresh(view: TabBarViewController) {
 		let work = DispatchWorkItem {
-			self.coreDataStack.saveContext()
-			DispatchQueue.main.async {
-				view.didFinishFirstLaunch()
-			}
+			let refresh = Refresh(coreDataStack: self.coreDataStack)
+			refresh.All()
 		}
 		DispatchQueue.global().async (execute: work)
+		work.notify(queue: DispatchQueue.main, execute: {
+			view.didFinishFirstLaunch()
+		})
 	}
 	
 	func registerForPushNotifications() {
