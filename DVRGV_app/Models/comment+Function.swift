@@ -133,4 +133,20 @@ extension Comment {
 			return nil
 		}
 	}
+	
+	private static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
+	let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Comment")
+	fetchRequest.resultType = .dictionaryResultType
+	fetchRequest.propertiesToFetch = ["id"]
+	fetchRequest.resultType = .dictionaryResultType
+	do {
+		let categories = try context.fetch(fetchRequest) as NSArray
+		return categories.value(forKey: "id") as? [Int]
+	} catch let error as NSError {
+		print("couldn't fetc \(error), \(error.userInfo)")
+		return nil
+	}
 }
+}
+
+

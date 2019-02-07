@@ -195,7 +195,7 @@ extension Post {
 		}
 	}
 	private static func findAllIds(context:NSManagedObjectContext) -> [Int]? {
-		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
 		fetchRequest.resultType = .dictionaryResultType
 		fetchRequest.propertiesToFetch = ["id"]
 		fetchRequest.resultType = .dictionaryResultType
