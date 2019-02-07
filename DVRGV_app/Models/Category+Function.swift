@@ -105,7 +105,7 @@ extension Category {
 		}
 		task.resume()
 	}
-	static func retrieveCategories(coreDataStack:CoreDataStack, isPartialRefresh:Bool) {
+	static func refreshCategories(coreDataStack:CoreDataStack, isPartialRefresh:Bool) {
 		var currentPage = 1
 		Category.totalPages = 1
 		let categoryGroup = DispatchGroup()

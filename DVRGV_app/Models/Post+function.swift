@@ -12,17 +12,17 @@ import SwiftSoup
 
 extension Post {
 	private static var totalPages:Int = 1
-	static func retrievePosts(coreDataStack:CoreDataStack) {
+	static func refreshPosts(coreDataStack:CoreDataStack, lastRefresh:Date?) {
 		Post.totalPages = 1
 		var currentPage:Int = 1
 		let postGroup = DispatchGroup()
 		while (currentPage<=Post.totalPages) {
-			Post.retrievePagePosts(group: postGroup, coreDataStack: coreDataStack, page: currentPage)
+			Post.retrievePagePosts(group: postGroup, coreDataStack: coreDataStack, page: currentPage, lastRefresh: lastRefresh)
 			postGroup.wait()
 			currentPage = currentPage + 1
 		}
 	}
-	private static func retrievePagePosts(group: DispatchGroup, coreDataStack: CoreDataStack, page: Int) {
+	private static func retrievePagePosts(group: DispatchGroup, coreDataStack: CoreDataStack, page: Int, lastRefresh:Date?) {
 		group.enter()
 		let apiManager = APIManager()
 		let argument = ["per_page":"50","page":"\(page)"]

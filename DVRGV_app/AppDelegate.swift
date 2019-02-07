@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			return true
 		}
 		
-		if UserDefaults.standard.object(forKey: "lastLaunch") != nil {
+		if UserDefaults.standard.object(forKey: "lastRefresh") != nil {
 			tabController.coreDataStack = coreDataStack
 			tabController.viewIsLoading = false
 			tabController.launch()
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			tabController.viewIsLoading = true
 			tabController.coreDataStack = coreDataStack
 			tabController.launch()
-			retrieveAll(view: tabController)
+			firstRefresh(view: tabController)
 			return true
 		}
 	}
@@ -67,14 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		coreDataStack.saveContext()
 	}
 	
-	func retrieveAll(view: TabBarViewController) {
+	func firstRefresh(view: TabBarViewController) {
 		let work = DispatchWorkItem {
-			Category.retrieveCategories(coreDataStack: self.coreDataStack, isPartialRefresh: false)
-			User.retrieveUsers(coreDataStack: self.coreDataStack, isPartialRefresh: false)
-			Post.retrievePosts(coreDataStack: self.coreDataStack)
-			Comment.retrieveComment(coreDataStack: self.coreDataStack)
 			self.coreDataStack.saveContext()
-			UserDefaults.standard.set(Date(), forKey: "lastLaunch")
 			DispatchQueue.main.async {
 				view.didFinishFirstLaunch()
 			}

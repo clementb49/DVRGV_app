@@ -31,6 +31,7 @@
 		EB88727121C101F00002F215 /* Category+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB88727021C101F00002F215 /* Category+Function.swift */; };
 		EB9035AA2118E24E0091F603 /* CategoryPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */; };
 		EB99A026210A5BE90018072C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB99A025210A5BE90018072C /* CoreDataStack.swift */; };
+		EB9A7FC3220CC14000CF5CFF /* refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9A7FC2220CC14000CF5CFF /* refresh.swift */; };
 		EBA7B1AA21D9085700603073 /* comment+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA7B1A921D9085700603073 /* comment+Function.swift */; };
 		EBAA19D5212AEFB4005395D4 /* ListPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */; };
 		EBAA19D7212AF19F005395D4 /* DetailPodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */; };
@@ -84,6 +85,7 @@
 		EB8A9CA1211E3E4100CE32C4 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		EB9035A92118E24E0091F603 /* CategoryPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostTableViewController.swift; sourceTree = "<group>"; };
 		EB99A025210A5BE90018072C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EB9A7FC2220CC14000CF5CFF /* refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = refresh.swift; sourceTree = "<group>"; };
 		EBA7B1A921D9085700603073 /* comment+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "comment+Function.swift"; sourceTree = "<group>"; };
 		EBAA19D4212AEFB4005395D4 /* ListPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListPodcastStoryboard.storyboard; sourceTree = "<group>"; };
 		EBAA19D6212AF19F005395D4 /* DetailPodcastStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailPodcastStoryboard.storyboard; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				EBC93D3A21280B5300C230C3 /* DVRGV_app.entitlements */,
 				EB0C4B462104E3DF00128DD6 /* AppDelegate.swift */,
+				EB9A7FC2220CC14000CF5CFF /* refresh.swift */,
 				EBB1E90C210BD00100B9CB12 /* Models */,
 				EBE13428210B0562009AADF6 /* DVRGV.xcdatamodeld */,
 				EB99A025210A5BE90018072C /* CoreDataStack.swift */,
@@ -410,6 +413,7 @@
 				EB3E104B21FE4A4A00CD82FC /* IdentityCommentTableViewController.swift in Sources */,
 				EBBE990E21C7A0DC007A1706 /* User+function.swift in Sources */,
 				EBE1342A210B0562009AADF6 /* DVRGV.xcdatamodeld in Sources */,
+				EB9A7FC3220CC14000CF5CFF /* refresh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

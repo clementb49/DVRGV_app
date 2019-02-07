@@ -10,17 +10,17 @@ import Foundation
 import CoreData
 extension Comment {
 	private static var totalPages:Int = 1
-	static func retrieveComment(coreDataStack:CoreDataStack) {
+	static func refreshComment(coreDataStack:CoreDataStack, lastRefresh:Date?) {
 		Comment.totalPages = 1
 		var currentPage = 1
 		let commentGroup = DispatchGroup()
 		while (currentPage <= Comment.totalPages) {
-			Comment.retrievePageComment(group: commentGroup, coreDataStack: coreDataStack, page: currentPage)
+			Comment.retrievePageComment(group: commentGroup, coreDataStack: coreDataStack, page: currentPage, lastRefresh: lastRefresh)
 			commentGroup.wait()
 			currentPage+=1
 		}
 	}
-	private static func retrievePageComment(group:DispatchGroup, coreDataStack:CoreDataStack, page:Int) {
+	private static func retrievePageComment(group:DispatchGroup, coreDataStack:CoreDataStack, page:Int, lastRefresh:Date?) {
 		group.enter()
 		let apiManager = APIManager()
 		let argument:[String:String] = ["per_page":"50","page":"\(page)"]

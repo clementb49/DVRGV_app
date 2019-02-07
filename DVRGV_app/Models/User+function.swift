@@ -79,7 +79,7 @@ extension User {
 		}
 		task.resume()
 	}
-	static func retrieveUsers(coreDataStack: CoreDataStack, isPartialRefresh:Bool) {
+	static func refreshUsers(coreDataStack: CoreDataStack, isPartialRefresh:Bool) {
 	var currentPage = 1
 		User.totalPages = 1
 		let userGroup = DispatchGroup()
