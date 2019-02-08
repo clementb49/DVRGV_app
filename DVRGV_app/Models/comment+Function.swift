@@ -23,7 +23,10 @@ extension Comment {
 	private static func retrievePageComment(group:DispatchGroup, coreDataStack:CoreDataStack, page:Int, lastRefresh:Date?) {
 		group.enter()
 		let apiManager = APIManager()
-		let argument:[String:String] = ["per_page":"50","page":"\(page)"]
+		var argument:[String:String] = ["per_page":"50","page":"\(page)"]
+		if let lastRefresh = lastRefresh {
+			argument["after"] = lastRefresh.iso8601
+		}
 		let request = apiManager.request(methods: .GET, route: .comments, data: argument)
 		let task = URLSession.shared.dataTask(with: request) {dataBody, response, error -> Void in
 			if let error = error {
@@ -32,7 +35,10 @@ extension Comment {
 				let response = response as! HTTPURLResponse
 				if response.statusCode == 200 {
 					Comment.totalPages = Int(response.allHeaderFields["X-WP-TotalPages"] as! String)!
-					Comment.converteComments(from: dataBody!, context: coreDataStack.privateContext)
+					let totalItem = Int(response.allHeaderFields["X-WP-Total"] as! String)!
+					if totalPages != 0 && totalItem != 0 {
+						Comment.converteComments(from: dataBody!, context: coreDataStack.privateContext)
+					}
 				} else {
 					print("error")
 				}
@@ -46,9 +52,10 @@ extension Comment {
 			let jsonArray = jsonObject as? [[String:Any]] else {
 				return
 		}
+		let existingCommentIds = Comment.findAllIds(context: context)
 		var parentDict = [Int32:Int32]()
 		for jsonDictionary in jsonArray {
-			let parent:[Int32:Int32]? = Comment.newComment(jsonObject: jsonDictionary, context: context)
+			let parent:[Int32:Int32]? = Comment.newComment(jsonObject: jsonDictionary, context: context, existingCommentIds: existingCommentIds!)
 			if let parent = parent {
 				parentDict = parentDict.merging(parent)
 				{(_, new) in new}
@@ -65,8 +72,7 @@ extension Comment {
 		}
 		Comment.save(context: context)
 	}
-	private static func newComment(jsonObject:[String:Any], context:NSManagedObjectContext) -> [Int32:Int32]? {
-		let comment = Comment(context: context)
+	private static func newComment(jsonObject:[String:Any], context:NSManagedObjectContext, existingCommentIds:[Int]) -> [Int32:Int32]? {
 		guard let id = jsonObject["id"] as? NSNumber,
 			let postId = jsonObject["post"] as? NSNumber,
 			let parentId = jsonObject["parent"] as? NSNumber,
@@ -78,19 +84,26 @@ extension Comment {
 				print("error json")
 				return nil
 		}
-		comment.id = id.int32Value
+		var comment:Comment?
+		if existingCommentIds.contains(id.intValue) {
+			let predicate = NSPredicate(format: "%K == \(id.int32Value)", #keyPath(Comment.id))
+			comment = Comment.findComment(predicate: predicate, context: context)
+		} else {
+			comment = Comment(context: context)
+			comment?.id = id.int32Value
+		}
 		let postPredicate = NSPredicate(format: "%K == \(postId.int32Value)", #keyPath(Post.id))
 		if let post = Post.findPost(predicate: postPredicate, context: context) {
-			comment.post = post
+			comment?.post = post
 		}
 		if authorId.intValue != 0 {
 			let authorPredicate = NSPredicate(format: "%K == \(authorId.int32Value)", #keyPath(User.id))
 			if let user = User.findUser(predicate: authorPredicate, context: context) {
-				comment.author = user
+				comment?.author = user
 			}
 		}
-		comment.authorName = authorName
-		comment.date_gmt = Comment.convertDate(from: date)!
+		comment?.authorName = authorName
+		comment?.date_gmt = Comment.convertDate(from: date)!
 		let contentData = content.data(using: .utf8)!
 
 		let options: [NSAttributedString.DocumentReadingOptionKey:Any] = [
@@ -98,10 +111,14 @@ extension Comment {
 			.characterEncoding:String.Encoding.utf8.rawValue
 		]
 		if let contentAttributedString = try? NSAttributedString(data: contentData, options: options, documentAttributes: nil) {
-			comment.content = contentAttributedString
+			comment?.content = contentAttributedString
 		}
 		if parentId.intValue != 0 {
-			return [id.int32Value:parentId.int32Value]
+			if existingCommentIds.contains(id.intValue) {
+				return nil
+			} else {
+				return [id.int32Value:parentId.int32Value]
+			}
 		} else {
 			return nil
 		}
