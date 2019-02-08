@@ -77,6 +77,7 @@ extension Post {
 		if existingPostIds.contains(id.intValue) {
 			let predicate = NSPredicate(format: "%K == \(id.int32Value)", #keyPath(Post.id))
 			post = findPost(predicate: predicate, context: context)!
+			post?.removeFromCategories(post!.categories!)
 		} else {
 			post = Post(context: context)
 			post?.id = id.int32Value
@@ -92,9 +93,14 @@ extension Post {
 			let doc:Document = try parse(HTMLString)
 			let podcastURL = Post.findPodcastURL(doc: doc)
 			if let podcastURL = podcastURL {
-				let podcast = Podcast(context: context)
-				podcast.audioURL = podcastURL
-				podcast.imageURL = Post.findFirstImageURL(doc: doc)
+				var podcast:Podcast?
+				if existingPostIds.contains(id.intValue) {
+					podcast = post?.podcast!
+				} else {
+					podcast = Podcast(context: context)
+				}
+				podcast?.audioURL = podcastURL
+				podcast?.imageURL = Post.findFirstImageURL(doc: doc)
 				post?.podcast = podcast
 				post?.content = Post.deletePlayer(doc: doc)
 			} else {

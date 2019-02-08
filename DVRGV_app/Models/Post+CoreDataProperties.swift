@@ -44,7 +44,7 @@ extension Post {
     @NSManaged public func addToCategories(_ values: NSSet)
 
     @objc(removeCategories:)
-    @NSManaged public func removeFromCategories(_ values: NSSet)
+    @NSManaged public func removeFromCategories(_ values: Set<Category>)
 
 }
 
