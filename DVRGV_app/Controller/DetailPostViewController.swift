@@ -50,6 +50,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 		}
 		webView.loadHTMLString(postContent, baseURL: URL(string: postLink))
 		let categoriesArray = Array(postCategories)
+		self.currentPostPodcast = currentPost.podcast
 		categoryLabel.text = categoriesArray.last?.name
 		titleLabel.text = postTitle
 		authorLabel.text = postAuthor.name
@@ -150,7 +151,7 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "DetailPodcastViewControllerToPlayerNavigationController" {
+		if segue.identifier == "DetailPostViewControllerToPlayerNavigationController" {
 			let destinationViewController = segue.destination as! AVPlayerViewController
 			guard let currentPostPodcast = self.currentPostPodcast,
 			let podcastURL = currentPostPodcast.audioURL else {

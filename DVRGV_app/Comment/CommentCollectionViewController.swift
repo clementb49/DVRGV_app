@@ -149,4 +149,5 @@ class CommentCollectionViewController: UICollectionViewController, IdentityComme
 
 		self.present(navController, animated: true, completion: nil)
 	}
+
 }

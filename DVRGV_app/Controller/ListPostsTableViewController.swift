@@ -87,6 +87,15 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 		present(vc, animated: true, completion: nil)
 	}
 	
+	
+	@IBAction func refreshControlValueChanged(_ sender: UIRefreshControl) {
+		let work = DispatchWorkItem {
+			let refresh = Refresh(coreDataStack: self.coreDataStack)
+			refresh.partial()
+		}
+		DispatchQueue.global().async(execute: work)
+	}
+	
 	func updateUI() {
 		if viewIsLoading == false {
 			self.activityIndicator.stopAnimating()
@@ -140,11 +149,12 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 		}
 	}
 	
+	
 	func updateFetchedResultController() {
 		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date_gmt", ascending: false)]
 		fetchRequest.predicate = NSPredicate(format: "%@ IN %K", categorySelected!, #keyPath(Post.categories))
-		let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+		let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: categorySelected?.name)
 		fetchedResultController.delegate = self
 		self.fetchedResultController = fetchedResultController
 	}
@@ -163,6 +173,56 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 		} else {
 			return nil
 		}
+	}
+	
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		self.tableView.beginUpdates()
+	}
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+		switch (type) {
+		case .insert:
+			tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+			break
+		case .delete:
+			tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+			break
+		default:
+			print("error")
+		}
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		switch (type) {
+		case .insert:
+			if let newIndexPath = newIndexPath {
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+			break
+		case .delete:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+			break
+		case .update:
+			if let indexPath = indexPath {
+				if let cell = tableView.cellForRow(at: indexPath) {
+					cell.textLabel?.text = fetchedResultController!.object(at: indexPath).title
+				}
+			}
+			break
+		case .move:
+			if let indexPath = indexPath {
+				if let newIndexPath = newIndexPath {
+					tableView.deleteRows(at: [indexPath], with: .fade)
+					tableView.insertRows(at: [newIndexPath], with: .fade)
+				}
+			}
+			break
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		self.tableView.endUpdates()
 	}
     // MARK: - Navigation
 

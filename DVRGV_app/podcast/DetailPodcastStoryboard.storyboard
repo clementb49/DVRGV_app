@@ -70,7 +70,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
                                                 <state key="normal" title="lire le podcast"/>
                                                 <connections>
-                                                    <segue destination="SeG-ch-km6" kind="showDetail" identifier="DetailPodcastViewControllerToPlayerNavigationController" id="sHH-yn-ghq"/>
+                                                    <segue destination="SeG-ch-km6" kind="showDetail" identifier="DetailPostViewControllerToPlayerNavigationController" id="sHH-yn-ghq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9d-vu-L0J" userLabel="Download Button">
