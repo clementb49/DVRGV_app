@@ -14,11 +14,11 @@ import MediaPlayer
 import SafariServices
 import CoreData
 protocol DetailPostViewControllerDelegate {
-	func previewPost(_ currentIndex:Int) -> Post?
-	func nextPost(_ currentIndex:Int) -> Post?
+	func previewPost(_ currentIndexPath:IndexPath) -> Post?
+	func nextPost(_ currentIndexPath:IndexPath) -> Post?
 }
 class DetailPostViewController: UIViewController, WKNavigationDelegate {
-	var currentPostIndex:Int?
+	var currentPostIndexPath:IndexPath?
 	private var currentPostPodcast:Podcast?
 	var currentPost:Post?
 	@IBOutlet weak var webView: WKWebView!
@@ -171,12 +171,11 @@ class DetailPostViewController: UIViewController, WKNavigationDelegate {
 			destinationViewController.player = player
 		} else if segue.identifier == "DetailPostViewControllerToCommentCollectionViewController" {
 			guard let currentPost = self.currentPost,
-				let comments = currentPost.comments,
 				let destinationViewController = segue.destination as? CommentCollectionViewController else {
 					return
 			}
-			destinationViewController.currentPost = self.currentPost
-			destinationViewController.comments = Array(comments)
+			destinationViewController.currentPost = currentPost
+			destinationViewController.coreDataStack = self.coreDataStack
 		}
 	}
 }

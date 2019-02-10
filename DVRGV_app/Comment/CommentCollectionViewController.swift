@@ -7,22 +7,33 @@
 //
 
 import UIKit
-
+import CoreData
 private let reuseIdentifier = "commentCell"
+class CommentCollectionViewController: UICollectionViewController, IdentityCommentTableViewControllerDelegate, NSFetchedResultsControllerDelegate {
+	var currentPost:Post!
+	var coreDataStack:CoreDataStack!
+	private lazy var fetchedResultControler:NSFetchedResultsController<Comment> = {
+		let fetchRequest:NSFetchRequest<Comment> = NSFetchRequest(entityName: "Comment")
+		fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Comment.post), currentPost)
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date_gmt", ascending: true)]
+		fetchRequest.resultType = .managedObjectResultType
+		let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+		fetchedResultController.delegate = self
+		return fetchedResultController
+	}()
 
-class CommentCollectionViewController: UICollectionViewController, IdentityCommentTableViewControllerDelegate {
-	var comments:[Comment]?
-	var currentPost:Post?
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if let comments = self.comments {
-			let numberComment = comments.count
-			self.comments = comments.sorted(by: {$0.date_gmt < $1.date_gmt})
-			if numberComment == 0 || numberComment == 1 {
-				self.navigationItem.title = "\(numberComment) commentaire"
-			} else {
-				self.navigationItem.title = "\(numberComment) commentaires"
-			}
+		do {
+			try fetchedResultControler.performFetch()
+		} catch {
+	}
+		
+		let numberComment = fetchedResultControler.fetchedObjects!.count
+		if numberComment == 0 || numberComment == 1 {
+			self.navigationItem.title = "\(numberComment) commentaire"
+		} else {
+			self.navigationItem.title = "\(numberComment) commentaires"
 		}
 		self.collectionView!.isAccessibilityElement = false
 		self.collectionView.shouldGroupAccessibilityChildren = true
@@ -40,10 +51,10 @@ class CommentCollectionViewController: UICollectionViewController, IdentityComme
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-		if self.comments != nil && comments?.count != 0 {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
+		if let sections = fetchedResultControler.sections {
 			self.restore()
-			return 1
+			return sections.count
 		} else {
 			self.setEmpty()
 			return 0
@@ -52,8 +63,14 @@ class CommentCollectionViewController: UICollectionViewController, IdentityComme
 
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if let comments = comments {
-			return comments.count
+		if let sections = fetchedResultControler.sections {
+			let numberOfObject =  sections[section].numberOfObjects
+			if numberOfObject == 0 {
+				setEmpty()
+			} else {
+				restore()
+			}
+			return numberOfObject
 		} else {
 			return 0
 		}
@@ -61,8 +78,7 @@ class CommentCollectionViewController: UICollectionViewController, IdentityComme
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCollectionViewCell
-		let comment = comments![indexPath.row]
-		commentCell.updateCommentView(comment: comment)
+		commentCell.updateCommentView(comment: fetchedResultControler.object(at: indexPath))
 		return commentCell
 	}
 

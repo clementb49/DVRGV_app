@@ -52,6 +52,7 @@ extension User {
 	}
 
 	private static func retrievePageUsers(group: DispatchGroup, coreDataStack:CoreDataStack, page:Int, isPartialRefresh:Bool) {
+		group.enter()
 		let apiManager = APIManager()
 		var argument:[String:String] = ["orderby":"id","per_page":"50","page":"\(page)"]
 		if (isPartialRefresh) {

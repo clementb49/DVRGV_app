@@ -8,14 +8,15 @@
 
 import UIKit
 import CoreData
-class ListPostTableViewController: UITableViewController, CategoryPostTableViewControllerDelegate, DetailPostViewControllerDelegate {
+class ListPostTableViewController: UITableViewController, CategoryPostTableViewControllerDelegate, DetailPostViewControllerDelegate, NSFetchedResultsControllerDelegate {
 	var coreDataStack:CoreDataStack!
 	var postCategory:Category?
 	var categorySelected:Category?
-	var posts:[Post]?
 	var activityIndicator = UIActivityIndicatorView(frame: CGRect(x:0, y:0, width:40, height:40))
 	var isArticleView:Bool?
 	var viewIsLoading:Bool?
+	private var fetchedResultController:NSFetchedResultsController<Post>?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		updateIsArticleView()
@@ -37,22 +38,29 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		if let fetchedResultController = fetchedResultController,
+			let sections = fetchedResultController.sections {
+			return sections.count
+		} else {
+			return 0
+		}
 	}
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let posts = posts else {
-			return 0
+		guard let fetchedResultController = fetchedResultController,
+			let sections = fetchedResultController.sections else {
+				return 0
 		}
-		return posts.count
+		return sections[section].numberOfObjects
 	}
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
-		guard let post = posts?[indexPath.row] else {
+		guard let fetchedResultController = fetchedResultController else {
 			return cell
 		}
+		let post = fetchedResultController.object(at: indexPath)
 		cell.textLabel?.text = post.title
 		return cell
 	}
@@ -83,13 +91,15 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 		if viewIsLoading == false {
 			self.activityIndicator.stopAnimating()
 		}
-		guard let categorySelected = categorySelected,
-			let possts = categorySelected.posts else {
-				return
+		updateFetchedResultController()
+		guard let fetchedResultController = fetchedResultController else {
+			return
 		}
-		self.posts = Array(possts)
-		let postsSorted = posts?.sorted(by: {$0.date_gmt! > $1.date_gmt!})
-		self.posts = postsSorted
+		do {
+			try fetchedResultController.performFetch()
+		} catch {
+			print("\(error), \(error.localizedDescription)")
+		}
 	}
 	
 	func didSelect(category: Category) {
@@ -106,20 +116,14 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 	}
 	
 	func updatePostCategory() {
-		let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
+		var predicate:NSPredicate?
 		if isArticleView ?? false {
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Articles")
+			predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Articles")
 		} else {
-			fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
+			predicate = NSPredicate(format: "%K == %@", #keyPath(Category.name), "Podcast")
 		}
-		fetchRequest.resultType = .managedObjectResultType
-		do {
-			let categories = try coreDataStack.mainContext.fetch(fetchRequest)
-			self.postCategory = categories.first
-			self.categorySelected = postCategory
-		} catch let error as NSError {
-			print("error, \(error), \(error.userInfo)")
-		}
+		self.postCategory = Category.findCategory(predicate: predicate!, context: coreDataStack.mainContext)
+		self.categorySelected = postCategory
 	}
 	
 	func updateNavigationItemTitle() {
@@ -136,21 +140,29 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 		}
 	}
 	
-	func previewPost(_ currentIndex: Int) -> Post? {
-		let newIndex = currentIndex - 1
-		guard let posts = posts, newIndex<0,
-			newIndex>posts.count else {
-			return nil
-		}
-		return posts[newIndex]
+	func updateFetchedResultController() {
+		let fetchRequest = NSFetchRequest<Post>(entityName: "Post")
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date_gmt", ascending: false)]
+		fetchRequest.predicate = NSPredicate(format: "%@ IN %K", categorySelected!, #keyPath(Post.categories))
+		let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+		fetchedResultController.delegate = self
+		self.fetchedResultController = fetchedResultController
 	}
-	
-	func nextPost(_ currentIndex: Int) -> Post? {
-		let newIndex = currentIndex+1
-		guard let posts = posts, newIndex<0, newIndex>posts.count else {
+	func previewPost(_ currentIndexPath:IndexPath) -> Post? {
+		let newIndexPath = IndexPath(item: currentIndexPath.row-1, section: currentIndexPath.section)
+		if let fetchedResultController = fetchedResultController {
+			return fetchedResultController.object(at: newIndexPath)
+		} else {
 			return nil
 		}
-		return posts[newIndex]
+	}
+	func nextPost(_ currentIndexPath: IndexPath) -> Post? {
+		let newIndexPath = IndexPath(item: currentIndexPath.row+1, section: currentIndexPath.section)
+		if let fetchedResultController = fetchedResultController {
+			return fetchedResultController.object(at: newIndexPath)
+		} else {
+			return nil
+		}
 	}
     // MARK: - Navigation
 
@@ -160,13 +172,13 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			guard let destinationViewController = segue.destination as? DetailPostViewController,
 			let postCell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: postCell),
-			let posts = self.posts else {
+			let fetchedResultController = fetchedResultController else {
 				return
 			}
-			destinationViewController.currentPostIndex = indexPath.row
-			destinationViewController.currentPost = posts[indexPath.row]
+			destinationViewController.currentPostIndexPath = indexPath
+			destinationViewController.currentPost = fetchedResultController.object(at: indexPath)
 			destinationViewController.detailPostViewControllerDelegate = self
-			destinationViewController.postCount = posts.count
+			destinationViewController.postCount = fetchedResultController.fetchedObjects?.count
 			destinationViewController.coreDataStack = self.coreDataStack
 		}
 	}
