@@ -178,7 +178,7 @@ class ListPostTableViewController: UITableViewController, CategoryPostTableViewC
 			destinationViewController.currentPostIndexPath = indexPath
 			destinationViewController.currentPost = fetchedResultController.object(at: indexPath)
 			destinationViewController.detailPostViewControllerDelegate = self
-			destinationViewController.postCount = fetchedResultController.fetchedObjects?.count
+			destinationViewController.postCount = fetchedResultController.sections![indexPath.section].numberOfObjects
 			destinationViewController.coreDataStack = self.coreDataStack
 		}
 	}
